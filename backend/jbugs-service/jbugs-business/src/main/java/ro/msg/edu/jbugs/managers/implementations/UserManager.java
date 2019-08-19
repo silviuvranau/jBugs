@@ -5,6 +5,7 @@ import dao.NotificationDao;
 import dao.UserDao;
 import entity.Notification;
 import entity.User;
+import entity.enums.NotificationType;
 import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.managers.interfaces.UserManagerRemote;
@@ -59,9 +60,9 @@ public class UserManager implements UserManagerRemote {
 
         Notification notification = new Notification();
         notification.setMessage("Welcome: " + username);
-        notification.setUserID(UserDTOEntityMapper.getUserFromUserDto(userDTO));
-        notification.setDate(new Date());
-        notification.setType("NewUser");
+        notification.setUser(UserDTOEntityMapper.getUserFromUserDto(userDTO));
+        notification.setDate("");
+        notification.setType(NotificationType.WELCOME_NEW_USER);
 
         notificationDao.insertNotification(notification);
         return UserDTOEntityMapper.getDtoFromUser(insertedUser);
@@ -129,7 +130,7 @@ public class UserManager implements UserManagerRemote {
                     .hashString(password, StandardCharsets.UTF_8)
                     .toString();
             if (loggingPassword.equals(userToLogin.getPassword())) {
-                if (userToLogin.getStatus() == 0) {
+                if (userToLogin.isStatus() == false) {
                     throw new BusinessException("Your account is disabled", "Throw");
                 } else {
                     userToLogin.setCounter(0);
@@ -139,7 +140,7 @@ public class UserManager implements UserManagerRemote {
                 Integer userCounter = userToLogin.getCounter() + 1;
                 userToLogin.setCounter(userCounter);
                 if (userCounter == 5) {
-                    userToLogin.setStatus(0);
+                    userToLogin.setStatus(false);
                     throw new BusinessException("Exceeding max login tries", "_");
                 }
             }

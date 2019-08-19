@@ -211,13 +211,13 @@ public class User {
     @Column(name = "status")
     private boolean status;
 
-    @OneToMany(mappedBy = "createdID", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "created_id", cascade = CascadeType.PERSIST)
     private Set<Bug> createdBugs;
 
-    @OneToMany(mappedBy = "assignedID", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "assigned_id", cascade = CascadeType.PERSIST)
     private Set<Bug> assignedBugs;
 
-    @OneToMany(mappedBy="userID", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy="user_id", cascade = CascadeType.PERSIST)
     private Set<Comment> comments;
 
     @ManyToMany(targetEntity = Role.class)

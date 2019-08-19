@@ -39,7 +39,7 @@ public class TestServlet extends HttpServlet {
         userDTO.setMobileNumber("test3");
         userDTO.setUsername("test3");
         userDTO.setPassword("test3");
-        userDTO.setStatus(2);
+        userDTO.setStatus(false);
     }
 
     public void destroy(){}

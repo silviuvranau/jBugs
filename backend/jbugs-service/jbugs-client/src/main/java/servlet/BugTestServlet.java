@@ -1,5 +1,6 @@
 package servlet;
 
+import entity.enums.Severity;
 import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.managers.implementations.BugManager;
@@ -89,7 +90,7 @@ public class BugTestServlet extends HttpServlet {
         userDTO.setMobileNumber("test");
         userDTO.setPassword("test");
         userDTO.setLastName("test");
-        userDTO.setStatus(1);
+        userDTO.setStatus(true);
         userDTO.setUsername("test");
 
         bugDTO = new BugDTO();
@@ -98,7 +99,7 @@ public class BugTestServlet extends HttpServlet {
         bugDTO.setVersion("test version");
         bugDTO.setTitle("test title");
         bugDTO.setTargetDate(null);
-        bugDTO.setSeverity("test severity");
+        bugDTO.setSeverity(Severity.CRITICAL);
         bugDTO.setFixedVersion("test fixed");
         bugDTO.setStatus("test status");
         bugDTO.setDescription("test description");
@@ -112,7 +113,7 @@ public class BugTestServlet extends HttpServlet {
         //inserting a new managers managers
         out.println("Inserting a new managers... <br>");
         UserDTO user = userManager.insertUser(userDTO);
-        userDTO.setID(user.getID());
+        userDTO.setId(user.getId());
 
         //finding managers after id
         out.println("Searching for managers with id 2... <br>");
@@ -134,7 +135,7 @@ public class BugTestServlet extends HttpServlet {
 
         //find by created id
         out.println("Searching after created id...<br>");
-        userDTO.setID(1);
+        userDTO.setId(1);
         List<BugDTO> bugsByCreatedID = bugManager.findBugsByCreatedId(userDTO);
         bugsByCreatedID.forEach(bugAssigned -> out.println(bugAssigned.toString()+"<br>"));
     }

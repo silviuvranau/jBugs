@@ -46,7 +46,7 @@ public class UserDao {
 
     public Long getCreatedBugs(User user){
         Query query = entityManager.createNativeQuery("SELECT COUNT(b.CREATED_ID) FROM bugs b where b.CREATED_ID = ?1;");
-        query.setParameter(1,user.getID());
+        query.setParameter(1,user.getId());
         Object resultSet = query.getSingleResult();
         Long numberOfCreatedBugs = (Long)resultSet;
         return numberOfCreatedBugs;

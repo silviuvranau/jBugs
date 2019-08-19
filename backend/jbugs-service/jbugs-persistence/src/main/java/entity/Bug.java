@@ -64,7 +64,7 @@ public class Bug implements Serializable {
     @Column(name="status")
     private String status;
 
-    @OneToMany(mappedBy="bugID")
+    @OneToMany(mappedBy="bug_id")
     private Set<Comment> comments;
 
     public Integer getId() {

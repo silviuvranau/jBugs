@@ -85,7 +85,7 @@ public class UserManagerTest {
 
     private User createUser(){
         User user = new User();
-        user.setID(1);
+        user.setId(1);
         user.setFirstName("test");
         user.setLastName("test");
         user.setEmail("_");
@@ -121,7 +121,7 @@ public class UserManagerTest {
 
         UserDTO userToLogin = userManager.login("testt", "test");
         assertEquals(persistedUser.getCounter(), userToLogin.getCounter());
-        assertEquals(persistedUser.getStatus(), userToLogin.getStatus());
+        assertEquals(persistedUser.isStatus(), userToLogin.getStatus());
     }
 
     @Test(expected = BusinessException.class)
