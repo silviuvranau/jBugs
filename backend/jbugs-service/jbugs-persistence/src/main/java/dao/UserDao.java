@@ -63,26 +63,6 @@ public class UserDao {
         return deletedUser;
     }
 
-//    public boolean checkUsernameUnique(String username){
-//        Integer occ = entityManager.createNamedQuery(User.CHECK_IF_USERNAME_UNIQUE, Integer.class)
-//                .setParameter("username", username)
-//                .getSingleResult();
-//        try{
-//            entityManager.createNamedQuery(User.CHECK_IF_USERNAME_UNIQUE, Integer.class)
-//                    .setParameter("username", username)
-//                    .getSingleResult();
-//            return true;
-//            //ret false
-//        }catch(NoResultException | NonUniqueResultException e){
-//            return false;
-//            //true
-//        }
-////        if (occ != 0){
-////            return false;
-////        }
-////        return true;
-//    }
-
     public boolean checkUsernameUnique(String username){
         Long occurences = entityManager.createNamedQuery(User.CHECK_IF_USERNAME_UNIQUE, Long.class)
                 .setParameter("username", username)
