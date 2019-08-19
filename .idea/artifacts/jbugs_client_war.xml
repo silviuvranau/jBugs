@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="jbugs-client:war">
+    <output-path>$PROJECT_DIR$/backend/jbugs-service/jbugs-client/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>jbugs-client</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="jbugs-client-1.0.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="jbugs-client:war exploded" />
+    </root>
+  </artifact>
+</component>

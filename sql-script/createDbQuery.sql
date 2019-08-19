@@ -64,7 +64,7 @@ CREATE TABLE `notifications` (
   `user_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_notifications_user_id_idx` (`user_id`),
-  CONSTRAINT `FK_notifications_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_notifications_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
 
 

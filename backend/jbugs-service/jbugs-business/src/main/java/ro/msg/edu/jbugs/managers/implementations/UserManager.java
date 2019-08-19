@@ -1,7 +1,6 @@
 package ro.msg.edu.jbugs.managers.implementations;
 
 import com.google.common.hash.Hashing;
-import dao.NotificationDao;
 import dao.UserDao;
 import entity.Notification;
 import entity.User;
@@ -9,6 +8,7 @@ import entity.enums.NotificationType;
 import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.interceptors.Interceptor;
+import ro.msg.edu.jbugs.managers.interfaces.NotificationManagerRemote;
 import ro.msg.edu.jbugs.managers.interfaces.UserManagerRemote;
 import ro.msg.edu.jbugs.mappers.UserDTOEntityMapper;
 
@@ -31,7 +31,7 @@ public class UserManager implements UserManagerRemote {
     @EJB
     private UserDao userDao;
     @EJB
-    private NotificationDao notificationDao;
+    private NotificationManagerRemote notificationManagerRemote;
 
 //    public void insertUser(UserDTO userDTO){
 //        User managers = UserDTOEntityMapper.getUserFromUserDto(userDTO);
@@ -64,7 +64,7 @@ public class UserManager implements UserManagerRemote {
         notification.setDate("2000-01-09 01:10:20");
         notification.setType(NotificationType.BUG_CLOSED);
 
-        notificationDao.insertNotification(notification);
+        notificationManagerRemote.insertNotification(notification, insertedUser.getId());
         return UserDTOEntityMapper.getDtoFromUser(insertedUser);
     }
 

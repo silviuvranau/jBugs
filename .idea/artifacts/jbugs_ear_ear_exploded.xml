@@ -1,0 +1,25 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="jbugs-ear:ear exploded">
+    <output-path>$PROJECT_DIR$/backend/jbugs-service/jbugs-ear/target/jbugs-ear-1.0.0-SNAPSHOT</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>jbugs-ear</module>
+        <packaging>ear</packaging>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="jbugs-ear/javaeeApplication/JavaEE" />
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/backend/jbugs-service/jbugs-ear/target/jbugs-ear-1.0.0-SNAPSHOT/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="archive" name="jbugs-client.war">
+        <element id="artifact" artifact-name="jbugs-client:war exploded" />
+      </element>
+      <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/logging/log4j/log4j-core/2.7/log4j-core-2.7.jar" output-file-name="log4j-core.jar" />
+      <element id="file-copy" path="$MAVEN_REPOSITORY$/org/apache/logging/log4j/log4j-api/2.7/log4j-api-2.7.jar" output-file-name="log4j-api.jar" />
+      <element id="file-copy" path="$MAVEN_REPOSITORY$/com/sun/mail/javax.mail/1.6.1/javax.mail-1.6.1.jar" output-file-name="javax.mail.jar" />
+      <element id="file-copy" path="$MAVEN_REPOSITORY$/javax/activation/activation/1.1.1/activation-1.1.1.jar" output-file-name="activation.jar" />
+    </root>
+  </artifact>
+</component>

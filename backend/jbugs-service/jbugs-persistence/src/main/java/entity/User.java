@@ -1,7 +1,6 @@
 package entity;
+
 import javax.persistence.*;
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -71,7 +70,7 @@ public class User {
     private Set<Role> roles;
 
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Notification> notifications;
 
 

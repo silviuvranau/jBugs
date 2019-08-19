@@ -12,6 +12,6 @@ import java.util.List;
  * @since 19.1.2
  */
 public interface NotificationManagerRemote {
-    Notification insertNotification(Notification notification);
+    Notification insertNotification(Notification notification, Integer userId);
     List<NotificationDTO> findAllNotifications();
 }
