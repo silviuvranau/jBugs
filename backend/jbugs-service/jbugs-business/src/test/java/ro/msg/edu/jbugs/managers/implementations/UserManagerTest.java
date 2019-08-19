@@ -3,19 +3,16 @@ package ro.msg.edu.jbugs.managers.implementations;
 import dao.UserDao;
 import entity.User;
 import exceptions.BusinessException;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import ro.msg.edu.jbugs.dto.UserDTO;
 
-import javax.persistence.criteria.CriteriaBuilder;
-
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.when;
 
 /**
  * Document me.
@@ -85,7 +82,7 @@ public class UserManagerTest {
 
     private User createUser(){
         User user = new User();
-        user.setID(1);
+        user.setId(1);
         user.setFirstName("test");
         user.setLastName("test");
         user.setEmail("_");
@@ -121,7 +118,7 @@ public class UserManagerTest {
 
         UserDTO userToLogin = userManager.login("testt", "test");
         assertEquals(persistedUser.getCounter(), userToLogin.getCounter());
-        assertEquals(persistedUser.getStatus(), userToLogin.getStatus());
+        assertEquals(persistedUser.isStatus(), userToLogin.getStatus());
     }
 
     @Test(expected = BusinessException.class)
