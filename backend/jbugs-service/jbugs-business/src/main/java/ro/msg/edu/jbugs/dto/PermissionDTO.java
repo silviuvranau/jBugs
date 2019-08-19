@@ -9,16 +9,16 @@ import java.io.Serializable;
  * @since 19.1.2
  */
 public class PermissionDTO implements Serializable {
-    private Integer ID;
+    private Integer id;
     private String description;
     private String type;
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setId(Integer ID) {
+        this.id = ID;
     }
 
     public String getDescription() {
@@ -40,7 +40,7 @@ public class PermissionDTO implements Serializable {
     @Override
     public String toString() {
         return "PermissionDTO{" +
-                "ID=" + ID +
+                "ID=" + id +
                 ", description='" + description + '\'' +
                 ", type='" + type + '\'' +
                 '}';
