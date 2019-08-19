@@ -74,12 +74,6 @@ public class UserManager implements UserManagerRemote {
         return userDTO;
     }
 
-    public UserDTO findUser(Integer id){
-        User user = userDao.findUser(id);
-        UserDTO userDTO = UserDTOEntityMapper.getDtoFromUser(user);
-        return userDTO;
-    }
-
     public List<UserDTO> findAllUsers(){
         List<User> users = userDao.findAll();
 
