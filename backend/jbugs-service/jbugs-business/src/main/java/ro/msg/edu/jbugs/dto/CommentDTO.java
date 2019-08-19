@@ -4,7 +4,6 @@ import entity.Bug;
 import entity.User;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Document me.
@@ -15,7 +14,7 @@ import java.util.Date;
 public class CommentDTO implements Serializable {
     private Integer ID;
     private String text;
-    private Date date;
+    private String date;
     private User user;
     private Bug bug;
 
@@ -51,11 +50,11 @@ public class CommentDTO implements Serializable {
         this.text = text;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

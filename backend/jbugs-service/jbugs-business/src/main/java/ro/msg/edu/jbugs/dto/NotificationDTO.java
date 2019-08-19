@@ -4,7 +4,6 @@ import entity.User;
 import entity.enums.NotificationType;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Document me.
@@ -14,7 +13,7 @@ import java.util.Date;
  */
 public class NotificationDTO implements Serializable {
     private Integer ID;
-    private Date date;
+    private String date;
     private String message;
     private NotificationType type;
     private String url;
@@ -28,11 +27,11 @@ public class NotificationDTO implements Serializable {
         this.ID = ID;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

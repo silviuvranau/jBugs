@@ -17,7 +17,7 @@ public class UserDTO implements Serializable {
     private String mobileNumber;
     private String username;
     private String password;
-    private Integer status;
+    private boolean status;
 
     public String getEmail() {
         return email;
@@ -83,11 +83,11 @@ public class UserDTO implements Serializable {
         this.password = password;
     }
 
-    public Integer getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 

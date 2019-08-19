@@ -15,7 +15,7 @@ public class UserDTOEntityMapper {
 
     public static User getUserFromUserDto(UserDTO userDTO){
         User user = new User();
-        user.setID(userDTO.getID());
+        user.setId(userDTO.getId());
         user.setCounter(userDTO.getCounter());
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
@@ -29,7 +29,7 @@ public class UserDTOEntityMapper {
 
     public static UserDTO getDtoFromUser(User user){
         UserDTO userDTO = new UserDTO();
-        userDTO.setID(user.getID());
+        userDTO.setId(user.getId());
         userDTO.setCounter(user.getCounter());
         userDTO.setFirstName(user.getFirstName());
         userDTO.setLastName(user.getLastName());
@@ -37,7 +37,7 @@ public class UserDTOEntityMapper {
         userDTO.setMobileNumber(user.getMobileNumber());
         userDTO.setUsername(user.getUsername());
         userDTO.setPassword(user.getPassword());
-        userDTO.setStatus(user.getStatus());
+        userDTO.setStatus(user.isStatus());
         return userDTO;
     }
 }
