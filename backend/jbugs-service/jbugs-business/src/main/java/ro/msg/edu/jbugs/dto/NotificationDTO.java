@@ -1,9 +1,9 @@
 package ro.msg.edu.jbugs.dto;
 
 import entity.User;
+import entity.enums.NotificationType;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Document me.
@@ -13,11 +13,11 @@ import java.util.Date;
  */
 public class NotificationDTO implements Serializable {
     private Integer ID;
-    private Date date;
+    private String date;
     private String message;
-    private String type;
+    private NotificationType type;
     private String url;
-    private User userID;
+    private User user;
 
     public Integer getID() {
         return ID;
@@ -27,11 +27,11 @@ public class NotificationDTO implements Serializable {
         this.ID = ID;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -43,11 +43,11 @@ public class NotificationDTO implements Serializable {
         this.message = message;
     }
 
-    public String getType() {
+    public NotificationType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(NotificationType type) {
         this.type = type;
     }
 
@@ -59,12 +59,12 @@ public class NotificationDTO implements Serializable {
         this.url = url;
     }
 
-    public User getUserID() {
-        return userID;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserID(User userID) {
-        this.userID = userID;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -75,7 +75,7 @@ public class NotificationDTO implements Serializable {
                 ", message='" + message + '\'' +
                 ", type='" + type + '\'' +
                 ", url='" + url + '\'' +
-                ", userID=" + userID +
+                ", user=" + user +
                 '}';
     }
 }

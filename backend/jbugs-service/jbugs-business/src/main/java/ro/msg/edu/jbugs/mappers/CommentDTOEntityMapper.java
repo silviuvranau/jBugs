@@ -15,11 +15,11 @@ public class CommentDTOEntityMapper {
     public Comment getCommentFromDto(CommentDTO commentDTO){
         Comment comment = new Comment();
 
-        comment.setID(commentDTO.getID());
+        comment.setId(commentDTO.getID());
         comment.setText(commentDTO.getText());
         comment.setDate(commentDTO.getDate());
-        comment.setUserID(commentDTO.getUserID());
-        comment.setBugID(commentDTO.getBugID());
+        comment.setUser(commentDTO.getUser());
+        comment.setBug(commentDTO.getBug());
 
         return comment;
     }
@@ -27,14 +27,12 @@ public class CommentDTOEntityMapper {
     public CommentDTO getDtoFromComment(Comment comment){
         CommentDTO commentDTO = new CommentDTO();
 
-        commentDTO.setID(comment.getID());
+        commentDTO.setID(comment.getId());
         commentDTO.setText(comment.getText());
         commentDTO.setDate(comment.getDate());
-        commentDTO.setUserID(comment.getUserID());
-        commentDTO.setBugID(comment.getBugID());
+        commentDTO.setUser(comment.getUser());
+        commentDTO.setBug(comment.getBug());
 
         return commentDTO;
     }
-
-
 }

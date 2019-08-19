@@ -1,5 +1,7 @@
 package entity;
 
+import entity.enums.Severity;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -49,7 +51,7 @@ public class Bug implements Serializable {
     private String fixedVersion;
 
     @Column(name="severity")
-    private String severity;
+    private Severity severity;
 
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="created_id", referencedColumnName = "ID")
@@ -65,13 +67,21 @@ public class Bug implements Serializable {
     @OneToMany(mappedBy="bugID")
     private Set<Comment> comments;
 
-//    public Integer getID() {
-//        return ID;
-//    }
-//
-//    public void setID(Integer ID) {
-//        this.ID = ID;
-//    }
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
 
     public String getTitle() {
         return title;
@@ -113,11 +123,11 @@ public class Bug implements Serializable {
         this.fixedVersion = fixedVersion;
     }
 
-    public String getSeverity() {
+    public Severity getSeverity() {
         return severity;
     }
 
-    public void setSeverity(String severity) {
+    public void setSeverity(Severity severity) {
         this.severity = severity;
     }
 
@@ -146,4 +156,21 @@ public class Bug implements Serializable {
     }
 
     public Bug(){}
+
+    @Override
+    public String toString() {
+        return "Bug{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", version='" + version + '\'' +
+                ", targetDate='" + targetDate + '\'' +
+                ", fixedVersion='" + fixedVersion + '\'' +
+                ", severity='" + severity + '\'' +
+                ", createdID=" + createdID +
+                ", assignedID=" + assignedID +
+                ", status='" + status + '\'' +
+                ", comments=" + comments +
+                '}';
+    }
 }

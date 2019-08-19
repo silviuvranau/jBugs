@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @since 19.1.2
  */
 public class UserDTO implements Serializable {
-    private Integer ID;
+    private Integer id;
     private Integer counter;
     private String firstName;
     private String lastName;
@@ -17,7 +17,7 @@ public class UserDTO implements Serializable {
     private String mobileNumber;
     private String username;
     private String password;
-    private Integer status;
+    private boolean status;
 
     public String getEmail() {
         return email;
@@ -27,12 +27,12 @@ public class UserDTO implements Serializable {
         this.email = email;
     }
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setId(Integer ID) {
+        this.id = ID;
     }
 
     public Integer getCounter() {
@@ -83,18 +83,18 @@ public class UserDTO implements Serializable {
         this.password = password;
     }
 
-    public Integer getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
     @Override
     public String toString() {
         return "UserDTO{" +
-                "ID=" + ID +
+                "ID=" + id +
                 ", counter=" + counter +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

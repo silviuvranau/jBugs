@@ -12,7 +12,7 @@ import ro.msg.edu.jbugs.dto.BugDTO;
 public class BugDTOEntityMapper {
     public static Bug getBugFromDto(BugDTO bugDTO){
         Bug bug = new Bug();
-        bug.setID(bugDTO.getID());
+        bug.setId(bugDTO.getID());
         bug.setTitle(bugDTO.getTitle());
         bug.setDescription(bugDTO.getDescription());
         bug.setVersion(bugDTO.getVersion());
@@ -27,7 +27,7 @@ public class BugDTOEntityMapper {
 
     public static BugDTO getDtoFromBug(Bug bug){
         BugDTO bugDTO = new BugDTO();
-        bugDTO.setID(bug.getID());
+        bugDTO.setID(bug.getId());
         bugDTO.setTitle(bug.getTitle());
         bugDTO.setDescription(bug.getDescription());
         bugDTO.setVersion(bug.getVersion());
