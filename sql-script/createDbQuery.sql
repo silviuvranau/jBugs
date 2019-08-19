@@ -89,7 +89,7 @@ CREATE TABLE `bugs` (
 
 CREATE TABLE `comments` (
   `text` varchar(1000) NOT NULL,
-  `date` datetime NOT NULL,
+  `date` varchar(50) NOT NULL,
   `ID` bigint(20) NOT NULL,
   `user_id` bigint(20) DEFAULT NULL,
   `bug_id` bigint(20) DEFAULT NULL,
