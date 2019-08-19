@@ -186,49 +186,123 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Integer ID;
+
     @Column(name = "counter")
     private Integer counter;
+
     @Column(name = "first_name")
     private String firstName;
+
     @Column(name = "last_name")
     private String lastName;
+
     @Column(name = "email")
     private String email;
+
     @Column(name = "mobile_number")
     private String mobileNumber;
+
     @Column(name = "password")
     private String password;
+
     @Column(name = "username")
     private String username;
+
     @Column(name = "status")
-    private Integer status;
+    private boolean status;
+
     @OneToMany(mappedBy = "createdID", cascade = CascadeType.PERSIST)
     private Set<Bug> createdBugs;
+
     @OneToMany(mappedBy = "assignedID", cascade = CascadeType.PERSIST)
     private Set<Bug> assignedBugs;
+
     @OneToMany(mappedBy="userID", cascade = CascadeType.PERSIST)
     private Set<Comment> comments;
+
     @ManyToMany(targetEntity = Role.class)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = {@JoinColumn(name= "role_id")})
-    private List<Role> roleList;
+    private Set<Role> roles;
 
-//    @OneToMany(targetEntity = Notification.class, mappedBy = "userID", cascade = CascadeType.PERSIST, orphanRemoval = true)
-//    @JoinColumn(name="user_id")
-//    private Set<Notification> notifications;
-
-        //adds two users
-//    @OneToMany(targetEntity = Notification.class, mappedBy = "userID", cascade = CascadeType.PERSIST)
-//    @JoinColumn(name="user_id")
-//    private Set<Notification> notifications;
 
     @OneToMany(mappedBy = "user")
-//    @JoinColumn(name="user_id", referencedColumnName = "ID")
     private Set<Notification> notifications;
 
 
     public User() {
     }
 
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
+
+    public Integer getCounter() {
+        return counter;
+    }
+
+    public void setCounter(Integer counter) {
+        this.counter = counter;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
     public Set<Bug> getCreatedBugs() {
         return createdBugs;
@@ -254,67 +328,12 @@ public class User {
         this.comments = comments;
     }
 
-    public List<Role> getRoleList() {
-        return roleList;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRoleList(List<Role> roleList) {
-        this.roleList = roleList;
-    }
-
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public Integer getStatus() {
-        return status;
-    }
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-    public Integer getID() {
-        return ID;
-    }
-    public void setID(Integer id) {
-        this.ID = id;
-    }
-    public Integer getCounter() {
-        return counter;
-    }
-    public void setCounter(Integer counter) {
-        this.counter = counter;
-    }
-    public String getFirstName() {
-        return firstName;
-    }
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    public String getLastName() {
-        return lastName;
-    }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public Set<Notification> getNotifications() {
@@ -323,24 +342,5 @@ public class User {
 
     public void setNotifications(Set<Notification> notifications) {
         this.notifications = notifications;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(counter, user.counter) &&
-                Objects.equals(firstName, user.firstName) &&
-                Objects.equals(lastName, user.lastName) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(mobileNumber, user.mobileNumber) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(username, user.username) &&
-                Objects.equals(status, user.status);
-    }
-    @Override
-    public int hashCode() {
-        return Objects.hash(counter, firstName, lastName, email, mobileNumber, password, username, status);
     }
 }
