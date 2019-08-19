@@ -13,7 +13,7 @@ CREATE TABLE `users` (
   `last_name` varchar(255) NOT NULL,
   `mobile_number` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL UNIQUE,
   `status` boolean NOT NULL DEFAULT false,
   PRIMARY KEY (`ID`)
 );
@@ -78,8 +78,8 @@ CREATE TABLE `bugs` (
   `created_username` varchar(255) NOT NULL,
   `assigned_username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  KEY ` FK_bugs_CREATED_USERNAME_idx` (`created_id`),
-  KEY `FK_bugs_ASSIGNED_USERNAME_idx` (`assigned_id`),
+  KEY ` FK_bugs_CREATED_USERNAME_idx` (`created_username`),
+  KEY `FK_bugs_ASSIGNED_USERNAME_idx` (`assigned_username`),
   CONSTRAINT ` FK_bugs_CREATED_USERNAME` FOREIGN KEY (`created_username`) REFERENCES `users` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_bugs_ASSIGNED_USERNAME` FOREIGN KEY (`assigned_username`) REFERENCES `users` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
