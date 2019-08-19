@@ -65,14 +65,6 @@ public class Bug implements Serializable {
     @OneToMany(mappedBy="bugID")
     private Set<Comment> comments;
 
-//    public Integer getID() {
-//        return ID;
-//    }
-//
-//    public void setID(Integer ID) {
-//        this.ID = ID;
-//    }
-
     public String getTitle() {
         return title;
     }
@@ -146,4 +138,21 @@ public class Bug implements Serializable {
     }
 
     public Bug(){}
+
+    @Override
+    public String toString() {
+        return "Bug{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", version='" + version + '\'' +
+                ", targetDate='" + targetDate + '\'' +
+                ", fixedVersion='" + fixedVersion + '\'' +
+                ", severity='" + severity + '\'' +
+                ", createdID=" + createdID +
+                ", assignedID=" + assignedID +
+                ", status='" + status + '\'' +
+                ", comments=" + comments +
+                '}';
+    }
 }

@@ -42,7 +42,8 @@ public class Attachment implements Serializable {
     @Override
     public String toString() {
         return "Attachment{" +
-                "attContent='" + attContent + '\'' +
+                "id=" + id +
+                ", attContent='" + attContent + '\'' +
                 ", bug=" + bug +
                 '}';
     }

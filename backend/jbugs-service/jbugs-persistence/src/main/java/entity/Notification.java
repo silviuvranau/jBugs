@@ -91,7 +91,7 @@ public class Notification implements Serializable {
                 ", message='" + message + '\'' +
                 ", type='" + type + '\'' +
                 ", url='" + url + '\'' +
-                ", userID=" + //userID +
+                ", user=" +
                 '}';
     }
 }

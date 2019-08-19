@@ -32,10 +32,10 @@ public class Comment implements Serializable {
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="user_id", referencedColumnName = "ID")
 
-    private User userID;
+    private User user;
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="bug_id", referencedColumnName = "ID")
-    private Bug bugID;
+    private Bug bug;
 
     public String getText() {
         return text;
@@ -53,37 +53,21 @@ public class Comment implements Serializable {
         this.date = date;
     }
 
-//    public Integer getUserID() {
-//        return userID;
-//    }
-//
-//    public void setUserID(Integer userID) {
-//        this.userID = userID;
-//    }
-//
-//    public Integer getBugID() {
-//        return bugID;
-//    }
-//
-//    public void setBugID(Integer bugID) {
-//        this.bugID = bugID;
-//    }
 
-
-    public User getUserID() {
-        return userID;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserID(User userID) {
-        this.userID = userID;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Bug getBugID() {
-        return bugID;
+    public Bug getBug() {
+        return bug;
     }
 
-    public void setBugID(Bug bugID) {
-        this.bugID = bugID;
+    public void setBug(Bug bug) {
+        this.bug = bug;
     }
 
     @Override
@@ -91,8 +75,8 @@ public class Comment implements Serializable {
         return "Comment{" +
                 "text='" + text + '\'' +
                 ", date=" + date +
-                ", userID=" + userID +
-                ", bugID=" + bugID +
+                ", user=" + user +
+                ", bug=" + bug +
                 '}';
     }
 }
