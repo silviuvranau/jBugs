@@ -17,9 +17,9 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name = Bug.GET_ALL_BUGS,query = "SELECT b FROM Bug b"),
         @NamedQuery(name= Bug.GET_BY_CREATED_ID, query = "SELECT b FROM Bug b " +
-                "WHERE b.createdID = :user"),
+                "WHERE b.createdId = :user"),
         @NamedQuery(name= Bug.GET_BY_ASSIGNED_ID, query = "SELECT b FROM Bug b " +
-                "WHERE b.assignedID = :user"),
+                "WHERE b.assignedId = :user"),
 //        @NamedQuery(name=Bug.DELETE_BUGS, query = "DELETE FROM Bug b " +
 //                "WHERE b.targetDate < :date")
         @NamedQuery(name=Bug.DELETE_BUGS, query = "Update Bug b set b.status= 'closed' " +
@@ -55,16 +55,16 @@ public class Bug implements Serializable {
 
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="created_id", referencedColumnName = "ID")
-    private User createdID;
+    private User createdId;
 
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="assigned_id",referencedColumnName = "ID")
-    private User assignedID;
+    private User assignedId;
 
     @Column(name="status")
     private String status;
 
-    @OneToMany(mappedBy="bug_id")
+    @OneToMany(mappedBy="bug")
     private Set<Comment> comments;
 
     public Integer getId() {
@@ -131,20 +131,20 @@ public class Bug implements Serializable {
         this.severity = severity;
     }
 
-    public User getCreatedID() {
-        return createdID;
+    public User getCreatedId() {
+        return createdId;
     }
 
-    public void setCreatedID(User createdID) {
-        this.createdID = createdID;
+    public void setCreatedId(User createdId) {
+        this.createdId = createdId;
     }
 
-    public User getAssignedID() {
-        return assignedID;
+    public User getAssignedId() {
+        return assignedId;
     }
 
-    public void setAssignedID(User assignedID) {
-        this.assignedID = assignedID;
+    public void setAssignedId(User assignedId) {
+        this.assignedId = assignedId;
     }
 
     public String getStatus() {
@@ -167,8 +167,8 @@ public class Bug implements Serializable {
                 ", targetDate='" + targetDate + '\'' +
                 ", fixedVersion='" + fixedVersion + '\'' +
                 ", severity='" + severity + '\'' +
-                ", createdID=" + createdID +
-                ", assignedID=" + assignedID +
+                ", createdId=" + createdId +
+                ", assignedId=" + assignedId +
                 ", status='" + status + '\'' +
                 ", comments=" + comments +
                 '}';
