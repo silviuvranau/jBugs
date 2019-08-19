@@ -1,5 +1,7 @@
 package entity;
 
+import entity.enums.Severity;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -49,7 +51,7 @@ public class Bug implements Serializable {
     private String fixedVersion;
 
     @Column(name="severity")
-    private String severity;
+    private Severity severity;
 
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="created_id", referencedColumnName = "ID")
@@ -121,11 +123,11 @@ public class Bug implements Serializable {
         this.fixedVersion = fixedVersion;
     }
 
-    public String getSeverity() {
+    public Severity getSeverity() {
         return severity;
     }
 
-    public void setSeverity(String severity) {
+    public void setSeverity(Severity severity) {
         this.severity = severity;
     }
 

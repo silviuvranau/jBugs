@@ -1,5 +1,7 @@
 package entity;
 
+import entity.enums.NotificationType;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -28,7 +30,7 @@ public class Notification implements Serializable {
     private String message;
 
     @Column(name="type")
-    private String type;
+    private NotificationType type;
 
     @Column(name="url")
     private String url;
@@ -71,11 +73,11 @@ public class Notification implements Serializable {
         this.message = message;
     }
 
-    public String getType() {
+    public NotificationType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(NotificationType type) {
         this.type = type;
     }
 

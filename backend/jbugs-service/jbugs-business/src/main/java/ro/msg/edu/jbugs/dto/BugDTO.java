@@ -1,6 +1,8 @@
 package ro.msg.edu.jbugs.dto;
 
 
+import entity.enums.Severity;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,7 +19,7 @@ public class BugDTO implements Serializable {
     private String version;
     private String targetDate;
     private String fixedVersion;
-    private String severity;
+    private Severity severity;
     private UserDTO createdId;
     private UserDTO assignedId;
     private String status;
@@ -70,11 +72,11 @@ public class BugDTO implements Serializable {
         this.fixedVersion = fixedVersion;
     }
 
-    public String getSeverity() {
+    public Severity getSeverity() {
         return severity;
     }
 
-    public void setSeverity(String severity) {
+    public void setSeverity(Severity severity) {
         this.severity = severity;
     }
 
