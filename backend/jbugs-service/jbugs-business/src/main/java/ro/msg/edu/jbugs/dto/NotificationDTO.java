@@ -17,7 +17,7 @@ public class NotificationDTO implements Serializable {
     private String message;
     private String type;
     private String url;
-    private User userID;
+    private User user;
 
     public Integer getID() {
         return ID;
@@ -59,12 +59,12 @@ public class NotificationDTO implements Serializable {
         this.url = url;
     }
 
-    public User getUserID() {
-        return userID;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserID(User userID) {
-        this.userID = userID;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -75,7 +75,7 @@ public class NotificationDTO implements Serializable {
                 ", message='" + message + '\'' +
                 ", type='" + type + '\'' +
                 ", url='" + url + '\'' +
-                ", userID=" + userID +
+                ", user=" + user +
                 '}';
     }
 }

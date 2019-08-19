@@ -11,16 +11,16 @@ import java.io.Serializable;
  * @since 19.1.2
  */
 public class AttachmentDTO implements Serializable {
-    private Integer ID;
+    private Integer id;
     private String attContent;
-    private Bug idBug;
+    private Bug bug;
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getAttContent() {
@@ -31,20 +31,20 @@ public class AttachmentDTO implements Serializable {
         this.attContent = attContent;
     }
 
-    public Bug getIdBug() {
-        return idBug;
+    public Bug getBug() {
+        return bug;
     }
 
-    public void setIdBug(Bug idBug) {
-        this.idBug = idBug;
+    public void setBug(Bug bug) {
+        this.bug = bug;
     }
 
     @Override
     public String toString() {
         return "AttachmentDTO{" +
-                "ID=" + ID +
+                "id=" + id +
                 ", attContent='" + attContent + '\'' +
-                ", idBug=" + idBug +
+                ", bug=" + bug +
                 '}';
     }
 }

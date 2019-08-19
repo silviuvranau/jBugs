@@ -31,8 +31,8 @@ public class Comment implements Serializable {
 
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="user_id", referencedColumnName = "ID")
-
     private User user;
+
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="bug_id", referencedColumnName = "ID")
     private Bug bug;

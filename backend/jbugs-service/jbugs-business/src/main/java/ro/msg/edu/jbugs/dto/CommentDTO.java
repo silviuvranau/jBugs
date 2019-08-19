@@ -16,10 +16,24 @@ public class CommentDTO implements Serializable {
     private Integer ID;
     private String text;
     private Date date;
-//    private Integer userID;
-//    private Integer bugID;
-    private User userID;
-    private Bug bugID;
+    private User user;
+    private Bug bug;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Bug getBug() {
+        return bug;
+    }
+
+    public void setBug(Bug bug) {
+        this.bug = bug;
+    }
 
     public Integer getID() {
         return ID;
@@ -45,46 +59,14 @@ public class CommentDTO implements Serializable {
         this.date = date;
     }
 
-//    public Integer getUserID() {
-//        return userID;
-//    }
-//
-//    public void setUserID(Integer userID) {
-//        this.userID = userID;
-//    }
-//
-//    public Integer getBugID() {
-//        return bugID;
-//    }
-//
-//    public void setBugID(Integer bugID) {
-//        this.bugID = bugID;
-//    }
-
-
-    public User getUserID() {
-        return userID;
-    }
-
-    public void setUserID(User userID) {
-        this.userID = userID;
-    }
-
-    public Bug getBugID() {
-        return bugID;
-    }
-
-    public void setBugID(Bug bugID) {
-        this.bugID = bugID;
-    }
-
     @Override
     public String toString() {
         return "CommentDTO{" +
-                "text='" + text + '\'' +
+                "ID=" + ID +
+                ", text='" + text + '\'' +
                 ", date=" + date +
-                ", userID=" + userID +
-                ", bugID=" + bugID +
+                ", user=" + user +
+                ", bug=" + bug +
                 '}';
     }
 }

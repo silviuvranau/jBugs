@@ -15,7 +15,7 @@ public class BugDTO implements Serializable {
     private String title;
     private String description;
     private String version;
-    private Date targetDate;
+    private String targetDate;
     private String fixedVersion;
     private String severity;
     private UserDTO createdId;
@@ -54,11 +54,11 @@ public class BugDTO implements Serializable {
         this.version = version;
     }
 
-    public Date getTargetDate() {
+    public String getTargetDate() {
         return targetDate;
     }
 
-    public void setTargetDate(Date targetDate) {
+    public void setTargetDate(String targetDate) {
         this.targetDate = targetDate;
     }
 

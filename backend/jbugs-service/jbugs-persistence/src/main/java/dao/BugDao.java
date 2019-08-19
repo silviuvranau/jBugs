@@ -27,7 +27,7 @@ public class BugDao {
     public Bug insertBug(Bug bug) {
         entityManager.persist(bug);
         entityManager.flush();
-        System.out.println(bug.getID());
+        System.out.println(bug.getId());
         return bug;
     }
 
