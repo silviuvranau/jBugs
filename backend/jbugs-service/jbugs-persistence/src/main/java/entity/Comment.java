@@ -2,7 +2,6 @@ package entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Document me.
@@ -16,24 +15,27 @@ import java.util.Date;
         @NamedQuery(name= Comment.DELETE_COMMENTS, query = "DELETE FROM Comment c " +
                 "WHERE c.date <= :date")
 })
-public class Comment extends BaseEntity implements Serializable {
+public class Comment implements Serializable {
     public static final String DELETE_COMMENTS = "deleteComments";
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
 
     @Column(name="text")
     private String text;
+
     @Column(name="date")
-    private Date date;
-//    @Column(name="user_id")
-//    private Integer userID;
-//    @Column(name="bug_id")
-//    private Integer bugID;
+    private String date;
 
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="user_id", referencedColumnName = "ID")
-    private User userID;
+
+    private User user;
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="bug_id", referencedColumnName = "ID")
-    private Bug bugID;
+    private Bug bug;
 
     public String getText() {
         return text;
@@ -43,45 +45,29 @@ public class Comment extends BaseEntity implements Serializable {
         this.text = text;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-//    public Integer getUserID() {
-//        return userID;
-//    }
-//
-//    public void setUserID(Integer userID) {
-//        this.userID = userID;
-//    }
-//
-//    public Integer getBugID() {
-//        return bugID;
-//    }
-//
-//    public void setBugID(Integer bugID) {
-//        this.bugID = bugID;
-//    }
 
-
-    public User getUserID() {
-        return userID;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserID(User userID) {
-        this.userID = userID;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Bug getBugID() {
-        return bugID;
+    public Bug getBug() {
+        return bug;
     }
 
-    public void setBugID(Bug bugID) {
-        this.bugID = bugID;
+    public void setBug(Bug bug) {
+        this.bug = bug;
     }
 
     @Override
@@ -89,8 +75,8 @@ public class Comment extends BaseEntity implements Serializable {
         return "Comment{" +
                 "text='" + text + '\'' +
                 ", date=" + date +
-                ", userID=" + userID +
-                ", bugID=" + bugID +
+                ", user=" + user +
+                ", bug=" + bug +
                 '}';
     }
 }

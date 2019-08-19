@@ -2,7 +2,6 @@ package entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Set;
 
 /**
@@ -24,45 +23,47 @@ import java.util.Set;
         @NamedQuery(name=Bug.DELETE_BUGS, query = "Update Bug b set b.status= 'closed' " +
                 "WHERE b.targetDate < :date and b.status <> 'closed'")
 })
-public class Bug extends BaseEntity implements Serializable {
+public class Bug implements Serializable {
     public static final String GET_ALL_BUGS = "findAllBugs";
     public static final String GET_BY_CREATED_ID = "findByCreatedId";
     public static final String GET_BY_ASSIGNED_ID = "findByAssignedId";
     public static final String DELETE_BUGS="deleteBugsWhoExceededDate";
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Integer ID;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     @Column(name="title")
     private String title;
+
     @Column(name="description")
     private String description;
+
     @Column(name="version")
     private String version;
-    @Column(name="targetDate")
-    private Date targetDate;
-    @Column(name="fixedVersion")
+
+    @Column(name="target_date")
+    private String targetDate;
+
+    @Column(name="fixed_version")
     private String fixedVersion;
+
     @Column(name="severity")
     private String severity;
+
     @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="CREATED_ID", referencedColumnName = "ID")
+    @JoinColumn(name="created_id", referencedColumnName = "ID")
     private User createdID;
+
     @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="ASSIGNED_ID",referencedColumnName = "ID")
+    @JoinColumn(name="assigned_id",referencedColumnName = "ID")
     private User assignedID;
+
     @Column(name="status")
     private String status;
 
     @OneToMany(mappedBy="bugID")
     private Set<Comment> comments;
-
-//    public Integer getID() {
-//        return ID;
-//    }
-//
-//    public void setID(Integer ID) {
-//        this.ID = ID;
-//    }
 
     public String getTitle() {
         return title;
@@ -88,11 +89,11 @@ public class Bug extends BaseEntity implements Serializable {
         this.version = version;
     }
 
-    public Date getTargetDate() {
+    public String getTargetDate() {
         return targetDate;
     }
 
-    public void setTargetDate(Date targetDate) {
+    public void setTargetDate(String targetDate) {
         this.targetDate = targetDate;
     }
 
@@ -137,4 +138,21 @@ public class Bug extends BaseEntity implements Serializable {
     }
 
     public Bug(){}
+
+    @Override
+    public String toString() {
+        return "Bug{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", version='" + version + '\'' +
+                ", targetDate='" + targetDate + '\'' +
+                ", fixedVersion='" + fixedVersion + '\'' +
+                ", severity='" + severity + '\'' +
+                ", createdID=" + createdID +
+                ", assignedID=" + assignedID +
+                ", status='" + status + '\'' +
+                ", comments=" + comments +
+                '}';
+    }
 }

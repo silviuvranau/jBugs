@@ -2,7 +2,6 @@ package entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Document me.
@@ -15,26 +14,20 @@ import java.util.Date;
 @NamedQueries({
         @NamedQuery(name= Notification.FIND_ALL_NOTIFICATIONS, query = "select n from Notification n"),
 })
-public class Notification extends BaseEntity implements Serializable {
+public class Notification implements Serializable {
     public static final String FIND_ALL_NOTIFICATIONS = "findAllNotifications";
+
     @Column(name="date")
-    private Date date;
+    private String date;
+
     @Column(name="message")
     private String message;
+
     @Column(name="type")
     private String type;
+
     @Column(name="url")
     private String url;
-    //@ManyToOne(cascade= CascadeType.ALL)
-    //@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-//    @ManyToOne(cascade = CascadeType.PERSIST)
-//    @JoinColumn(name="user_id", referencedColumnName = "ID")
-//    private User userID;
-
-        //adds two users
-//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-//    @JoinColumn(name="user_id", referencedColumnName = "ID", insertable = false, updatable = false)
-//    private User userID;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name="user_id")
@@ -42,11 +35,11 @@ public class Notification extends BaseEntity implements Serializable {
 
     public Notification(){}
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -98,7 +91,7 @@ public class Notification extends BaseEntity implements Serializable {
                 ", message='" + message + '\'' +
                 ", type='" + type + '\'' +
                 ", url='" + url + '\'' +
-                ", userID=" + //userID +
+                ", user=" +
                 '}';
     }
 }
