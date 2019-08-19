@@ -185,7 +185,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private Integer ID;
+    private Integer id;
 
     @Column(name = "counter")
     private Integer counter;
@@ -232,12 +232,12 @@ public class User {
     public User() {
     }
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setId(Integer ID) {
+        this.id = ID;
     }
 
     public Integer getCounter() {
