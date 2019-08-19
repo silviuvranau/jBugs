@@ -5,7 +5,10 @@ import entity.User;
 import exceptions.BusinessException;
 
 import javax.ejb.Stateless;
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -47,6 +50,7 @@ public class UserDao {
     public Long getCreatedBugs(User user){
         Query query = entityManager.createNativeQuery("SELECT COUNT(b.CREATED_ID) FROM bugs b where b.CREATED_ID = ?1;");
         query.setParameter(1,user.getId());
+        query.setParameter(1, user.getId());
         Object resultSet = query.getSingleResult();
         Long numberOfCreatedBugs = (Long)resultSet;
         return numberOfCreatedBugs;

@@ -62,6 +62,7 @@ public class Servlet extends HttpServlet {
         //secondUser.setUsername("fuckU");
         secondUser.setPassword("test2");
         secondUser.setStatus(false);
+        secondUser.setStatus(true);
     }
 
     public void destroy(){}

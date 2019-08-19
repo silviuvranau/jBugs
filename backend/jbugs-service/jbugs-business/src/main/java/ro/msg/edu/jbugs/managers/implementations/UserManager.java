@@ -8,16 +8,14 @@ import entity.User;
 import entity.enums.NotificationType;
 import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.UserDTO;
+import ro.msg.edu.jbugs.interceptors.Interceptor;
 import ro.msg.edu.jbugs.managers.interfaces.UserManagerRemote;
 import ro.msg.edu.jbugs.mappers.UserDTOEntityMapper;
-import ro.msg.edu.jbugs.interceptors.Interceptor;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
-import javax.swing.plaf.nimbus.NimbusStyle;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,6 +61,8 @@ public class UserManager implements UserManagerRemote {
         notification.setUser(UserDTOEntityMapper.getUserFromUserDto(userDTO));
         notification.setDate("");
         notification.setType(NotificationType.WELCOME_NEW_USER);
+        notification.setDate("2000-01-09 01:10:20");
+        notification.setType(NotificationType.BUG_CLOSED);
 
         notificationDao.insertNotification(notification);
         return UserDTOEntityMapper.getDtoFromUser(insertedUser);
@@ -131,21 +131,23 @@ public class UserManager implements UserManagerRemote {
                     .toString();
             if (loggingPassword.equals(userToLogin.getPassword())) {
                 if (userToLogin.isStatus() == false) {
-                    throw new BusinessException("Your account is disabled", "Throw");
+                    if (!userToLogin.isStatus()) {
+                        throw new BusinessException("Your account is disabled", "Throw");
+                    } else {
+                        userToLogin.setCounter(0);
+                        return UserDTOEntityMapper.getDtoFromUser(userToLogin);
+                    }
                 } else {
-                    userToLogin.setCounter(0);
-                    return UserDTOEntityMapper.getDtoFromUser(userToLogin);
+                    Integer userCounter = userToLogin.getCounter() + 1;
+                    userToLogin.setCounter(userCounter);
+                    if (userCounter == 5) {
+                        userToLogin.setStatus(false);
+                        throw new BusinessException("Exceeding max login tries", "_");
+                    }
                 }
             } else {
-                Integer userCounter = userToLogin.getCounter() + 1;
-                userToLogin.setCounter(userCounter);
-                if (userCounter == 5) {
-                    userToLogin.setStatus(false);
-                    throw new BusinessException("Exceeding max login tries", "_");
-                }
+                throw new BusinessException("User does not exist in DB", "_");
             }
-        } else {
-            throw new BusinessException("User does not exist in DB", "_");
         }
         return null;
     }

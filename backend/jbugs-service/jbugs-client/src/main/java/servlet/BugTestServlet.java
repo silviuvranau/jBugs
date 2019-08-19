@@ -3,8 +3,6 @@ package servlet;
 import entity.enums.Severity;
 import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.dto.UserDTO;
-import ro.msg.edu.jbugs.managers.implementations.BugManager;
-import ro.msg.edu.jbugs.managers.implementations.UserManager;
 import ro.msg.edu.jbugs.managers.interfaces.BugManagerRemote;
 import ro.msg.edu.jbugs.managers.interfaces.UserManagerRemote;
 
