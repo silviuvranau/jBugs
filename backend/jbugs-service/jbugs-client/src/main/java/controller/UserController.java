@@ -5,12 +5,11 @@ import ro.msg.edu.jbugs.managers.implementations.UserManager;
 import ro.msg.edu.jbugs.managers.interfaces.UserManagerRemote;
 
 import javax.ejb.EJB;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
 import java.util.List;
 
 @Path("/users")
+@Produces("application/json")
 public class UserController {
 
     @EJB
@@ -25,5 +24,10 @@ public class UserController {
     @GET
     public List<UserDTO> getAllUsers(){
         return userManager.findAllUsers();
+    }
+
+    @POST
+    public UserDTO createUser(UserDTO userDTO) {
+        return userManager.insertUser(userDTO);
     }
 }
