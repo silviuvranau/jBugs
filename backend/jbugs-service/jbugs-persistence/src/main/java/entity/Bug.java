@@ -65,6 +65,22 @@ public class Bug implements Serializable {
     @OneToMany(mappedBy="bugID")
     private Set<Comment> comments;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
+
     public String getTitle() {
         return title;
     }

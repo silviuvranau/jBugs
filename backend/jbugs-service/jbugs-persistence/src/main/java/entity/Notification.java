@@ -17,6 +17,10 @@ import java.io.Serializable;
 public class Notification implements Serializable {
     public static final String FIND_ALL_NOTIFICATIONS = "findAllNotifications";
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     @Column(name="date")
     private String date;
 
@@ -34,6 +38,22 @@ public class Notification implements Serializable {
     private User user;
 
     public Notification(){}
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getDate() {
         return date;
@@ -67,22 +87,6 @@ public class Notification implements Serializable {
         this.url = url;
     }
 
-//    public User getUserID() {
-//        return userID;
-//    }
-//
-//    public void setUserID(User userID) {
-//        this.userID = userID;
-//    }
-
-
-    public User getUserID() {
-        return user;
-    }
-
-    public void setUserID(User user) {
-        this.user = user;
-    }
 
     @Override
     public String toString() {

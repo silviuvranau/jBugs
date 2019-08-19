@@ -37,6 +37,14 @@ public class Comment implements Serializable {
     @JoinColumn(name="bug_id", referencedColumnName = "ID")
     private Bug bug;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getText() {
         return text;
     }

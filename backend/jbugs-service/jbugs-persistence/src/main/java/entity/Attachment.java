@@ -23,20 +23,20 @@ public class Attachment implements Serializable {
     @JoinColumn(name="bug_id", referencedColumnName = "ID")
     private Bug bug;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public Bug getBug() {
+        return bug;
+    }
+
     public String getAttContent() {
         return attContent;
     }
 
     public void setAttContent(String attContent) {
         this.attContent = attContent;
-    }
-
-    public Bug getIdBug() {
-        return bug;
-    }
-
-    public void setIdBug(Bug idBug) {
-        this.bug = idBug;
     }
 
     @Override
