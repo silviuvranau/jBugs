@@ -76,7 +76,7 @@ CREATE TABLE `bugs` (
   `fixed_version` varchar(255) DEFAULT NULL,
   `severity` varchar(255) NOT NULL,
   `created_username` varchar(255) NOT NULL,
-  `assigned_username` varchar(255) DEFAULT '0',
+  `assigned_username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY ` FK_bugs_CREATED_USERNAME_idx` (`created_id`),
   KEY `FK_bugs_ASSIGNED_USERNAME_idx` (`assigned_id`),
