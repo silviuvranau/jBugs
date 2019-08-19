@@ -1,12 +1,13 @@
 package ro.msg.edu.jbugs.managers.implementations;
 
 import dao.NotificationDao;
+import dao.UserDao;
 import entity.Notification;
+import entity.User;
 import ro.msg.edu.jbugs.dto.NotificationDTO;
 import ro.msg.edu.jbugs.interceptors.Interceptor;
 import ro.msg.edu.jbugs.managers.interfaces.NotificationManagerRemote;
 import ro.msg.edu.jbugs.mappers.NotificationDTOEntityMapper;
-import ro.msg.edu.jbugs.mappers.UserDTOEntityMapper;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -24,10 +25,14 @@ import java.util.stream.Collectors;
 @Interceptors(Interceptor.class)
 public class NotificationManager implements NotificationManagerRemote {
     @EJB
+    private UserDao userDao;
+    @EJB
     NotificationDao notificationDao;
     @Override
-    public Notification insertNotification(Notification notification) {
-        notificationDao.insertNotification(notification);
+    public Notification insertNotification(Notification notification, Integer userId) {
+        User user = userDao.findUser(userId);
+        notification.setUser(user);
+        notification = notificationDao.insertNotification(notification);
         return notification;
     }
 

@@ -35,7 +35,7 @@ public class Notification implements Serializable {
     @Column(name="url")
     private String url;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User user;
 
