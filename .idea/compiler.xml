@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="jbugs-business" />
+        <module name="jbugs-client" />
+        <module name="jbugs-ear" />
+        <module name="jbugs-persistence" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="jbugs" target="1.8" />
+      <module name="jbugs-business" target="1.8" />
+      <module name="jbugs-client" target="1.8" />
+      <module name="jbugs-ear" target="1.8" />
+      <module name="jbugs-persistence" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

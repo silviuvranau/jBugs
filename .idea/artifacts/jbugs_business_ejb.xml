@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="ejb-jar" name="jbugs-business:ejb">
+    <output-path>$PROJECT_DIR$/backend/jbugs-service/jbugs-business/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>jbugs-business</module>
+        <packaging>ejb</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="jbugs-business-1.0.0-SNAPSHOT.jar">
+      <element id="artifact" artifact-name="jbugs-business:ejb exploded" />
+    </root>
+  </artifact>
+</component>
