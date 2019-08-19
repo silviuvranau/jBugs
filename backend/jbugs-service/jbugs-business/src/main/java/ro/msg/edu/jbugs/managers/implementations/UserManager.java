@@ -5,18 +5,17 @@ import dao.NotificationDao;
 import dao.UserDao;
 import entity.Notification;
 import entity.User;
+import entity.enums.NotificationType;
 import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.UserDTO;
+import ro.msg.edu.jbugs.interceptors.Interceptor;
 import ro.msg.edu.jbugs.managers.interfaces.UserManagerRemote;
 import ro.msg.edu.jbugs.mappers.UserDTOEntityMapper;
-import ro.msg.edu.jbugs.interceptors.Interceptor;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
-import javax.swing.plaf.nimbus.NimbusStyle;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,9 +58,9 @@ public class UserManager implements UserManagerRemote {
 
         Notification notification = new Notification();
         notification.setMessage("Welcome: " + username);
-        notification.setUserID(UserDTOEntityMapper.getUserFromUserDto(userDTO));
-        notification.setDate(new Date());
-        notification.setType("NewUser");
+        notification.setUser(UserDTOEntityMapper.getUserFromUserDto(userDTO));
+        notification.setDate("2000-01-09 01:10:20");
+        notification.setType(NotificationType.BUG_CLOSED);
 
         notificationDao.insertNotification(notification);
         return UserDTOEntityMapper.getDtoFromUser(insertedUser);
@@ -129,7 +128,7 @@ public class UserManager implements UserManagerRemote {
                     .hashString(password, StandardCharsets.UTF_8)
                     .toString();
             if (loggingPassword.equals(userToLogin.getPassword())) {
-                if (userToLogin.getStatus() == 0) {
+                if (!userToLogin.isStatus()) {
                     throw new BusinessException("Your account is disabled", "Throw");
                 } else {
                     userToLogin.setCounter(0);
@@ -139,7 +138,7 @@ public class UserManager implements UserManagerRemote {
                 Integer userCounter = userToLogin.getCounter() + 1;
                 userToLogin.setCounter(userCounter);
                 if (userCounter == 5) {
-                    userToLogin.setStatus(0);
+                    userToLogin.setStatus(false);
                     throw new BusinessException("Exceeding max login tries", "_");
                 }
             }
