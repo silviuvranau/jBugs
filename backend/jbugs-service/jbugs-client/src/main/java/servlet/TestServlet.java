@@ -1,7 +1,6 @@
 package servlet;
 
 import ro.msg.edu.jbugs.dto.UserDTO;
-import ro.msg.edu.jbugs.managers.implementations.UserManager;
 import ro.msg.edu.jbugs.managers.interfaces.UserManagerRemote;
 
 import javax.ejb.EJB;
@@ -39,7 +38,7 @@ public class TestServlet extends HttpServlet {
         userDTO.setMobileNumber("test3");
         userDTO.setUsername("test3");
         userDTO.setPassword("test3");
-        userDTO.setStatus(2);
+        userDTO.setStatus(true);
     }
 
     public void destroy(){}

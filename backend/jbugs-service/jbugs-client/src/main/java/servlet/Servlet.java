@@ -51,7 +51,7 @@ public class Servlet extends HttpServlet {
         firstUser.setMobileNumber("test");
         //firstUser.setUsername("fuckU");
         firstUser.setPassword("test");
-        firstUser.setStatus(2);
+        firstUser.setStatus(true);
 
         secondUser = new UserDTO();
         secondUser.setCounter(3);
@@ -61,7 +61,7 @@ public class Servlet extends HttpServlet {
         secondUser.setMobileNumber("test2");
         //secondUser.setUsername("fuckU");
         secondUser.setPassword("test2");
-        secondUser.setStatus(2);
+        secondUser.setStatus(true);
     }
 
     public void destroy(){}
