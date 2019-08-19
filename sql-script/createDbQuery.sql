@@ -75,13 +75,13 @@ CREATE TABLE `bugs` (
   `status` varchar(255) NOT NULL,
   `fixed_version` varchar(255) DEFAULT NULL,
   `severity` varchar(255) NOT NULL,
-  `created_id` bigint(20) NOT NULL,
-  `assigned_id` bigint(20) DEFAULT '0',
+  `created_username` varchar(255) NOT NULL,
+  `assigned_username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  KEY ` FK_bugs_CREATED_ID_idx` (`created_id`),
-  KEY `FK_bugs_ASSIGNED_ID_idx` (`assigned_id`),
-  CONSTRAINT ` FK_bugs_CREATED_ID` FOREIGN KEY (`created_id`) REFERENCES `users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_bugs_ASSIGNED_ID` FOREIGN KEY (`assigned_id`) REFERENCES `users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY ` FK_bugs_CREATED_USERNAME_idx` (`created_id`),
+  KEY `FK_bugs_ASSIGNED_USERNAME_idx` (`assigned_id`),
+  CONSTRAINT ` FK_bugs_CREATED_USERNAME` FOREIGN KEY (`created_username`) REFERENCES `users` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_bugs_ASSIGNED_USERNAME` FOREIGN KEY (`assigned_username`) REFERENCES `users` (`username`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=latin1;
 
 
