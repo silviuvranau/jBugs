@@ -11,12 +11,17 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name="attachments")
-public class Attachment extends BaseEntity implements Serializable {
-    @Column(name="attContent")
+public class Attachment implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(name="att_content")
     private String attContent;
+
     @ManyToOne(cascade= CascadeType.ALL)
-    @JoinColumn(name="id_bug", referencedColumnName = "ID")
-    private Bug idBug;
+    @JoinColumn(name="bug_id", referencedColumnName = "ID")
+    private Bug bug;
 
     public String getAttContent() {
         return attContent;
@@ -27,18 +32,18 @@ public class Attachment extends BaseEntity implements Serializable {
     }
 
     public Bug getIdBug() {
-        return idBug;
+        return bug;
     }
 
     public void setIdBug(Bug idBug) {
-        this.idBug = idBug;
+        this.bug = idBug;
     }
 
     @Override
     public String toString() {
         return "Attachment{" +
                 "attContent='" + attContent + '\'' +
-                ", idBug=" + idBug +
+                ", bug=" + bug +
                 '}';
     }
 }

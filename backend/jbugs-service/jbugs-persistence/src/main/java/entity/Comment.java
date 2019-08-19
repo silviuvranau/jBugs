@@ -2,7 +2,6 @@ package entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Document me.
@@ -16,20 +15,23 @@ import java.util.Date;
         @NamedQuery(name= Comment.DELETE_COMMENTS, query = "DELETE FROM Comment c " +
                 "WHERE c.date <= :date")
 })
-public class Comment extends BaseEntity implements Serializable {
+public class Comment implements Serializable {
     public static final String DELETE_COMMENTS = "deleteComments";
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
 
     @Column(name="text")
     private String text;
+
     @Column(name="date")
-    private Date date;
-//    @Column(name="user_id")
-//    private Integer userID;
-//    @Column(name="bug_id")
-//    private Integer bugID;
+    private String date;
 
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="user_id", referencedColumnName = "ID")
+
     private User userID;
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name="bug_id", referencedColumnName = "ID")
@@ -43,11 +45,11 @@ public class Comment extends BaseEntity implements Serializable {
         this.text = text;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
