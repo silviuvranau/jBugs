@@ -16,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sql-script/createDbQuery.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-862">
-              <caret line="15" column="41" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
+            <state relative-caret-position="-466">
+              <caret line="59" column="7" selection-start-line="59" selection-start-column="3" selection-end-line="59" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -115,7 +115,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1566210002557</updated>
-      <workItem from="1566210003816" duration="3403000" />
+      <workItem from="1566210003816" duration="4547000" />
     </task>
     <task id="LOCAL-00001" summary="in table Bugs, created_id, assgned_id =&gt; ...username">
       <created>1566211520223</created>
@@ -138,11 +138,25 @@
       <option name="project" value="LOCAL" />
       <updated>1566212771346</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="in table Bugs, created_id, assgned_id =&gt; ...username &amp;&amp; varchar">
+      <created>1566214017649</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1566214017649</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fk in notif">
+      <created>1566214509318</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1566214509318</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3403000" />
+    <option name="totallyTimeSpent" value="4547000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -212,15 +226,16 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <MESSAGE value="in table Bugs, created_id, assgned_id =&gt; ...username" />
     <MESSAGE value="in table Bugs, created_id, assgned_id =&gt; ...username &amp;&amp; varchar" />
-    <option name="LAST_COMMIT_MESSAGE" value="in table Bugs, created_id, assgned_id =&gt; ...username &amp;&amp; varchar" />
+    <MESSAGE value="fk in notif" />
+    <option name="LAST_COMMIT_MESSAGE" value="fk in notif" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/sql-script/createDbQuery.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-862">
-          <caret line="15" column="41" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
+        <state relative-caret-position="-466">
+          <caret line="59" column="7" selection-start-line="59" selection-start-column="3" selection-end-line="59" selection-end-column="7" />
         </state>
       </provider>
     </entry>
