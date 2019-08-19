@@ -62,7 +62,9 @@ CREATE TABLE `notifications` (
   `type` varchar(255) DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL,
   `user_id` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  PRIMARY KEY (`ID`),
+  KEY `FK_notifications_user_id_idx` (`user_id`),
+  CONSTRAINT `FK_notifications_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
 
 
