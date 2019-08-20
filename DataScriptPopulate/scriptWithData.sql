@@ -9,14 +9,14 @@ insert into users values (4, 0, 'iulian_oprea@msggroup.com', 'Iulian', 'Oprea', 
 insert into users values (5, 0, 'tudor_nedelcu@msggroup.com', 'Tudor', 'Nedelcu', +49012003404, 'abcdef', 'nedelt', false);
 
 
-insert into bugs values(1,'bug1', 'e grav bugu asta', '1.0', '2000-01-09 01:10:20', 'New', '1.1','critical', 'popm', 'dumiti');
-insert into bugs values(2,'bug2', 'e slab bugu asta', '2.0', '2001-01-08 02:10:20', 'New', '1.1','high', 'popm', 'dumiti');
-insert into bugs values(3,'bug3', 'mere bugu asta', '1.1', '2002-01-07 03:10:20', 'Fixed', '1.1','critical', 'bogzav', 'dumiti');
-insert into bugs values(4,'bug4', 'se pote mai bine bugu asta', '1.9', '2003-01-06 04:10:20', 'New', '1.1','critical', 'popm', 'popm');
-insert into bugs values(5,'bug5', 'imposibil bugu asta', '1.2', '2004-01-05 05:10:20', 'Closed', '1.1','low', 'opreai', 'dumiti');
-insert into bugs values(6,'bug6', 'e a Lu Radu bugu asta', '3.0', '2005-01-04 06:10:20', 'Rejected', '1.1','critical', 'nedelt', 'dumiti');
-insert into bugs values(7,'bug7', 'E a lu Stefan bugu asta', '4.0', '2006-03-01 07:10:20', 'Info needed', '1.1','medium', 'popm', 'bogzav');
-insert into bugs values(8,'bug8', 'A mieu nu ie bugu asta', '5.0', '2007-01-02 08:10:20', 'New', '1.1','low', 'dumiti', 'popm');
+insert into bugs values(1,'bug1', 'e grav bugu asta', '1.0', '2000-01-09 01:10:20', 'NEW', '1.1','CRITICAL', 'popm', 'dumiti');
+insert into bugs values(2,'bug2', 'e slab bugu asta', '2.0', '2001-01-08 02:10:20', 'NEW', '1.1','HIGH', 'popm', 'dumiti');
+insert into bugs values(3,'bug3', 'mere bugu asta', '1.1', '2002-01-07 03:10:20', 'FIXED', '1.1','CRITICAL', 'bogzav', 'dumiti');
+insert into bugs values(4,'bug4', 'se pote mai bine bugu asta', '1.9', '2003-01-06 04:10:20', 'NEW', '1.1','CRITICAL', 'popm', 'popm');
+insert into bugs values(5,'bug5', 'imposibil bugu asta', '1.2', '2004-01-05 05:10:20', 'CLOSED', '1.1','LOW', 'opreai', 'dumiti');
+insert into bugs values(6,'bug6', 'e a Lu Radu bugu asta', '3.0', '2005-01-04 06:10:20', 'REJECTED', '1.1','CRITICAL', 'nedelt', 'dumiti');
+insert into bugs values(7,'bug7', 'E a lu Stefan bugu asta', '4.0', '2006-03-01 07:10:20', 'INFO NEEDED', '1.1','MEDIUM', 'popm', 'bogzav');
+insert into bugs values(8,'bug8', 'A mieu nu ie bugu asta', '5.0', '2007-01-02 08:10:20', 'NEW', '1.1','LOW', 'dumiti', 'popm');
 
 
 insert into comments value('da sa ma mir de bugu vostru', '2000-01-09 01:10:20', 1, 1, 1);
