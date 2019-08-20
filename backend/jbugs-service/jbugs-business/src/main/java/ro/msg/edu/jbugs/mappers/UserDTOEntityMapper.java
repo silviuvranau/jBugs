@@ -24,6 +24,7 @@ public class UserDTOEntityMapper {
         user.setUsername(userDTO.getUsername());
         user.setPassword(userDTO.getPassword());
         user.setStatus(userDTO.getStatus());
+
         return user;
     }
 

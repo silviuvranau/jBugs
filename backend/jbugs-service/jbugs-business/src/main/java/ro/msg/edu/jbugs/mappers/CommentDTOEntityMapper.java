@@ -12,10 +12,10 @@ import ro.msg.edu.jbugs.dto.CommentDTO;
 public class CommentDTOEntityMapper {
     private CommentDTOEntityMapper(){}
 
-    public Comment getCommentFromDto(CommentDTO commentDTO){
+    public static Comment getCommentFromDto(CommentDTO commentDTO) {
         Comment comment = new Comment();
 
-        comment.setId(commentDTO.getID());
+        comment.setId(commentDTO.getId());
         comment.setText(commentDTO.getText());
         comment.setDate(commentDTO.getDate());
         comment.setUser(commentDTO.getUser());
@@ -24,10 +24,10 @@ public class CommentDTOEntityMapper {
         return comment;
     }
 
-    public CommentDTO getDtoFromComment(Comment comment){
+    public static CommentDTO getDtoFromComment(Comment comment) {
         CommentDTO commentDTO = new CommentDTO();
 
-        commentDTO.setID(comment.getId());
+        commentDTO.setId(comment.getId());
         commentDTO.setText(comment.getText());
         commentDTO.setDate(comment.getDate());
         commentDTO.setUser(comment.getUser());

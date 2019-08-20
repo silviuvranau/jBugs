@@ -15,7 +15,7 @@ public class AttachementDTOEntityMapper {
         Attachment attachment = new Attachment();
         attachment.setId(attachmentDTO.getId());
         attachment.setAttContent(attachmentDTO.getAttContent());
-        attachment.setBug(attachmentDTO.getBug());
+        attachment.setBug(BugDTOEntityMapper.getBugFromDto(attachmentDTO.getBug()));
 
         return attachment;
     }
@@ -24,7 +24,7 @@ public class AttachementDTOEntityMapper {
         AttachmentDTO attachmentDTO = new AttachmentDTO();
         attachmentDTO.setId(attachment.getId());
         attachmentDTO.setAttContent(attachment.getAttContent());
-        attachmentDTO.setBug(attachmentDTO.getBug());
+        attachmentDTO.setBug(BugDTOEntityMapper.getDtoFromBug(attachment.getBug()));
 
         return attachmentDTO;
     }
