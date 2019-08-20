@@ -61,9 +61,9 @@
 
 
 package entity;
+
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -74,7 +74,11 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "permissions")
+@NamedQueries({
+        @NamedQuery(name = Permission.FIND_ALL_PERMISSIONS, query = "select p from Permission p")
+})
 public class Permission {
+    public static final String FIND_ALL_PERMISSIONS = "findAllPermission";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
