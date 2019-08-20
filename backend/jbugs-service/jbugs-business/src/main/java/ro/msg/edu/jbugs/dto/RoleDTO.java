@@ -13,7 +13,6 @@ public class RoleDTO implements Serializable {
     private Integer id;
     private String type;
     private Set<PermissionDTO> permissions;
-    private Set<UserDTO> users;
 
     public Integer getId() {
         return id;
@@ -37,14 +36,6 @@ public class RoleDTO implements Serializable {
 
     public void setPermissions(Set<PermissionDTO> permissions) {
         this.permissions = permissions;
-    }
-
-    public Set<UserDTO> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<UserDTO> users) {
-        this.users = users;
     }
 
     @Override
