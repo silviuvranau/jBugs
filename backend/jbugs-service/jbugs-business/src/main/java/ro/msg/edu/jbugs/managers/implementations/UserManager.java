@@ -33,11 +33,6 @@ public class UserManager implements UserManagerRemote {
     @EJB
     private NotificationManagerRemote notificationManagerRemote;
 
-//    public void insertUser(UserDTO userDTO){
-//        User managers = UserDTOEntityMapper.getUserFromUserDto(userDTO);
-//        userDao.insertUser(managers);
-//    }
-
     public UserDTO insertUser(UserDTO userDTO){
         String username = "";
 

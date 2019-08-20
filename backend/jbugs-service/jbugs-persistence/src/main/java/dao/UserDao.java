@@ -18,7 +18,8 @@ import java.util.List;
  * @author msg systems AG; User Name.
  * @since 19.1.2
  */
-@Stateless //tells container that its an EJB
+//tells container that its an EJB
+@Stateless
 public class UserDao {
     @PersistenceContext(unitName = "jbugs-persistence")
     private EntityManager entityManager;
@@ -29,11 +30,6 @@ public class UserDao {
         User user = entityManager.find(User.class, id);
         return user;
     }
-
-//    public void insertUser(User managers){
-//        entityManager.persist(managers);
-//        System.out.println();
-//    }
 
     public User insertUser(User user){
         entityManager.persist(user);
