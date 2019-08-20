@@ -102,11 +102,11 @@ public class Servlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        UserDTO user = userManager.findAUser(1);
+        UserDTO user = userManager.findAUser(2);
         out.println("---CHECK IF FOUND USER WITH ID: 1 ---");
         out.println("<h1>" + user.toString() + "</h1>");
 
-        Integer delete = userManager.deleteUser(1);
+        Integer delete = userManager.deleteUser(15);
         out.println("---NR OF DELETED USERS: " + delete + "<br>");
 
         out.println("---CHECK USER IN DB AFTER DELETION: ----");
