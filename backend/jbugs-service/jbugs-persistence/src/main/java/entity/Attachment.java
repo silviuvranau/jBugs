@@ -39,6 +39,14 @@ public class Attachment implements Serializable {
         this.attContent = attContent;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setBug(Bug bug) {
+        this.bug = bug;
+    }
+
     @Override
     public String toString() {
         return "Attachment{" +
