@@ -30,7 +30,7 @@ public class RoleDao {
     }
 
     public void modifyRolePermission(Role role, Permission permission) {
-        Query query = entityManager.createNativeQuery("Select * from roles_permissions where role_id = ?1 and permission_id = ?2)");
+        Query query = entityManager.createNativeQuery("Select * from roles_permissions where role_id = ?1 and permission_id = ?2");
         query.setParameter(1, role.getId());
         query.setParameter(2, permission.getId());
         boolean toAdd = query.getResultList().size() == 0;

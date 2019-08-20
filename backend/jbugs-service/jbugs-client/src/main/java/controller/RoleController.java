@@ -1,7 +1,7 @@
 package controller;
 
-import ro.msg.edu.jbugs.dto.PermissionDTO;
 import ro.msg.edu.jbugs.dto.RoleDTO;
+import ro.msg.edu.jbugs.dto.RolePermissionDTO;
 import ro.msg.edu.jbugs.managers.interfaces.RoleManagerRemote;
 
 import javax.ejb.EJB;
@@ -28,9 +28,7 @@ public class RoleController {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void modifyRolePermission(RoleDTO roleDTO,
-                                     PermissionDTO permissionDTO) {
-        roleManagerRemote.modifyRolePermission(roleDTO, permissionDTO);
+    public void modifyRolePermission(RolePermissionDTO rolePermissionDTO) {
+        roleManagerRemote.modifyRolePermission(rolePermissionDTO.getRoleDTO(), rolePermissionDTO.getPermissionDTO());
     }
-
 }
