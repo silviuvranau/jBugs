@@ -3,6 +3,7 @@ package ro.msg.edu.jbugs.dto;
 import entity.Bug;
 
 import java.io.Serializable;
+import java.sql.Blob;
 
 /**
  * Document me.
@@ -12,7 +13,7 @@ import java.io.Serializable;
  */
 public class AttachmentDTO implements Serializable {
     private Integer id;
-    private String attContent;
+    private Blob attContent;
     private Bug bug;
 
     public Integer getId() {
@@ -23,11 +24,11 @@ public class AttachmentDTO implements Serializable {
         this.id = id;
     }
 
-    public String getAttContent() {
+    public Blob getAttContent() {
         return attContent;
     }
 
-    public void setAttContent(String attContent) {
+    public void setAttContent(Blob attContent) {
         this.attContent = attContent;
     }
 
