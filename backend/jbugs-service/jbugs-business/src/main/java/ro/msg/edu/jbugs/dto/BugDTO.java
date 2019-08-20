@@ -1,13 +1,10 @@
 package ro.msg.edu.jbugs.dto;
 
 
-import entity.Comment;
 import entity.enums.Severity;
 import entity.enums.Status;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Set;
 
 /**
  * Document me.
@@ -26,7 +23,6 @@ public class BugDTO implements Serializable {
     private UserDTO createdId;
     private UserDTO assignedId;
     private Status status;
-    private Set<CommentDTO> comments;
 
     public Integer getId() {
         return id;
@@ -110,14 +106,6 @@ public class BugDTO implements Serializable {
         this.status = status;
     }
 
-    public Set<CommentDTO> getComments() {
-        return comments;
-    }
-
-    public void setComments(Set<CommentDTO> comments) {
-        this.comments = comments;
-    }
-
     @Override
     public String toString() {
         return "BugDTO{" +
@@ -131,7 +119,6 @@ public class BugDTO implements Serializable {
                 ", createdId=" + createdId +
                 ", assignedId=" + assignedId +
                 ", status='" + status + '\'' +
-                ", comments=" + comments +
                 '}';
     }
 }
