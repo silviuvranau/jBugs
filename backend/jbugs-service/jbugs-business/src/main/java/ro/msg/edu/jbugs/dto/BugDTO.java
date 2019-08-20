@@ -3,6 +3,7 @@ package ro.msg.edu.jbugs.dto;
 
 import entity.Comment;
 import entity.enums.Severity;
+import entity.enums.Status;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -24,7 +25,7 @@ public class BugDTO implements Serializable {
     private Severity severity;
     private UserDTO createdId;
     private UserDTO assignedId;
-    private String status;
+    private Status status;
     private Set<CommentDTO> comments;
 
     public Integer getId() {
@@ -101,11 +102,11 @@ public class BugDTO implements Serializable {
         this.createdId = createdId;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

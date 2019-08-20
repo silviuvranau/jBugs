@@ -1,6 +1,7 @@
 package entity;
 
 import entity.enums.Severity;
+import entity.enums.Status;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -54,15 +55,15 @@ public class Bug implements Serializable {
     private Severity severity;
 
     @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="created_id", referencedColumnName = "ID")
+    @JoinColumn(name="created_username", referencedColumnName = "username")
     private User createdId;
 
     @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="assigned_id",referencedColumnName = "ID")
+    @JoinColumn(name="assigned_username",referencedColumnName = "username")
     private User assignedId;
 
     @Column(name="status")
-    private String status;
+    private Status status;
 
     @OneToMany(mappedBy="bug")
     private Set<Comment> comments;
@@ -147,11 +148,11 @@ public class Bug implements Serializable {
         this.assignedId = assignedId;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

@@ -99,7 +99,7 @@ public class BugTestServlet extends HttpServlet {
         bugDTO.setTargetDate(null);
         bugDTO.setSeverity(Severity.CRITICAL);
         bugDTO.setFixedVersion("test fixed");
-        bugDTO.setStatus("test status");
+//        bugDTO.setStatus("test status");
         bugDTO.setDescription("test description");
     }
 
