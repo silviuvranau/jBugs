@@ -1,17 +1,7 @@
 package ro.msg.edu.jbugs.mappers;
 
-import entity.Bug;
-import entity.Comment;
-import entity.Notification;
 import entity.User;
-import ro.msg.edu.jbugs.dto.BugDTO;
-import ro.msg.edu.jbugs.dto.CommentDTO;
-import ro.msg.edu.jbugs.dto.NotificationDTO;
 import ro.msg.edu.jbugs.dto.UserDTO;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Document me.
@@ -35,17 +25,17 @@ public class UserDTOEntityMapper {
         user.setPassword(userDTO.getPassword());
         user.setStatus(userDTO.getStatus());
 
-        List<Bug> assignedBugs = userDTO.getAssignedBugs().stream().map(BugDTOEntityMapper::getBugFromDto).collect(Collectors.toList());
-        user.setAssignedBugs(new HashSet<Bug>(assignedBugs));
-
-        List<Bug> createdBugs = userDTO.getCreatedBugs().stream().map(BugDTOEntityMapper::getBugFromDto).collect(Collectors.toList());
-        user.setCreatedBugs(new HashSet<Bug>(createdBugs));
-
-        List<Notification> notifications = userDTO.getNotifications().stream().map(NotificationDTOEntityMapper::getNotificationFromDto).collect(Collectors.toList());
-        user.setNotifications(new HashSet<Notification>(notifications));
-
-        List<Comment> comments = userDTO.getComments().stream().map(CommentDTOEntityMapper::getCommentFromDto).collect(Collectors.toList());
-        user.setComments(new HashSet<Comment>(comments));
+//        List<Bug> assignedBugs = userDTO.getAssignedBugs().stream().map(BugDTOEntityMapper::getBugFromDto).collect(Collectors.toList());
+//        user.setAssignedBugs(new HashSet<Bug>(assignedBugs));
+//
+//        List<Bug> createdBugs = userDTO.getCreatedBugs().stream().map(BugDTOEntityMapper::getBugFromDto).collect(Collectors.toList());
+//        user.setCreatedBugs(new HashSet<Bug>(createdBugs));
+//
+//        List<Notification> notifications = userDTO.getNotifications().stream().map(NotificationDTOEntityMapper::getNotificationFromDto).collect(Collectors.toList());
+//        user.setNotifications(new HashSet<Notification>(notifications));
+//
+//        List<Comment> comments = userDTO.getComments().stream().map(CommentDTOEntityMapper::getCommentFromDto).collect(Collectors.toList());
+//        user.setComments(new HashSet<Comment>(comments));
 
         return user;
     }
@@ -62,18 +52,17 @@ public class UserDTOEntityMapper {
         userDTO.setPassword(user.getPassword());
         userDTO.setStatus(user.isStatus());
 
-
-        List<BugDTO> assignedBugs = user.getAssignedBugs().stream().map(BugDTOEntityMapper::getDtoFromBug).collect(Collectors.toList());
-        userDTO.setAssignedBugs(new HashSet<BugDTO>(assignedBugs));
-
-        List<BugDTO> createdBugs = user.getCreatedBugs().stream().map(BugDTOEntityMapper::getDtoFromBug).collect(Collectors.toList());
-        userDTO.setCreatedBugs(new HashSet<BugDTO>(createdBugs));
-
-        List<NotificationDTO> notifications = user.getNotifications().stream().map(NotificationDTOEntityMapper::getDtoFromNotification).collect(Collectors.toList());
-        userDTO.setNotifications(new HashSet<NotificationDTO>(notifications));
-
-        List<CommentDTO> comments = user.getComments().stream().map(CommentDTOEntityMapper::getDtoFromComment).collect(Collectors.toList());
-        userDTO.setComments(new HashSet<CommentDTO>(comments));
+//        List<BugDTO> assignedBugs = user.getAssignedBugs().stream().map(BugDTOEntityMapper::getDtoFromBug).collect(Collectors.toList());
+//        userDTO.setAssignedBugs(new HashSet<BugDTO>(assignedBugs));
+//
+//        List<BugDTO> createdBugs = user.getCreatedBugs().stream().map(BugDTOEntityMapper::getDtoFromBug).collect(Collectors.toList());
+//        userDTO.setCreatedBugs(new HashSet<BugDTO>(createdBugs));
+//
+//        List<NotificationDTO> notifications = user.getNotifications().stream().map(NotificationDTOEntityMapper::getDtoFromNotification).collect(Collectors.toList());
+//        userDTO.setNotifications(new HashSet<NotificationDTO>(notifications));
+//
+//        List<CommentDTO> comments = user.getComments().stream().map(CommentDTOEntityMapper::getDtoFromComment).collect(Collectors.toList());
+//        userDTO.setComments(new HashSet<CommentDTO>(comments));
 
         return userDTO;
     }

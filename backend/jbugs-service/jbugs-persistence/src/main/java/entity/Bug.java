@@ -52,6 +52,7 @@ public class Bug implements Serializable {
     private String fixedVersion;
 
     @Column(name="severity")
+    @Enumerated(EnumType.STRING)
     private Severity severity;
 
     @ManyToOne(cascade=CascadeType.ALL)
@@ -63,6 +64,7 @@ public class Bug implements Serializable {
     private User assignedId;
 
     @Column(name="status")
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @OneToMany(mappedBy="bug")

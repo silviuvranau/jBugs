@@ -1,6 +1,5 @@
 package servlet;
 
-import entity.enums.Severity;
 import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.managers.interfaces.BugManagerRemote;
@@ -97,7 +96,7 @@ public class BugTestServlet extends HttpServlet {
         bugDTO.setVersion("test version");
         bugDTO.setTitle("test title");
         bugDTO.setTargetDate(null);
-        bugDTO.setSeverity(Severity.CRITICAL);
+        //bugDTO.setSeverity(Severity.CRITICAL);
         bugDTO.setFixedVersion("test fixed");
 //        bugDTO.setStatus("test status");
         bugDTO.setDescription("test description");
