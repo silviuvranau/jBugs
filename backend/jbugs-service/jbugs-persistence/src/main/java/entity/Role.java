@@ -67,10 +67,10 @@
 //}
 
 package entity;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -81,7 +81,11 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "roles")
+@NamedQueries({
+        @NamedQuery(name = Role.FIND_ALL_ROLES, query = "select r from Role r")
+})
 public class Role implements Serializable {
+    public static final String FIND_ALL_ROLES = "findAllRoles";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")

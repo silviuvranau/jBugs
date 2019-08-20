@@ -1,4 +1,4 @@
-import static org.junit.Assert.*;
+package dao;
 
 /**
  * Document me.
@@ -8,4 +8,15 @@ import static org.junit.Assert.*;
  */
 public class RoleDaoTest {
 
+    private RoleDao roleDao;
+
+    public RoleDaoTest() {
+        this.roleDao = new RoleDao();
+    }
+
+//    @Test
+//    public void findAll() {
+//        List<Role> roles = roleDao.findAll();
+//        assertEquals(roles.size(), 5);
+//    }
 }
