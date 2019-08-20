@@ -1,10 +1,12 @@
 package ro.msg.edu.jbugs.dto;
 
 
+import entity.Comment;
 import entity.enums.Severity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Document me.
@@ -13,7 +15,7 @@ import java.util.Date;
  * @since 19.1.2
  */
 public class BugDTO implements Serializable {
-    private Integer ID;
+    private Integer id;
     private String title;
     private String description;
     private String version;
@@ -23,13 +25,14 @@ public class BugDTO implements Serializable {
     private UserDTO createdId;
     private UserDTO assignedId;
     private String status;
+    private Set<CommentDTO> comments;
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -98,7 +101,6 @@ public class BugDTO implements Serializable {
         this.createdId = createdId;
     }
 
-
     public String getStatus() {
         return status;
     }
@@ -107,19 +109,28 @@ public class BugDTO implements Serializable {
         this.status = status;
     }
 
+    public Set<CommentDTO> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<CommentDTO> comments) {
+        this.comments = comments;
+    }
+
     @Override
     public String toString() {
         return "BugDTO{" +
-                "ID=" + ID +
+                "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", version='" + version + '\'' +
-                ", targetDate=" + targetDate +
+                ", targetDate='" + targetDate + '\'' +
                 ", fixedVersion='" + fixedVersion + '\'' +
-                ", severity='" + severity + '\'' +
+                ", severity=" + severity +
                 ", createdId=" + createdId +
                 ", assignedId=" + assignedId +
                 ", status='" + status + '\'' +
+                ", comments=" + comments +
                 '}';
     }
 }

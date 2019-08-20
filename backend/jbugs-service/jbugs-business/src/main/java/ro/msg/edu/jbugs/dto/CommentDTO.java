@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @since 19.1.2
  */
 public class CommentDTO implements Serializable {
-    private Integer ID;
+    private Integer id;
     private String text;
     private String date;
     private User user;
@@ -34,12 +34,12 @@ public class CommentDTO implements Serializable {
         this.bug = bug;
     }
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getText() {
@@ -61,7 +61,7 @@ public class CommentDTO implements Serializable {
     @Override
     public String toString() {
         return "CommentDTO{" +
-                "ID=" + ID +
+                "id=" + id +
                 ", text='" + text + '\'' +
                 ", date=" + date +
                 ", user=" + user +

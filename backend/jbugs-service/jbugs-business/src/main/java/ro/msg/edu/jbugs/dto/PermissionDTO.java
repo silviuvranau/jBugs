@@ -1,6 +1,7 @@
 package ro.msg.edu.jbugs.dto;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Document me.
@@ -12,6 +13,8 @@ public class PermissionDTO implements Serializable {
     private Integer id;
     private String description;
     private String type;
+    private Set<RoleDTO> roles;
+
 
     public Integer getId() {
         return id;
@@ -37,12 +40,21 @@ public class PermissionDTO implements Serializable {
         this.type = type;
     }
 
+    public Set<RoleDTO> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleDTO> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "PermissionDTO{" +
-                "ID=" + id +
+                "id=" + id +
                 ", description='" + description + '\'' +
                 ", type='" + type + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }

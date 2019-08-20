@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class AttachmentDTO implements Serializable {
     private Integer id;
     private String attContent;
-    private Bug bug;
+    private BugDTO bug;
 
     public Integer getId() {
         return id;
@@ -31,11 +31,11 @@ public class AttachmentDTO implements Serializable {
         this.attContent = attContent;
     }
 
-    public Bug getBug() {
+    public BugDTO getBug() {
         return bug;
     }
 
-    public void setBug(Bug bug) {
+    public void setBug(BugDTO bug) {
         this.bug = bug;
     }
 

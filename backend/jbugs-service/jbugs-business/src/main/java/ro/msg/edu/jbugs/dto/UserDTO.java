@@ -1,6 +1,7 @@
 package ro.msg.edu.jbugs.dto;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Document me.
@@ -18,6 +19,11 @@ public class UserDTO implements Serializable {
     private String username;
     private String password;
     private boolean status;
+    private Set<BugDTO> createdBugs;
+    private Set<BugDTO> assignedBugs;
+    private Set<CommentDTO> comments;
+    private Set<RoleDTO> roles;
+    private Set<NotificationDTO> notifications;
 
     public String getEmail() {
         return email;
@@ -91,10 +97,54 @@ public class UserDTO implements Serializable {
         this.status = status;
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
+    public Set<BugDTO> getCreatedBugs() {
+        return createdBugs;
+    }
+
+    public void setCreatedBugs(Set<BugDTO> createdBugs) {
+        this.createdBugs = createdBugs;
+    }
+
+    public Set<BugDTO> getAssignedBugs() {
+        return assignedBugs;
+    }
+
+    public void setAssignedBugs(Set<BugDTO> assignedBugs) {
+        this.assignedBugs = assignedBugs;
+    }
+
+    public Set<CommentDTO> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<CommentDTO> comments) {
+        this.comments = comments;
+    }
+
+    public Set<RoleDTO> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleDTO> roles) {
+        this.roles = roles;
+    }
+
+    public Set<NotificationDTO> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(Set<NotificationDTO> notifications) {
+        this.notifications = notifications;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +
-                "ID=" + id +
+                "id=" + id +
                 ", counter=" + counter +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -103,6 +153,11 @@ public class UserDTO implements Serializable {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +
+                ", createdBugs=" + createdBugs +
+                ", assignedBugs=" + assignedBugs +
+                ", comments=" + comments +
+                ", roles=" + roles +
+                ", notifications=" + notifications +
                 '}';
     }
 }

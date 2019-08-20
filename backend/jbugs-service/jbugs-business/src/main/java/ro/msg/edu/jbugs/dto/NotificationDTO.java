@@ -12,19 +12,19 @@ import java.io.Serializable;
  * @since 19.1.2
  */
 public class NotificationDTO implements Serializable {
-    private Integer ID;
+    private Integer id;
     private String date;
     private String message;
     private NotificationType type;
     private String url;
-    private User user;
+    private UserDTO user;
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return id;
     }
 
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getDate() {
@@ -59,21 +59,21 @@ public class NotificationDTO implements Serializable {
         this.url = url;
     }
 
-    public User getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 
     @Override
     public String toString() {
         return "NotificationDTO{" +
-                "ID=" + ID +
-                ", date=" + date +
+                "id=" + id +
+                ", date='" + date + '\'' +
                 ", message='" + message + '\'' +
-                ", type='" + type + '\'' +
+                ", type=" + type +
                 ", url='" + url + '\'' +
                 ", user=" + user +
                 '}';
