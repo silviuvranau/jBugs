@@ -1,12 +1,12 @@
 package controller;
 
+import ro.msg.edu.jbugs.dto.PermissionDTO;
 import ro.msg.edu.jbugs.dto.RoleDTO;
 import ro.msg.edu.jbugs.managers.interfaces.RoleManagerRemote;
 
 import javax.ejb.EJB;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 /**
@@ -24,6 +24,13 @@ public class RoleController {
     @GET
     public List<RoleDTO> getAllRoles() {
         return roleManagerRemote.findAllRoles();
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void modifyRolePermission(RoleDTO roleDTO,
+                                     PermissionDTO permissionDTO) {
+        roleManagerRemote.modifyRolePermission(roleDTO, permissionDTO);
     }
 
 }

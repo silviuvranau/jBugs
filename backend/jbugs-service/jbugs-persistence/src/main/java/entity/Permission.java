@@ -63,6 +63,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -77,7 +78,7 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name = Permission.FIND_ALL_PERMISSIONS, query = "select p from Permission p")
 })
-public class Permission {
+public class Permission implements Serializable {
     public static final String FIND_ALL_PERMISSIONS = "findAllPermission";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
