@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 /**
  * Document me.
  *
- * @author msg systems AG; User Name.
+ * @author msg systems AG; Pricop Stefania.
  * @since 19.1.2
  */
 @Stateless
@@ -35,11 +35,9 @@ public class RoleManager implements RoleManagerRemote {
     }
 
     @Override
-    public void modifyRolePermission(RoleDTO roleDTO, PermissionDTO permissionDTO) {
-        roleDao.modifyRolePermission(
+    public Integer modifyRolePermission(RoleDTO roleDTO, PermissionDTO permissionDTO) {
+        return roleDao.modifyRolePermission(
                 RoleDTOEntityMapper.getRoleFromDto(roleDTO),
                 PermissionDTOEntityMapper.getPermissionFromDto(permissionDTO));
-
-        //return modifiedRows;
     }
 }

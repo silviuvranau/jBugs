@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Document me.
  *
- * @author msg systems AG; User Name.
+ * @author msg systems AG; Pricop Stefania.
  * @since 19.1.2
  */
 @Stateless
@@ -29,22 +29,31 @@ public class RoleDao {
         return roles;
     }
 
-    public void modifyRolePermission(Role role, Permission permission) {
+    public Integer modifyRolePermission(Role role, Permission permission) {
         Query query = entityManager.createNativeQuery("Select * from roles_permissions where role_id = ?1 and permission_id = ?2");
         query.setParameter(1, role.getId());
         query.setParameter(2, permission.getId());
-        boolean toAdd = query.getResultList().size() == 0;
-        if (toAdd) {
-            Query queryAdd = entityManager.createNativeQuery("Insert into roles_permissions(role_id, permission_id) values (?1, ?2)");
-            queryAdd.setParameter(1, role.getId());
-            queryAdd.setParameter(2, permission.getId());
-            Integer updatedRows = queryAdd.executeUpdate();
-            //return updatedRows;
+        boolean permissionExistsToRole = query.getResultList().size() == 0;
+        if (permissionExistsToRole) {
+            return addPermissionToRole(role, permission);
         } else {
-            Query queryDelete = entityManager.createNativeQuery("Delete from roles_permissions where role_id = ?1");
-            queryDelete.setParameter(1, role.getId());
-            Integer updatedRows = queryDelete.executeUpdate();
-            //return updatedRows;
+            return deletePermissionFromRole(role, permission);
         }
+    }
+
+    private Integer addPermissionToRole(Role role, Permission permission){
+        Query queryAdd = entityManager.createNativeQuery("Insert into roles_permissions(role_id, permission_id) values (?1, ?2)");
+        queryAdd.setParameter(1, role.getId());
+        queryAdd.setParameter(2, permission.getId());
+
+        return queryAdd.executeUpdate();
+    }
+
+    private Integer deletePermissionFromRole(Role role, Permission permission){
+        Query queryDelete = entityManager.createNativeQuery("Delete from roles_permissions where role_id = ?1 and permission_id = ?2");
+        queryDelete.setParameter(1, role.getId());
+        queryDelete.setParameter(2, permission.getId());
+
+        return queryDelete.executeUpdate();
     }
 }

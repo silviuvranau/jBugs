@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 /**
  * Document me.
  *
- * @author msg systems AG; User Name.
+ * @author msg systems AG; Pricop Stefania.
  * @since 19.1.2
  */
 @Stateless

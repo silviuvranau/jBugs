@@ -3,9 +3,9 @@ package ro.msg.edu.jbugs.dto;
 import java.io.Serializable;
 
 /**
- * Document me.
+ * Wrapper class for PermissionDTO & RoleDTO.
  *
- * @author msg systems AG; User Name.
+ * @author msg systems AG; Pricop Stefania.
  * @since 19.1.2
  */
 public class RolePermissionDTO implements Serializable {
