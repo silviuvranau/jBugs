@@ -43,7 +43,6 @@ public class RoleDTO implements Serializable {
         return "RoleDTO{" +
                 "id=" + id +
                 ", type='" + type + '\'' +
-                ", permissions=" + permissions +
                 '}';
     }
 }

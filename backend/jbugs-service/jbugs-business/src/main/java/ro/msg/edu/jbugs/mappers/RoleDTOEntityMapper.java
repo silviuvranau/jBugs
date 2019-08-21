@@ -22,8 +22,8 @@ public class RoleDTOEntityMapper {
         role.setType(roleDTO.getType());
 
         List<Permission> permissions = roleDTO.getPermissions().stream().map(PermissionDTOEntityMapper::getPermissionFromDto).collect(Collectors.toList());
-        role.setPermissions(new HashSet<Permission>(permissions));
 
+        role.setPermissions(new HashSet<Permission>(permissions));
         return role;
     }
 
@@ -35,7 +35,8 @@ public class RoleDTOEntityMapper {
         List<PermissionDTO> permissionsDto = role.getPermissions().stream().map(PermissionDTOEntityMapper::getDtoFromPermission).collect(Collectors.toList());
         roleDTO.setPermissions(new HashSet<PermissionDTO>(permissionsDto));
 
-
         return roleDTO;
     }
+
+
 }

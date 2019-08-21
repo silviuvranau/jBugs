@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Document me.
  *
- * @author msg systems AG; User Name.
+ * @author msg systems AG; Pricop Stefania.
  * @since 19.1.2
  */
 @Path("/permissions")
