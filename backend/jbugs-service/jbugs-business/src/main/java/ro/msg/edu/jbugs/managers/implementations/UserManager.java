@@ -113,38 +113,33 @@ public class UserManager implements UserManagerRemote {
         return username;
     }
 
-//    public UserDTO login(String username, String password) throws BusinessException {
-//        return UserDTOEntityMapper.getDtoFromUser(userDao.findUserByUsernameAndPassword(username, password));
-//    }
-
-    public UserDTO login(String username, String password) throws BusinessException {
-        User userToLogin = userDao.findUserByUsername(username);
-        if (userToLogin != null) {
-            String loggingPassword = Hashing.sha256()
-                    .hashString(password, StandardCharsets.UTF_8)
-                    .toString();
-            if (loggingPassword.equals(userToLogin.getPassword())) {
-                if (userToLogin.isStatus() == false) {
-                    if (!userToLogin.isStatus()) {
-                        throw new BusinessException("Your account is disabled", "Throw");
-                    } else {
-                        userToLogin.setCounter(0);
-                        return UserDTOEntityMapper.getDtoFromUser(userToLogin);
-                    }
-                } else {
-                    Integer userCounter = userToLogin.getCounter() + 1;
-                    userToLogin.setCounter(userCounter);
-                    if (userCounter == 5) {
-                        userToLogin.setStatus(false);
-                        throw new BusinessException("Exceeding max login tries", "_");
-                    }
-                }
-            } else {
-                throw new BusinessException("User does not exist in DB", "_");
-            }
-        }
-        return null;
-    }
+   public UserDTO login(String username, String password) throws BusinessException {
+       User user = new User();
+       try{
+           user = userDao.findUserByUsername(username);
+           if(user.isStatus() == false){
+               try{
+                   user = userDao.findUserByUsernameAndPassword1(username, password);
+                   user.setCounter(0);
+               }
+               catch(BusinessException e){
+                   e.printStackTrace();
+                   user.setCounter(user.getCounter() + 1);
+                   if(user.getCounter() > 5)
+                       user.setStatus(false);
+                   return null;
+               }
+           }
+           else{
+               System.out.println("Account is blocked!");
+               return null;
+           }
+       }
+       catch(BusinessException e){
+           e.printStackTrace();
+       }
+       return UserDTOEntityMapper.getDtoFromUser(user);
+   }
 
 
 }
