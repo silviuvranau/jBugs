@@ -35,8 +35,8 @@ public class RoleManager implements RoleManagerRemote {
     }
 
     @Override
-    public Integer modifyRolePermission(RoleDTO roleDTO, PermissionDTO permissionDTO) {
-        return roleDao.modifyRolePermission(
+    public void modifyRolePermission(RoleDTO roleDTO, PermissionDTO permissionDTO) {
+        roleDao.modifyRolePermission(
                 RoleDTOEntityMapper.getRoleFromDto(roleDTO),
                 PermissionDTOEntityMapper.getPermissionFromDto(permissionDTO));
     }

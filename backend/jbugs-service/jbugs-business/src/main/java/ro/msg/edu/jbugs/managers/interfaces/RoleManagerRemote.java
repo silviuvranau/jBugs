@@ -16,5 +16,5 @@ import java.util.List;
 public interface RoleManagerRemote {
     List<RoleDTO> findAllRoles();
 
-    Integer modifyRolePermission(RoleDTO roleDTO, PermissionDTO permissionDTO);
+    void modifyRolePermission(RoleDTO roleDTO, PermissionDTO permissionDTO);
 }
