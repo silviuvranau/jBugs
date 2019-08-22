@@ -1,13 +1,7 @@
 package ro.msg.edu.jbugs.mappers;
 
 import entity.Bug;
-import entity.Comment;
 import ro.msg.edu.jbugs.dto.BugDTO;
-import ro.msg.edu.jbugs.dto.CommentDTO;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Document me.
@@ -29,9 +23,6 @@ public class BugDTOEntityMapper {
         bug.setTargetDate(bugDTO.getTargetDate());
         bug.setStatus(bugDTO.getStatus());
 
-        List<Comment> comments = bugDTO.getComments().stream().map(CommentDTOEntityMapper::getCommentFromDto).collect(Collectors.toList());
-        bug.setComments(new HashSet<Comment>(comments));
-
         return bug;
     }
 
@@ -47,9 +38,6 @@ public class BugDTOEntityMapper {
         bugDTO.setAssignedId(UserDTOEntityMapper.getDtoFromUser(bug.getAssignedId()));
         bugDTO.setTargetDate(bug.getTargetDate());
         bugDTO.setStatus(bug.getStatus());
-
-        List<CommentDTO> commentsDto = bug.getComments().stream().map(CommentDTOEntityMapper::getDtoFromComment).collect(Collectors.toList());
-        bugDTO.setComments(new HashSet<CommentDTO>(commentsDto));
 
         return bugDTO;
     }

@@ -1,8 +1,11 @@
 package ro.msg.edu.jbugs.managers.implementations;
 
 import com.google.common.hash.Hashing;
+import dao.NotificationDao;
+import dao.RoleDao;
 import dao.UserDao;
 import entity.Notification;
+import entity.Role;
 import entity.User;
 import entity.enums.NotificationType;
 import exceptions.BusinessException;
@@ -16,7 +19,11 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -30,36 +37,49 @@ import java.util.stream.Collectors;
 public class UserManager implements UserManagerRemote {
     @EJB
     private UserDao userDao;
+
     @EJB
-    private NotificationManagerRemote notificationManagerRemote;
+    private NotificationDao notificationDao;
+
+    @EJB
+    private RoleDao roleDao;
+
 
     public UserDTO insertUser(UserDTO userDTO){
-        String username = "";
-
-        try {
-            username = generateUsername(userDTO.getFirstName(), userDTO.getLastName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        userDTO.setUsername(username);
+        String generatedUsername = generateUsername(userDTO.getFirstName(), userDTO.getLastName());
+        userDTO.setUsername(generatedUsername);
 
         String hashedPassword = Hashing.sha256()
                 .hashString(userDTO.getPassword(), StandardCharsets.UTF_8)
                 .toString();
         userDTO.setPassword(hashedPassword);
-
         User userToBeInserted = UserDTOEntityMapper.getUserFromUserDto(userDTO);
+
+        userToBeInserted.setCounter(0);
+        userToBeInserted.setStatus(false);
+
+
         User insertedUser = userDao.insertUser(userToBeInserted);
 
-        Notification notification = new Notification();
-        notification.setMessage("Welcome: " + username);
-        notification.setUser(UserDTOEntityMapper.getUserFromUserDto(userDTO));
-        notification.setDate("");
-        notification.setType(NotificationType.WELCOME_NEW_USER);
-        notification.setDate("2000-01-09 01:10:20");
-        notification.setType(NotificationType.BUG_CLOSED);
+        Notification welcomeNotification = new Notification();
+        welcomeNotification.setMessage("Welcome: " + insertedUser.getUsername());
+        String date = LocalDateTime.now().toString();
+        welcomeNotification.setDate(date);
+        welcomeNotification.setType(NotificationType.WELCOME_NEW_USER);
+        welcomeNotification.setUser(insertedUser);
+        notificationDao.insertNotification(welcomeNotification);
+        Set<Notification> notifications = insertedUser.getNotifications();
+        notifications.add(welcomeNotification);
+        insertedUser.setNotifications(notifications);
 
-        notificationManagerRemote.insertNotification(notification, insertedUser.getId());
+        Set<Role> roles = insertedUser.getRoles();
+
+        for(Integer roleId : userDTO.getRoleIds()){
+            Role role = roleDao.findRole(roleId);
+            roles.add(role);
+        }
+
+        insertedUser.setRoles(roles);
         return UserDTOEntityMapper.getDtoFromUser(insertedUser);
     }
 
@@ -87,7 +107,7 @@ public class UserManager implements UserManagerRemote {
     }
 
     @Override
-    public String generateUsername(String firstName, String lastName) throws Exception {
+    public String generateUsername(String firstName, String lastName) {
         String firstPart;
         if (lastName.length() >= 5){
             firstPart = lastName.substring(0, 5);
@@ -97,6 +117,8 @@ public class UserManager implements UserManagerRemote {
         }
         int charPosition = 0;
         String username = (firstPart + firstName.charAt(charPosition)).toLowerCase();
+        username = username.replaceAll("\\s","");
+        username = username.replaceAll("\\W","");
         while(!userDao.checkUsernameUnique(username)){
             charPosition++;
             if(charPosition < firstName.length()) {
@@ -107,10 +129,6 @@ public class UserManager implements UserManagerRemote {
         }
         return username;
     }
-
-//    public UserDTO login(String username, String password) throws BusinessException {
-//        return UserDTOEntityMapper.getDtoFromUser(userDao.findUserByUsernameAndPassword(username, password));
-//    }
 
     public UserDTO login(String username, String password) throws BusinessException {
         User userToLogin = userDao.findUserByUsername(username);

@@ -1,6 +1,10 @@
 package ro.msg.edu.jbugs.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -9,21 +13,30 @@ import java.util.Set;
  * @author msg systems AG; User Name.
  * @since 19.1.2
  */
+
 public class UserDTO implements Serializable {
     private Integer id;
     private Integer counter;
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+            message = "INVALID_FIRST_NAME_EXCEPTION")
     private String firstName;
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+            message = "INVALID_LAST_NAME_EXCEPTION")
     private String lastName;
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z0-9_.+-]+@msggroup\\.com$",
+            message = "INVALID_EMAIL_EXCEPTION")
     private String email;
+    @NotNull
+    @Pattern(regexp = "(\\+4[0][7][0-9]{8})|(\\(?\\+\\(?49\\)?[ ()]?([- ()]?\\d[- ()]?){10})",
+            message = "INVALID_MOBILE_NUMBER_EXCEPTION")
     private String mobileNumber;
     private String username;
     private String password;
     private boolean status;
-    private Set<BugDTO> createdBugs;
-    private Set<BugDTO> assignedBugs;
-    private Set<CommentDTO> comments;
-    private Set<RoleDTO> roles;
-    private Set<NotificationDTO> notifications;
+    private List<Integer> roleIds;
 
     public String getEmail() {
         return email;
@@ -101,44 +114,12 @@ public class UserDTO implements Serializable {
         return status;
     }
 
-    public Set<BugDTO> getCreatedBugs() {
-        return createdBugs;
+    public List<Integer> getRoleIds() {
+        return roleIds;
     }
 
-    public void setCreatedBugs(Set<BugDTO> createdBugs) {
-        this.createdBugs = createdBugs;
-    }
-
-    public Set<BugDTO> getAssignedBugs() {
-        return assignedBugs;
-    }
-
-    public void setAssignedBugs(Set<BugDTO> assignedBugs) {
-        this.assignedBugs = assignedBugs;
-    }
-
-    public Set<CommentDTO> getComments() {
-        return comments;
-    }
-
-    public void setComments(Set<CommentDTO> comments) {
-        this.comments = comments;
-    }
-
-    public Set<RoleDTO> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<RoleDTO> roles) {
-        this.roles = roles;
-    }
-
-    public Set<NotificationDTO> getNotifications() {
-        return notifications;
-    }
-
-    public void setNotifications(Set<NotificationDTO> notifications) {
-        this.notifications = notifications;
+    public void setRoleIds(List<Integer> roleIds) {
+        this.roleIds = roleIds;
     }
 
     @Override
@@ -153,11 +134,7 @@ public class UserDTO implements Serializable {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +
-                ", createdBugs=" + createdBugs +
-                ", assignedBugs=" + assignedBugs +
-                ", comments=" + comments +
-                ", roles=" + roles +
-                ", notifications=" + notifications +
+                ", roleIds=" + roleIds +
                 '}';
     }
 }

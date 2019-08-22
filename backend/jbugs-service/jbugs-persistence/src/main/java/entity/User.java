@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -57,21 +58,22 @@ public class User {
     private boolean status;
 
     @OneToMany(mappedBy = "createdId", cascade = CascadeType.PERSIST)
-    private Set<Bug> createdBugs;
+    private Set<Bug> createdBugs = new HashSet<>();
 
     @OneToMany(mappedBy = "assignedId", cascade = CascadeType.PERSIST)
-    private Set<Bug> assignedBugs;
+    private Set<Bug> assignedBugs = new HashSet<>();
 
     @OneToMany(mappedBy="user", cascade = CascadeType.PERSIST)
-    private Set<Comment> comments;
+    private Set<Comment> comments = new HashSet<>();
 
-    @ManyToMany(targetEntity = Role.class)
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = {@JoinColumn(name= "role_id")})
-    private Set<Role> roles;
+    @ManyToMany(targetEntity = Role.class, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = {@JoinColumn(name= "role_id")})
+    private Set<Role> roles = new HashSet<>();
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Notification> notifications;
+    private Set<Notification> notifications = new HashSet<>();
 
 
     public User() {
