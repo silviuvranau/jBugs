@@ -1,5 +1,6 @@
 package ro.msg.edu.jbugs.managers.interfaces;
 
+import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.PermissionDTO;
 import ro.msg.edu.jbugs.dto.RoleDTO;
 
@@ -16,5 +17,5 @@ import java.util.List;
 public interface RoleManagerRemote {
     List<RoleDTO> findAllRoles();
 
-    void modifyRolePermission(RoleDTO roleDTO, PermissionDTO permissionDTO);
+    void modifyRolePermission(RoleDTO roleDTO, PermissionDTO permissionDTO) throws BusinessException;
 }

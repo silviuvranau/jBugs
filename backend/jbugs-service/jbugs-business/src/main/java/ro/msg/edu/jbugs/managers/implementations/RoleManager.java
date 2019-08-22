@@ -2,6 +2,7 @@ package ro.msg.edu.jbugs.managers.implementations;
 
 import dao.RoleDao;
 import entity.Role;
+import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.PermissionDTO;
 import ro.msg.edu.jbugs.dto.RoleDTO;
 import ro.msg.edu.jbugs.interceptors.Interceptor;
@@ -35,7 +36,7 @@ public class RoleManager implements RoleManagerRemote {
     }
 
     @Override
-    public void modifyRolePermission(RoleDTO roleDTO, PermissionDTO permissionDTO) {
+    public void modifyRolePermission(RoleDTO roleDTO, PermissionDTO permissionDTO) throws BusinessException {
         roleDao.modifyRolePermission(
                 RoleDTOEntityMapper.getRoleFromDto(roleDTO),
                 PermissionDTOEntityMapper.getPermissionFromDto(permissionDTO));

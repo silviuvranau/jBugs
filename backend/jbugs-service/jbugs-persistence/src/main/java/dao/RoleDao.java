@@ -2,6 +2,7 @@ package dao;
 
 import entity.Permission;
 import entity.Role;
+import exceptions.BusinessException;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -29,7 +30,7 @@ public class RoleDao {
         return roles;
     }
 
-    public void modifyRolePermission(Role role, Permission permission) {
+    public void modifyRolePermission(Role role, Permission permission) throws BusinessException {
         Query query = entityManager.createNativeQuery("Select * from roles_permissions where role_id = ?1 and permission_id = ?2");
         query.setParameter(1, role.getId());
         query.setParameter(2, permission.getId());
@@ -41,16 +42,26 @@ public class RoleDao {
         }
     }
 
-    private void addPermissionToRole(Role role, Permission permission) {
+    private void addPermissionToRole(Role role, Permission permission) throws BusinessException {
         Role roleToUpdate = entityManager.find(Role.class, role.getId());
         Permission permissionToUpdate = entityManager.find(Permission.class, permission.getId());
-        roleToUpdate.getPermissions().add(permissionToUpdate);
+
+        if (roleToUpdate == null || permissionToUpdate == null) {
+            throw new BusinessException("msg-001", "Entities do not exist.");
+        } else {
+            roleToUpdate.getPermissions().add(permissionToUpdate);
+        }
     }
 
-    private void deletePermissionFromRole(Role role, Permission permission) {
+    private void deletePermissionFromRole(Role role, Permission permission) throws BusinessException {
         Role roleToUpdate = entityManager.find(Role.class, role.getId());
         Permission permissionToUpdate = entityManager.find(Permission.class, permission.getId());
-        roleToUpdate.getPermissions().remove(permissionToUpdate);
-        permissionToUpdate.getRoles().remove(roleToUpdate);
+
+        if (roleToUpdate == null || permissionToUpdate == null) {
+            throw new BusinessException("msg-001", "Entities do not exist.");
+        } else {
+            roleToUpdate.getPermissions().remove(permissionToUpdate);
+            permissionToUpdate.getRoles().remove(roleToUpdate);
+        }
     }
 }
