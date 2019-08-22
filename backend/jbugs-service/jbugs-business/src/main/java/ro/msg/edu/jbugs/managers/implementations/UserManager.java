@@ -117,6 +117,9 @@ public class UserManager implements UserManagerRemote {
        User user = new User();
        try{
            user = userDao.findUserByUsername(username);
+           if(user == null){
+               return null;
+           }
            if(user.isStatus() == false){
                try{
                    user = userDao.findUserByUsernameAndPassword1(username, password);
@@ -137,6 +140,7 @@ public class UserManager implements UserManagerRemote {
        }
        catch(BusinessException e){
            e.printStackTrace();
+
        }
        return UserDTOEntityMapper.getDtoFromUser(user);
    }

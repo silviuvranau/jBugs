@@ -94,9 +94,11 @@ public class UserDao {
             //User foundUser = (User)query.getSingleResult();
             List<User> users = query.getResultList();
             return users.get(0);
+
             //return foundUser;
         }catch (NoResultException e){
             throw new BusinessException(e.getMessage(), "User with username does not exists");
+
         }
     }
     public User findUserByUsernameAndPassword1(String username, String password) throws BusinessException{
