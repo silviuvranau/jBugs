@@ -21,7 +21,8 @@ public class BugDao {
     @PersistenceContext(unitName = "jbugs-persistence")
     private EntityManager entityManager;
 
-    public BugDao(){};
+    public BugDao() {
+    }
 
 
     public Bug insertBug(Bug bug) {
