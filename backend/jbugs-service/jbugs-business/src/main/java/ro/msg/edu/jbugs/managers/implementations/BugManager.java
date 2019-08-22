@@ -4,11 +4,11 @@ import dao.BugDao;
 import entity.Bug;
 import entity.User;
 import ro.msg.edu.jbugs.dto.BugDTO;
+import ro.msg.edu.jbugs.dto.UserDTO;
+import ro.msg.edu.jbugs.interceptors.Interceptor;
 import ro.msg.edu.jbugs.managers.interfaces.BugManagerRemote;
 import ro.msg.edu.jbugs.mappers.BugDTOEntityMapper;
-import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.mappers.UserDTOEntityMapper;
-import ro.msg.edu.jbugs.interceptors.Interceptor;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -55,9 +55,11 @@ public class BugManager implements BugManagerRemote {
 //        return count;
 //    }
 
-    public void insertBug(BugDTO bugDTO){
+    public BugDTO insertBug(BugDTO bugDTO) {
         Bug bugToBeInserted = BugDTOEntityMapper.getBugFromDto(bugDTO);
-        bugDao.insertBug(bugToBeInserted);
+        Bug insertedBug = bugDao.insertBug(bugToBeInserted);
+
+        return BugDTOEntityMapper.getDtoFromBug(insertedBug);
     }
 
     public BugDTO findABug(Integer id){

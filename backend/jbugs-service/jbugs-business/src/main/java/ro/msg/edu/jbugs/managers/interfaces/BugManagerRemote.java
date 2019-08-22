@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Remote
 public interface BugManagerRemote {
-    void insertBug(BugDTO bugDTO);
+    BugDTO insertBug(BugDTO bugDTO);
     BugDTO findABug(Integer id);
     List<BugDTO> findAllBugs();
     List<BugDTO> findBugsByCreatedId(UserDTO userDTO);
