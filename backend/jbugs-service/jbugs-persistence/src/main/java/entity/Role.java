@@ -81,7 +81,12 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "roles")
+@NamedQueries({
+        @NamedQuery(name = Role.FIND_ALL_ROLES, query = "select r from Role r")
+})
 public class Role implements Serializable {
+    public static final String FIND_ALL_ROLES = "findAllRoles";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
@@ -96,7 +101,7 @@ public class Role implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "permission_id"))
     private Set<Permission> permissions = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))

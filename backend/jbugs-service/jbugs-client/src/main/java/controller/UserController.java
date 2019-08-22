@@ -1,11 +1,12 @@
 package controller;
 
 import ro.msg.edu.jbugs.dto.UserDTO;
-import ro.msg.edu.jbugs.managers.implementations.UserManager;
 import ro.msg.edu.jbugs.managers.interfaces.UserManagerRemote;
 
 import javax.ejb.EJB;
+import javax.validation.Valid;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/users")
@@ -17,17 +18,20 @@ public class UserController {
 
     @GET
     @Path("{userId}")
-    public UserDTO getUserById(@PathParam("userId") Integer userId) {
-        return userManager.findAUser(userId);
+    public Response getUserById(@PathParam("userId") Integer userId) {
+        UserDTO result =  userManager.findAUser(userId);
+        return Response.ok(result).build();
     }
 
     @GET
-    public List<UserDTO> getAllUsers(){
-        return userManager.findAllUsers();
+    public Response getAllUsers(){
+        List<UserDTO> result =  userManager.findAllUsers();
+        return Response.ok(result).build();
     }
 
     @POST
-    public UserDTO createUser(UserDTO userDTO) {
-        return userManager.insertUser(userDTO);
+    public Response createUser(@Valid UserDTO userDTO) {
+        UserDTO result =  userManager.insertUser(userDTO);
+        return Response.ok(result).build();
     }
 }

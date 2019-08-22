@@ -3,6 +3,8 @@ package ro.msg.edu.jbugs.mappers;
 import entity.Role;
 import ro.msg.edu.jbugs.dto.RoleDTO;
 
+import java.util.stream.Collectors;
+
 /**
  * Document me.
  *
@@ -22,6 +24,10 @@ public class RoleDTOEntityMapper {
         RoleDTO roleDTO = new RoleDTO();
         roleDTO.setId(role.getId());
         roleDTO.setType(role.getType());
+        roleDTO.setUsers(role.getUsers().
+                stream().
+                map(UserDTOEntityMapper::getDtoFromUser).
+                collect(Collectors.toSet()));
 
         return roleDTO;
     }

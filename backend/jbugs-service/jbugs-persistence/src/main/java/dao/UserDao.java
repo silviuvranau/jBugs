@@ -63,13 +63,23 @@ public class UserDao {
         return deletedUser;
     }
 
+    /**
+     *
+     * @param username
+     * @return true if the username is unique, false otherwise
+     * executes a query which counts the number of occurrences
+     * of an username
+     */
     public boolean checkUsernameUnique(String username){
-        Long occurences = entityManager.createNamedQuery(User.CHECK_IF_USERNAME_UNIQUE, Long.class)
+        Long occurrences = entityManager.createNamedQuery(User.CHECK_IF_USERNAME_UNIQUE, Long.class)
                 .setParameter("username", username)
                 .getSingleResult();
-        if (occurences != 0){
+
+        if (occurrences != 0){
             return false;
-        } else return true;
+        } else {
+            return true;
+        }
     }
 
     public User findUserByUsernameAndPassword(String username, String password) throws BusinessException {
