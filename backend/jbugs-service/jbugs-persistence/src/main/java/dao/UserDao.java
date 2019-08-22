@@ -93,8 +93,12 @@ public class UserDao {
         try{
             //User foundUser = (User)query.getSingleResult();
             List<User> users = query.getResultList();
+            if(users.size() > 0){
             return users.get(0);
-
+            }
+            else{
+                return null;
+            }
             //return foundUser;
         }catch (NoResultException e){
             throw new BusinessException(e.getMessage(), "User with username does not exists");
