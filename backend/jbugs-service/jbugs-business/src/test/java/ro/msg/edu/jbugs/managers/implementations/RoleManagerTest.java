@@ -54,8 +54,24 @@ public class RoleManagerTest {
         firstTestingRole.setId(1);
         secondTestingRole.setId(1);
         testingPermission.setId(1);
+// Asta e?
+        //Akma vrei sa testezi DAO-ul sau Managerul?
+        //Managerul. Ajunge daca testezi ca DAO-ul era apelat, pt ca numai atata face.
+        //Oh
+        //Okay :)) Got it.
 
-//        when(roleDao.modifyRolePermission(anyObject(), anyObject())).thenReturn(1);
+        // Daca vrei sa testezi DAO-ul devine un pic mai complicat.
+        //Pai si acela trebuie testat eventual. Dar de ce complicat?
+        //Adica nu trebuie doar sa verific daca arunca businessEx sau nu?
+        //Ah nu. Scratch that.
+
+        //Am inteles acum :))
+        // Trebuie sa mocuiesti EntityManagerul cea ce nu stiu daca e posibil.... Sau sa folosesti o BD numai pentru
+        // test si sa verifici daca chiar sau sters/inserat/... entitatile.... Ce ce e si mai complicat. Hmmm... Stai sa ma uit pe google.
+
+        //Okay.
+
+        // Dao.modifyRolePermission(anyObject(), anyObject())).thenReturn(1);
 //
 //        assertEquals(roleManager.modifyRolePermission(RoleDTOEntityMapper.getDtoFromRole(firstTestingRole),
 //                PermissionDTOEntityMapper.getDtoFromPermission(testingPermission)), Integer.valueOf(1));
