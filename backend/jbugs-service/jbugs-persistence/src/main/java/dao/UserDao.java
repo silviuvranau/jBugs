@@ -99,10 +99,30 @@ public class UserDao {
         try{
             //User foundUser = (User)query.getSingleResult();
             List<User> users = query.getResultList();
+            if(users.size() > 0){
             return users.get(0);
+            }
+            else{
+                return null;
+            }
             //return foundUser;
         }catch (NoResultException e){
             throw new BusinessException(e.getMessage(), "User with username does not exists");
+
         }
+    }
+    public User findUserByUsernameAndPassword1(String username, String password) throws BusinessException{
+        User user;
+        try {
+            String hashedPassword = Hashing.sha256().hashString(password, StandardCharsets.UTF_8)
+                    .toString();
+            user = (User) entityManager.createNamedQuery(User.SELECT_BY_USERNAME_AND_PASSWORD)
+                    .setParameter("username", username)
+                    .setParameter("password", password).getSingleResult();
+        }
+        catch(NoResultException e){
+            throw new BusinessException("msg_001","Invalid credentials.");
+        }
+        return user;
     }
 }
