@@ -58,6 +58,8 @@ public class UserManager implements UserManagerRemote {
         userToBeInserted.setCounter(0);
         userToBeInserted.setStatus(false);
 
+        userToBeInserted.setEmail(userToBeInserted.getEmail().toLowerCase());
+
 
         User insertedUser = userDao.insertUser(userToBeInserted);
 
