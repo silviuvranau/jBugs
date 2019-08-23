@@ -22,7 +22,6 @@ public class NotificationDao {
     public NotificationDao(){}
 
     public Notification insertNotification(Notification notification){
-        //entityManager.persist(notification);
         entityManager.persist(notification);
         entityManager.flush();
         //System.out.println(notification.getID());
