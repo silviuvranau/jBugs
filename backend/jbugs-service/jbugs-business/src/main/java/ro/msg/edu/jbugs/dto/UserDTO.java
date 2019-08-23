@@ -4,6 +4,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -36,7 +37,7 @@ public class UserDTO implements Serializable {
     private String username;
     private String password;
     private boolean status;
-    private List<Integer> roleIds;
+    private List<Integer> roleIds = new ArrayList<>();
 
     public String getEmail() {
         return email;
