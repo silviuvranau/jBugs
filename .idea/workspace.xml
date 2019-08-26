@@ -7,10 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca89a1a1-3ee2-45f0-9768-40c2af9d9ac1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/test/java/ro/msg/edu/jbugs/managers/implementations/BugManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/test/java/ro/msg/edu/jbugs/managers/implementations/BugManagerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/BugController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/BugController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/servlet/BugTestServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/servlet/BugTestServlet.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/backend/jbugs-service/jbugs-ear/target/" />
     <ignored path="$PROJECT_DIR$/backend/jbugs-service/target/" />
@@ -39,6 +37,9 @@
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="jBugs" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
@@ -72,8 +73,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="56" column="73" lean-forward="true" selection-start-line="56" selection-start-column="73" selection-end-line="56" selection-end-column="73" />
+            <state relative-caret-position="139">
+              <caret line="55" column="7" lean-forward="true" selection-start-line="55" selection-start-column="7" selection-end-line="55" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4786#4787#0" expanded="true" />
@@ -240,239 +241,6 @@
             <path>
               <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
               <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-business" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-business" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-business" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-business" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-business" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-business" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs" type="462c0819:PsiDirectoryNode" />
-              <item name="dto" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-business" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs" type="462c0819:PsiDirectoryNode" />
-              <item name="managers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-business" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs" type="462c0819:PsiDirectoryNode" />
-              <item name="managers" type="462c0819:PsiDirectoryNode" />
-              <item name="implementations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-business" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs" type="462c0819:PsiDirectoryNode" />
-              <item name="managers" type="462c0819:PsiDirectoryNode" />
-              <item name="interfaces" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-business" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs" type="462c0819:PsiDirectoryNode" />
-              <item name="mappers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-business" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-business" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-business" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="implementations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="configuration" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-persistence" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-              <item name="enums" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -699,7 +467,7 @@
       <updated>1566210002557</updated>
       <workItem from="1566210003816" duration="6408000" />
       <workItem from="1566218508917" duration="1271000" />
-      <workItem from="1566732817930" duration="17611000" />
+      <workItem from="1566732817930" duration="18547000" />
     </task>
     <task id="LOCAL-00001" summary="in table Bugs, created_id, assgned_id =&gt; ...username">
       <created>1566211520223</created>
@@ -799,7 +567,21 @@
       <option name="project" value="LOCAL" />
       <updated>1566821578337</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="insert bug with validation">
+      <created>1566822281558</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1566822281558</updated>
+    </task>
+    <task id="LOCAL-00016" summary="insert bug with validation">
+      <created>1566822457009</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1566822457009</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -835,38 +617,37 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69247000" />
+    <option name="totallyTimeSpent" value="70183000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17583893" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4980695" visible="true" weight="0.17583893" />
       <window_info id="Image Layers" order="1" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Capture Tool" order="4" />
-      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info id="Favorites" order="5" sideWeight="0.5019305" side_tool="true" weight="0.17583893" />
       <window_info id="Persistence" order="6" side_tool="true" />
       <window_info id="EJB" order="7" side_tool="true" />
-      <window_info id="JavaEE:App" order="8" side_tool="true" />
+      <window_info id="JavaEE:App" order="8" sideWeight="0.5019305" side_tool="true" weight="0.17583893" />
       <window_info id="Web" order="9" side_tool="true" />
       <window_info id="Structure" order="10" weight="0.13892618" />
       <window_info anchor="bottom" id="Messages" sideWeight="0.4986577" weight="0.3286119" />
-      <window_info anchor="bottom" id="Application Servers" order="0" sideWeight="0.4966443" weight="0.3286119" />
+      <window_info anchor="bottom" id="Application Servers" order="0" sideWeight="0.49597314" weight="0.3286119" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" sideWeight="0.49731544" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.78389263" visible="true" weight="0.34560907" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.78389263" weight="0.34560907" />
       <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.74496645" weight="0.5892351" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49597314" weight="0.26628897" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49530202" weight="0.26628897" />
       <window_info anchor="bottom" id="Floobits" order="10" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49932885" weight="0.3286119" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.21610738" side_tool="true" visible="true" weight="0.34560907" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4986577" visible="true" weight="0.3286119" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="13" sideWeight="0.5013423" side_tool="true" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Java Enterprise" order="14" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -1362,8 +1143,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="56" column="73" lean-forward="true" selection-start-line="56" selection-start-column="73" selection-end-line="56" selection-end-column="73" />
+        <state relative-caret-position="139">
+          <caret line="55" column="7" lean-forward="true" selection-start-line="55" selection-start-column="7" selection-end-line="55" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4786#4787#0" expanded="true" />
