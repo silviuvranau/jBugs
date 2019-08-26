@@ -1,7 +1,11 @@
 package ro.msg.edu.jbugs.mappers;
 
+import entity.Role;
 import entity.User;
 import ro.msg.edu.jbugs.dto.UserDTO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Document me.
@@ -40,6 +44,25 @@ public class UserDTOEntityMapper {
         userDTO.setPassword(user.getPassword());
         userDTO.setStatus(user.isStatus());
 
+        List<Integer> roleIds = new ArrayList<>();
+        for (Role r : user.getRoles())
+            roleIds.add(r.getId());
+        userDTO.setRoleIds(roleIds);
+
         return userDTO;
+    }
+
+    public static User getSearchedUserFromUserDto(UserDTO userDTO, User user) {
+        user.setId(userDTO.getId());
+        user.setCounter(userDTO.getCounter());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setEmail(userDTO.getEmail());
+        user.setMobileNumber(userDTO.getMobileNumber());
+        user.setUsername(userDTO.getUsername());
+        user.setPassword(userDTO.getPassword());
+        user.setStatus(userDTO.getStatus());
+
+        return user;
     }
 }

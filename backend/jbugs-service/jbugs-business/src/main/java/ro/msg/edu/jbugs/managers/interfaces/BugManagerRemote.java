@@ -1,5 +1,6 @@
 package ro.msg.edu.jbugs.managers.interfaces;
 
+import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.dto.UserDTO;
 
@@ -20,4 +21,6 @@ public interface BugManagerRemote {
     List<BugDTO> findBugsByCreatedId(UserDTO userDTO);
     List<BugDTO> findBugsByAssignedId(UserDTO userDTO);
     Integer deleteExceedingBugs();
+
+    BugDTO updateBug(Integer id, BugDTO bugDTO) throws BusinessException;
 }

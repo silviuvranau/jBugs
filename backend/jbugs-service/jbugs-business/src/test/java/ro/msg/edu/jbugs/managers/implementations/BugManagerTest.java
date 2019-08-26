@@ -87,4 +87,26 @@ public class BugManagerTest {
         return bug;
     }
 
+    @Test
+    public void statusIsReachable() {
+        Assert.assertFalse(bugManager.statusIsReachable(Status.CLOSED, Status.IN_PROGRESSS));
+        Assert.assertFalse(bugManager.statusIsReachable(Status.CLOSED, Status.NEW));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.IN_PROGRESSS, Status.NEW));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.IN_PROGRESSS, Status.CLOSED));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.IN_PROGRESSS, Status.REJECTED));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.IN_PROGRESSS, Status.INFO_NEEDED));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.IN_PROGRESSS, Status.FIXED));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.NEW, Status.FIXED));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.NEW, Status.CLOSED));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.NEW, Status.INFO_NEEDED));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.NEW, Status.IN_PROGRESSS));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.NEW, Status.REJECTED));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.FIXED));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.CLOSED));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.NEW));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.IN_PROGRESSS));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.REJECTED));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.INFO_NEEDED));
+    }
+
 }

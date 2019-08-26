@@ -1,6 +1,7 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -56,22 +57,23 @@ public class User {
     @Column(name = "status")
     private boolean status;
 
-    @OneToMany(mappedBy = "createdId", cascade = CascadeType.PERSIST)
-    private Set<Bug> createdBugs;
-
-    @OneToMany(mappedBy = "assignedId", cascade = CascadeType.PERSIST)
-    private Set<Bug> assignedBugs;
+//    @OneToMany(mappedBy = "createdId")
+//    private Set<Bug> createdBugs = new HashSet<>();
+//
+//    @OneToMany(mappedBy = "assignedId")
+//    private Set<Bug> assignedBugs = new HashSet<>();
 
     @OneToMany(mappedBy="user", cascade = CascadeType.PERSIST)
-    private Set<Comment> comments;
+    private Set<Comment> comments = new HashSet<>();
 
-    @ManyToMany(targetEntity = Role.class)
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = {@JoinColumn(name= "role_id")})
-    private Set<Role> roles;
+    @ManyToMany(targetEntity = Role.class, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private Set<Role> roles = new HashSet<>();
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Notification> notifications;
+    private Set<Notification> notifications = new HashSet<>();
 
 
     public User() {
@@ -149,21 +151,21 @@ public class User {
         this.status = status;
     }
 
-    public Set<Bug> getCreatedBugs() {
-        return createdBugs;
-    }
-
-    public void setCreatedBugs(Set<Bug> createdBugs) {
-        this.createdBugs = createdBugs;
-    }
-
-    public Set<Bug> getAssignedBugs() {
-        return assignedBugs;
-    }
-
-    public void setAssignedBugs(Set<Bug> assignedBugs) {
-        this.assignedBugs = assignedBugs;
-    }
+//    public Set<Bug> getCreatedBugs() {
+//        return createdBugs;
+//    }
+//
+//    public void setCreatedBugs(Set<Bug> createdBugs) {
+//        this.createdBugs = createdBugs;
+//    }
+//
+//    public Set<Bug> getAssignedBugs() {
+//        return assignedBugs;
+//    }
+//
+//    public void setAssignedBugs(Set<Bug> assignedBugs) {
+//        this.assignedBugs = assignedBugs;
+//    }
 
     public Set<Comment> getComments() {
         return comments;

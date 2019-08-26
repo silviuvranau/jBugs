@@ -18,6 +18,7 @@ import java.util.List;
  */
 @Stateless //tells container that its an EJB
 public class BugDao {
+
     @PersistenceContext(unitName = "jbugs-persistence")
     private EntityManager entityManager;
 
@@ -63,5 +64,12 @@ public class BugDao {
         Integer deletedBugs = query.executeUpdate();
         entityManager.flush();
         return deletedBugs;
+    }
+
+    public Bug updateBug(Bug bug) {
+        entityManager.merge(bug);
+        entityManager.flush();
+        System.out.println(bug.getId());
+        return bug;
     }
 }
