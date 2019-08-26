@@ -66,10 +66,4 @@ public class BugDao {
         return deletedBugs;
     }
 
-    public Bug updateBug(Bug bug) {
-        entityManager.merge(bug);
-        entityManager.flush();
-        System.out.println(bug.getId());
-        return bug;
-    }
 }

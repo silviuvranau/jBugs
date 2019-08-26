@@ -15,11 +15,10 @@ import java.util.List;
 @Remote
 public interface UserManagerRemote {
     UserDTO insertUser(UserDTO userDTO);
-    UserDTO findAUser(Integer id) throws BusinessException;
+    UserDTO findAUser(Integer id);
     List<UserDTO> findAllUsers();
     Long findCreatedBugs(UserDTO userDTO);
     Integer deleteUser(Integer id);
     String generateUsername(String firstName, String lastName) throws Exception;
     UserDTO login(String username, String password) throws BusinessException;
-    UserDTO modifyUser(UserDTO userDTO) throws BusinessException;
 }
