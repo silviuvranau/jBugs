@@ -26,8 +26,10 @@ public class UserDao {
 
     public UserDao(){};
 
-    public User findUser(Integer id){
+    public User findUser(Integer id) throws BusinessException{
         User user = entityManager.find(User.class, id);
+        if(user == null)
+            throw new BusinessException("msg_003", "User not found exception");
         return user;
     }
 
@@ -60,6 +62,7 @@ public class UserDao {
     }
 
     /**
+     *
      * @param username
      * @return true if the username is unique, false otherwise
      * executes a query which counts the number of occurrences
@@ -70,25 +73,10 @@ public class UserDao {
                 .setParameter("username", username)
                 .getSingleResult();
 
-        if (occurrences != 0) {
+        if (occurrences != 0){
             return false;
         } else {
             return true;
-        }
-    }
-
-    public User findUserByUsernameAndPassword(String username, String password) throws BusinessException {
-        String hashedPassword = Hashing.sha256()
-                .hashString(password, StandardCharsets.UTF_8)
-                .toString();
-
-        try {
-            User user = entityManager.createNamedQuery(User.SELECT_BY_USERNAME_AND_PASSWORD, User.class)
-                    .setParameter("username", username)
-                    .setParameter("password", hashedPassword).getSingleResult();
-            return user;
-        } catch(NoResultException e){
-            throw new BusinessException("msg-001", "invalid credentials");
         }
     }
 
@@ -98,9 +86,10 @@ public class UserDao {
         try{
             //User foundUser = (User)query.getSingleResult();
             List<User> users = query.getResultList();
-            if (users.size() > 0) {
-                return users.get(0);
-            } else {
+            if(users.size() > 0){
+            return users.get(0);
+            }
+            else{
                 return null;
             }
             //return foundUser;
@@ -109,8 +98,7 @@ public class UserDao {
 
         }
     }
-
-    public User findUserByUsernameAndPassword1(String username, String password) throws BusinessException {
+    public User findUserByUsernameAndPassword(String username, String password) throws BusinessException{
         User user;
         try {
             String hashedPassword = Hashing.sha256().hashString(password, StandardCharsets.UTF_8)
@@ -118,8 +106,9 @@ public class UserDao {
             user = (User) entityManager.createNamedQuery(User.SELECT_BY_USERNAME_AND_PASSWORD)
                     .setParameter("username", username)
                     .setParameter("password", password).getSingleResult();
-        } catch (NoResultException e) {
-            throw new BusinessException("msg_001", "Invalid credentials.");
+        }
+        catch(NoResultException e){
+            throw new BusinessException("msg_001","Invalid credentials.");
         }
         return user;
     }
