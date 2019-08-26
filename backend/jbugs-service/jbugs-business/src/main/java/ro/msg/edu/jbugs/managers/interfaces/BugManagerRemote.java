@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Remote
 public interface BugManagerRemote {
-    BugDTO insertBug(BugDTO bugDTO);
+    BugDTO insertBug(BugDTO bugDTO) throws BusinessException;
     BugDTO findABug(Integer id);
     List<BugDTO> findAllBugs();
     List<BugDTO> findBugsByCreatedId(UserDTO userDTO);
