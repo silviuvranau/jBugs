@@ -1,6 +1,9 @@
 package ro.msg.edu.jbugs.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Document me.
@@ -8,16 +11,30 @@ import java.io.Serializable;
  * @author msg systems AG; User Name.
  * @since 19.1.2
  */
+
 public class UserDTO implements Serializable {
     private Integer id;
     private Integer counter;
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+            message = "INVALID_FIRST_NAME_EXCEPTION")
     private String firstName;
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+            message = "INVALID_LAST_NAME_EXCEPTION")
     private String lastName;
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z0-9_.+-]+@msggroup\\.com$",
+            message = "INVALID_EMAIL_EXCEPTION")
     private String email;
+    @NotNull
+    @Pattern(regexp = "(\\+4[0][7][0-9]{8})|(\\(?\\+\\(?49\\)?[ ()]?([- ()]?\\d[- ()]?){10})",
+            message = "INVALID_MOBILE_NUMBER_EXCEPTION")
     private String mobileNumber;
     private String username;
     private String password;
     private boolean status;
+    private List<Integer> roleIds;
 
     public String getEmail() {
         return email;
@@ -95,6 +112,14 @@ public class UserDTO implements Serializable {
         return status;
     }
 
+    public List<Integer> getRoleIds() {
+        return roleIds;
+    }
+
+    public void setRoleIds(List<Integer> roleIds) {
+        this.roleIds = roleIds;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +
@@ -107,6 +132,7 @@ public class UserDTO implements Serializable {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +
+                ", roleIds=" + roleIds +
                 '}';
     }
 }

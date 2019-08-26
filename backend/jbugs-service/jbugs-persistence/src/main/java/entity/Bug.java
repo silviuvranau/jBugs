@@ -57,11 +57,11 @@ public class Bug implements Serializable {
     @Enumerated(EnumType.STRING)
     private Severity severity;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name="created_username", referencedColumnName = "username")
     private User createdId;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name="assigned_username",referencedColumnName = "username")
     private User assignedId;
 

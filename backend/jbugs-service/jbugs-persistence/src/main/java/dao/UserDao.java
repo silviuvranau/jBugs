@@ -18,7 +18,8 @@ import java.util.List;
  * @author msg systems AG; User Name.
  * @since 19.1.2
  */
-@Stateless //tells container that its an EJB
+//tells container that its an EJB
+@Stateless
 public class UserDao {
     @PersistenceContext(unitName = "jbugs-persistence")
     private EntityManager entityManager;
@@ -29,11 +30,6 @@ public class UserDao {
         User user = entityManager.find(User.class, id);
         return user;
     }
-
-//    public void insertUser(User managers){
-//        entityManager.persist(managers);
-//        System.out.println();
-//    }
 
     public User insertUser(User user){
         entityManager.persist(user);
@@ -63,13 +59,22 @@ public class UserDao {
         return deletedUser;
     }
 
+    /**
+     * @param username
+     * @return true if the username is unique, false otherwise
+     * executes a query which counts the number of occurrences
+     * of an username
+     */
     public boolean checkUsernameUnique(String username){
-        Long occurences = entityManager.createNamedQuery(User.CHECK_IF_USERNAME_UNIQUE, Long.class)
+        Long occurrences = entityManager.createNamedQuery(User.CHECK_IF_USERNAME_UNIQUE, Long.class)
                 .setParameter("username", username)
                 .getSingleResult();
-        if (occurences != 0){
+
+        if (occurrences != 0) {
             return false;
-        } else return true;
+        } else {
+            return true;
+        }
     }
 
     public User findUserByUsernameAndPassword(String username, String password) throws BusinessException {
@@ -93,10 +98,29 @@ public class UserDao {
         try{
             //User foundUser = (User)query.getSingleResult();
             List<User> users = query.getResultList();
-            return users.get(0);
+            if (users.size() > 0) {
+                return users.get(0);
+            } else {
+                return null;
+            }
             //return foundUser;
         }catch (NoResultException e){
             throw new BusinessException(e.getMessage(), "User with username does not exists");
+
         }
+    }
+
+    public User findUserByUsernameAndPassword1(String username, String password) throws BusinessException {
+        User user;
+        try {
+            String hashedPassword = Hashing.sha256().hashString(password, StandardCharsets.UTF_8)
+                    .toString();
+            user = (User) entityManager.createNamedQuery(User.SELECT_BY_USERNAME_AND_PASSWORD)
+                    .setParameter("username", username)
+                    .setParameter("password", password).getSingleResult();
+        } catch (NoResultException e) {
+            throw new BusinessException("msg_001", "Invalid credentials.");
+        }
+        return user;
     }
 }
