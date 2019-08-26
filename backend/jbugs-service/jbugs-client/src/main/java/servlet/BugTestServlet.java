@@ -115,7 +115,7 @@ public class BugTestServlet extends HttpServlet {
 
         //finding managers after id
         out.println("Searching for managers with id 2... <br>");
-        UserDTO userDTO = userManager.findAUser(2);
+        //UserDTO userDTO = userManager.findAUser(2);
         out.println(userDTO);
         out.println("<br>");
 
