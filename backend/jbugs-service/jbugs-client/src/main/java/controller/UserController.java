@@ -42,6 +42,33 @@ public class UserController {
 
     @POST
     public Response createUser(@Valid UserDTO userDTO) {
+        Response response = checkUserManagementRights();
+        if(response != null)
+            return response;
+        UserDTO result =  userManager.insertUser(userDTO);
+        return Response.ok(result).build();
+    }
+
+    @PUT
+    public Response editUser(@Valid UserDTO userDTO) {
+        Response response = checkUserManagementRights();
+        if(response != null)
+            return response;
+
+        UserDTO result;
+        try {
+            result = userManager.modifyUser(userDTO);
+        }
+        catch (BusinessException e){
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(e.getMessage())
+                    .build();
+        }
+
+        return Response.ok(result).build();
+    }
+
+    private Response checkUserManagementRights(){
         HttpSession session = request.getSession();
         String loggedInUsername = (String)session.getAttribute("username");
         if(loggedInUsername == null){
@@ -61,24 +88,7 @@ public class UserController {
                     .entity(e.getMessage())
                     .build();
         }
-        UserDTO result =  userManager.insertUser(userDTO);
-        return Response.ok(result).build();
-    }
-
-    @PUT
-    public Response editUser(@Valid UserDTO userDTO) throws BusinessException{
-        UserDTO result;
-
-        try {
-            result = userManager.modifyUser(userDTO);
-        }
-        catch (BusinessException e){
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(e.getMessage())
-                    .build();
-        }
-
-        return Response.ok(result).build();
+        return null;
     }
 
 
