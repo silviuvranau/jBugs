@@ -80,7 +80,7 @@ public class UserController {
         try {
             if(!permissionChecker.checkPermission(loggedInUsername, "USER_MANAGEMENT"))
                 return Response.status(Response.Status.BAD_REQUEST)
-                        .entity("User doesn't have the required permissions !")
+                        .entity("User doesn't have the required permissions (USER_MANAGEMENT) !")
                         .build();
         }
         catch (BusinessException e){
