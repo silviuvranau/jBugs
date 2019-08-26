@@ -3,6 +3,7 @@ package ro.msg.edu.jbugs.dto;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +35,7 @@ public class UserDTO implements Serializable {
     private String username;
     private String password;
     private boolean status;
-    private List<Integer> roleIds;
+    private List<Integer> roleIds = new ArrayList<>();
 
     public String getEmail() {
         return email;

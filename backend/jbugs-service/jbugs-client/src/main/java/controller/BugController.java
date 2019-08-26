@@ -43,7 +43,7 @@ public class BugController {
             e.printStackTrace();
             return Response
                     .status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity("You request couldn't be carried out successfully.")
+                    .entity(e.getMessage())
                     .build();
         }
     }
