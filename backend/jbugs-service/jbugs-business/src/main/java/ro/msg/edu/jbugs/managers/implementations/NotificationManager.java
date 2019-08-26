@@ -4,6 +4,7 @@ import dao.NotificationDao;
 import dao.UserDao;
 import entity.Notification;
 import entity.User;
+import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.NotificationDTO;
 import ro.msg.edu.jbugs.interceptors.Interceptor;
 import ro.msg.edu.jbugs.managers.interfaces.NotificationManagerRemote;
@@ -29,7 +30,7 @@ public class NotificationManager implements NotificationManagerRemote {
     @EJB
     NotificationDao notificationDao;
     @Override
-    public Notification insertNotification(Notification notification, Integer userId) {
+    public Notification insertNotification(Notification notification, Integer userId) throws BusinessException {
         User user = userDao.findUser(userId);
         notification.setUser(user);
         notification = notificationDao.insertNotification(notification);

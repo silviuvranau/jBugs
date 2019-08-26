@@ -102,40 +102,40 @@ public class BugTestServlet extends HttpServlet {
         bugDTO.setDescription("test description");
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-
-
-        //inserting a new managers managers
-        out.println("Inserting a new managers... <br>");
-        UserDTO user = userManager.insertUser(userDTO);
-        userDTO.setId(user.getId());
-
-        //finding managers after id
-        out.println("Searching for managers with id 2... <br>");
-        UserDTO userDTO = userManager.findAUser(2);
-        out.println(userDTO);
-        out.println("<br>");
-
-        //shows the number of the created bugs for each managers each 2 minutes
-        //createView(out);
-
-        //inserting a new bug
-        out.println("Inserting a bug...<br>");
-        bugManager.insertBug(bugDTO);
-
-        //find by assigned id
-        out.println("Searching after assigned id...<br>");
-        List<BugDTO> bugsByAssignedID = bugManager.findBugsByAssignedId(userDTO);
-        bugsByAssignedID.forEach(bugCreated -> out.println(bugCreated.toString()+"<br>"));
-
-        //find by created id
-        out.println("Searching after created id...<br>");
-        userDTO.setId(1);
-        List<BugDTO> bugsByCreatedID = bugManager.findBugsByCreatedId(userDTO);
-        bugsByCreatedID.forEach(bugAssigned -> out.println(bugAssigned.toString()+"<br>"));
-    }
+//    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+//        response.setContentType("text/html");
+//        PrintWriter out = response.getWriter();
+//
+//
+//        //inserting a new managers managers
+//        out.println("Inserting a new managers... <br>");
+//        UserDTO user = userManager.insertUser(userDTO);
+//        userDTO.setId(user.getId());
+//
+//        //finding managers after id
+//        out.println("Searching for managers with id 2... <br>");
+//        UserDTO userDTO = userManager.findAUser(2);
+//        out.println(userDTO);
+//        out.println("<br>");
+//
+//        //shows the number of the created bugs for each managers each 2 minutes
+//        //createView(out);
+//
+//        //inserting a new bug
+//        out.println("Inserting a bug...<br>");
+//        bugManager.insertBug(bugDTO);
+//
+//        //find by assigned id
+//        out.println("Searching after assigned id...<br>");
+//        List<BugDTO> bugsByAssignedID = bugManager.findBugsByAssignedId(userDTO);
+//        bugsByAssignedID.forEach(bugCreated -> out.println(bugCreated.toString()+"<br>"));
+//
+//        //find by created id
+//        out.println("Searching after created id...<br>");
+//        userDTO.setId(1);
+//        List<BugDTO> bugsByCreatedID = bugManager.findBugsByCreatedId(userDTO);
+//        bugsByCreatedID.forEach(bugAssigned -> out.println(bugAssigned.toString()+"<br>"));
+//    }
 
 //    @Lock(LockType.READ)
 //    @Schedule(second = "/5", minute = "", hour = "*", persistent = false)
