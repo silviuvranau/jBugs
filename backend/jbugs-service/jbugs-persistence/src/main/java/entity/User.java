@@ -57,18 +57,18 @@ public class User {
     @Column(name = "status")
     private boolean status;
 
-    @OneToMany(mappedBy = "createdId", cascade = CascadeType.PERSIST)
-    private Set<Bug> createdBugs = new HashSet<>();
-
-    @OneToMany(mappedBy = "assignedId", cascade = CascadeType.PERSIST)
-    private Set<Bug> assignedBugs = new HashSet<>();
+//    @OneToMany(mappedBy = "createdId")
+//    private Set<Bug> createdBugs = new HashSet<>();
+//
+//    @OneToMany(mappedBy = "assignedId")
+//    private Set<Bug> assignedBugs = new HashSet<>();
 
     @OneToMany(mappedBy="user", cascade = CascadeType.PERSIST)
     private Set<Comment> comments = new HashSet<>();
 
     @ManyToMany(targetEntity = Role.class, cascade = CascadeType.ALL)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = {@JoinColumn(name= "role_id")})
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles = new HashSet<>();
 
 
@@ -151,21 +151,21 @@ public class User {
         this.status = status;
     }
 
-    public Set<Bug> getCreatedBugs() {
-        return createdBugs;
-    }
-
-    public void setCreatedBugs(Set<Bug> createdBugs) {
-        this.createdBugs = createdBugs;
-    }
-
-    public Set<Bug> getAssignedBugs() {
-        return assignedBugs;
-    }
-
-    public void setAssignedBugs(Set<Bug> assignedBugs) {
-        this.assignedBugs = assignedBugs;
-    }
+//    public Set<Bug> getCreatedBugs() {
+//        return createdBugs;
+//    }
+//
+//    public void setCreatedBugs(Set<Bug> createdBugs) {
+//        this.createdBugs = createdBugs;
+//    }
+//
+//    public Set<Bug> getAssignedBugs() {
+//        return assignedBugs;
+//    }
+//
+//    public void setAssignedBugs(Set<Bug> assignedBugs) {
+//        this.assignedBugs = assignedBugs;
+//    }
 
     public Set<Comment> getComments() {
         return comments;

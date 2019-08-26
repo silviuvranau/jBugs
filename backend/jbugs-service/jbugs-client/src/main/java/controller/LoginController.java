@@ -21,14 +21,16 @@ public class LoginController {
 
     @EJB
     UserManagerRemote userManager;
+
     @POST
-    public void createCredential(CredentialDTO credentialDTO){
-        System.out.println(" "+credentialDTO.getUsername()+" "+credentialDTO.getPassword());
+    public void createCredential(CredentialDTO credentialDTO) {
+        System.out.println(" " + credentialDTO.getUsername() + " " + credentialDTO.getPassword());
     }
+
     @POST
     public Response login(CredentialDTO credentialDTO) throws BusinessException {
 
-        UserDTO userDto = userManager.login(credentialDTO.getUsername(),credentialDTO.getPassword());
+        UserDTO userDto = userManager.login(credentialDTO.getUsername(), credentialDTO.getPassword());
         return Response.ok(userDto).build();
     }
 

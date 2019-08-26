@@ -24,13 +24,15 @@ import java.util.Set;
 //        @NamedQuery(name=Bug.DELETE_BUGS, query = "DELETE FROM Bug b " +
 //                "WHERE b.targetDate < :date")
         @NamedQuery(name=Bug.DELETE_BUGS, query = "Update Bug b set b.status= 'closed' " +
-                "WHERE b.targetDate < :date and b.status <> 'closed'")
+                "WHERE b.targetDate < :date and b.status <> 'closed'"),
+        //@NamedQuery(name=Bug.FILTER_BUGS, query = "")
 })
 public class Bug implements Serializable {
     public static final String GET_ALL_BUGS = "findAllBugs";
     public static final String GET_BY_CREATED_ID = "findByCreatedId";
     public static final String GET_BY_ASSIGNED_ID = "findByAssignedId";
     public static final String DELETE_BUGS="deleteBugsWhoExceededDate";
+    public static final String FILTER_BUGS = "filterBugs";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,11 +57,11 @@ public class Bug implements Serializable {
     @Enumerated(EnumType.STRING)
     private Severity severity;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name="created_username", referencedColumnName = "username")
     private User createdId;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name="assigned_username",referencedColumnName = "username")
     private User assignedId;
 

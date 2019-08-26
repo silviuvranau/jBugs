@@ -10,7 +10,9 @@ import ro.msg.edu.jbugs.dto.CredentialDTO;
  * @since 19.1.2
  */
 public class CredentialDTOEntityMapper {
-    private CredentialDTOEntityMapper(){}
+    private CredentialDTOEntityMapper() {
+    }
+
     public static Credential getCredentialFromDto(CredentialDTO credentialDTO) {
         Credential credential = new Credential();
 

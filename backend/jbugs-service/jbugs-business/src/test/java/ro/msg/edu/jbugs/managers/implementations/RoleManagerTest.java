@@ -38,6 +38,7 @@ public class RoleManagerTest {
         this.roleManager = new RoleManager();
         this.roleDao = new RoleDao();
     }
+
     @Test
     public void findAllRoles() {
         when(roleDao.findAllRoles()).thenReturn(Arrays.asList(firstTestingRole));

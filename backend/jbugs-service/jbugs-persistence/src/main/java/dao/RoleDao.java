@@ -89,7 +89,8 @@ public class RoleDao {
             permissionToUpdate.getRoles().remove(roleToUpdate);
         }
     }
-    public Role findRole(Integer id){
+
+    public Role findRole(Integer id) {
         Role role = entityManager.find(Role.class, id);
         return role;
     }

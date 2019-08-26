@@ -19,19 +19,19 @@ public class UserController {
     @GET
     @Path("{userId}")
     public Response getUserById(@PathParam("userId") Integer userId) {
-        UserDTO result =  userManager.findAUser(userId);
+        UserDTO result = userManager.findAUser(userId);
         return Response.ok(result).build();
     }
 
     @GET
-    public Response getAllUsers(){
-        List<UserDTO> result =  userManager.findAllUsers();
+    public Response getAllUsers() {
+        List<UserDTO> result = userManager.findAllUsers();
         return Response.ok(result).build();
     }
 
     @POST
     public Response createUser(@Valid UserDTO userDTO) {
-        UserDTO result =  userManager.insertUser(userDTO);
+        UserDTO result = userManager.insertUser(userDTO);
         return Response.ok(result).build();
     }
 }

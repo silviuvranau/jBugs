@@ -15,7 +15,7 @@ insert into bugs values(3,'bug3', 'mere bugu asta', '1.1', '2002-01-07 03:10:20'
 insert into bugs values(4,'bug4', 'se pote mai bine bugu asta', '1.9', '2003-01-06 04:10:20', 'NEW', '1.1','CRITICAL', 'popm', 'popm');
 insert into bugs values(5,'bug5', 'imposibil bugu asta', '1.2', '2004-01-05 05:10:20', 'CLOSED', '1.1','LOW', 'opreai', 'dumiti');
 insert into bugs values(6,'bug6', 'e a Lu Radu bugu asta', '3.0', '2005-01-04 06:10:20', 'REJECTED', '1.1','CRITICAL', 'nedelt', 'dumiti');
-insert into bugs values(7,'bug7', 'E a lu Stefan bugu asta', '4.0', '2006-03-01 07:10:20', 'INFO_NEEDED', '1.1','MEDIUM', 'popm', 'bogzav');
+insert into bugs values(7,'bug7', 'E a lu Stefan bugu asta', '4.0', '2006-03-01 07:10:20', 'INFO NEEDED', '1.1','MEDIUM', 'popm', 'bogzav');
 insert into bugs values(8,'bug8', 'A mieu nu ie bugu asta', '5.0', '2007-01-02 08:10:20', 'NEW', '1.1','LOW', 'dumiti', 'popm');
 
 

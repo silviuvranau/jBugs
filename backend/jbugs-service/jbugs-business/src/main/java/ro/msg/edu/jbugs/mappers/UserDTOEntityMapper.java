@@ -19,6 +19,7 @@ public class UserDTOEntityMapper {
 
     public static User getUserFromUserDto(UserDTO userDTO){
         User user = new User();
+        user.setId(userDTO.getId());
         user.setCounter(userDTO.getCounter());
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
@@ -44,10 +45,24 @@ public class UserDTOEntityMapper {
         userDTO.setStatus(user.isStatus());
 
         List<Integer> roleIds = new ArrayList<>();
-        for(Role r : user.getRoles())
+        for (Role r : user.getRoles())
             roleIds.add(r.getId());
         userDTO.setRoleIds(roleIds);
 
         return userDTO;
+    }
+
+    public static User getSearchedUserFromUserDto(UserDTO userDTO, User user) {
+        user.setId(userDTO.getId());
+        user.setCounter(userDTO.getCounter());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setEmail(userDTO.getEmail());
+        user.setMobileNumber(userDTO.getMobileNumber());
+        user.setUsername(userDTO.getUsername());
+        user.setPassword(userDTO.getPassword());
+        user.setStatus(userDTO.getStatus());
+
+        return user;
     }
 }
