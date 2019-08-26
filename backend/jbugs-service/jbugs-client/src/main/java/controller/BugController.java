@@ -5,6 +5,7 @@ import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.managers.interfaces.BugManagerRemote;
 
 import javax.ejb.EJB;
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -35,6 +36,25 @@ public class BugController {
     public Response modifyBug(@PathParam("id") Integer id, BugDTO bugDTO) {
         try {
             bugManagerRemote.updateBug(id, bugDTO);
+            return Response
+                    .status(Response.Status.OK)
+                    .entity("You request was carried out successfully.")
+                    .build();
+        } catch (BusinessException e) {
+            e.printStackTrace();
+            return Response
+                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(e.getMessage())
+                    .build();
+        }
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response insertBug(@Valid BugDTO bugDTO) {
+        try {
+            BugDTO insertedBug = bugManagerRemote.insertBug(bugDTO);
             return Response
                     .status(Response.Status.OK)
                     .entity("You request was carried out successfully.")

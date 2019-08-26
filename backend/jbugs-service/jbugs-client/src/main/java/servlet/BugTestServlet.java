@@ -1,5 +1,6 @@
 package servlet;
 
+import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.managers.interfaces.BugManagerRemote;
@@ -123,7 +124,11 @@ public class BugTestServlet extends HttpServlet {
 
         //inserting a new bug
         out.println("Inserting a bug...<br>");
-        bugManager.insertBug(bugDTO);
+        try {
+            bugManager.insertBug(bugDTO);
+        } catch (BusinessException e) {
+        }
+
 
         //find by assigned id
         out.println("Searching after assigned id...<br>");
