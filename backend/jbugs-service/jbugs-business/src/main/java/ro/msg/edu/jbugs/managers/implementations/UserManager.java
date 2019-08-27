@@ -113,6 +113,7 @@ public class UserManager implements UserManagerRemote {
         user.setLastName(userDTO.getLastName());
         user.setMobileNumber(userDTO.getMobileNumber());
         user.setEmail(userDTO.getEmail());
+        user.setStatus(userDTO.getStatus());
 
         String hashedPassword = Hashing.sha256()
                 .hashString(userDTO.getPassword(), StandardCharsets.UTF_8)
