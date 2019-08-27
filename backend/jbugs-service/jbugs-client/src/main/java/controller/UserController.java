@@ -70,6 +70,7 @@ public class UserController {
 
     private Response checkUserManagementRights(){
         HttpSession session = request.getSession();
+        System.out.println("CREATIONTIME" + session.getCreationTime());
         String loggedInUsername = (String)session.getAttribute("username");
         if(loggedInUsername == null){
             return Response.status(Response.Status.BAD_REQUEST)

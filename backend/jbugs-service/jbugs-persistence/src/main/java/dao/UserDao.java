@@ -101,9 +101,7 @@ public class UserDao {
     public User findUserByUsernameAndPassword(String username, String password) throws BusinessException{
         User user;
         try {
-            String hashedPassword = Hashing.sha256().hashString(password, StandardCharsets.UTF_8)
-                    .toString();
-            user = (User) entityManager.createNamedQuery(User.SELECT_BY_USERNAME_AND_PASSWORD)
+            user = (User) entityManager.createNamedQuery(User.SELECT_BY_USERNAME_AND_PASSWORD, User.class)
                     .setParameter("username", username)
                     .setParameter("password", password).getSingleResult();
         }
