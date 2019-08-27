@@ -15,6 +15,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.mappers.BugDTOEntityMapper;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 /**
@@ -40,13 +41,12 @@ public class BugManagerTest {
     @Test
     public void insertBug() {
         Bug bug = createBug();
-        when(bugDao.insertBug(bug)).thenReturn(createBug());
+        when(bugDao.insertBug(any(Bug.class))).thenReturn(bug);
         BugDTO bugToInsert = BugDTOEntityMapper.getDtoFromBug(createBug());
         BugDTO bugReturned = new BugDTO();
         try {
             bugReturned = bugManager.insertBug(bugToInsert);
-        } catch (BusinessException e) {
-        }
+        } catch (BusinessException e) { }
 
         Assert.assertEquals(bugToInsert.getId(), bugReturned.getId());
         Assert.assertEquals(bugToInsert.getDescription(), bugReturned.getDescription());
