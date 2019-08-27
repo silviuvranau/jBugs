@@ -7,19 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca89a1a1-3ee2-45f0-9768-40c2af9d9ac1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/util/PermissionChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/UserManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/interfaces/BugManagerRemote.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/interfaces/BugManagerRemote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/interfaces/UserManagerRemote.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/interfaces/UserManagerRemote.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/BugController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/BugController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/servlet/Servlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/servlet/Servlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/dao/BugDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/dao/BugDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/dao/UserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/entity/Bug.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/entity/Bug.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/backend/jbugs-service/jbugs-ear/target/" />
     <ignored path="$PROJECT_DIR$/backend/jbugs-service/target/" />
@@ -66,8 +54,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/BugController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
+            <state relative-caret-position="300">
+              <caret line="88" column="9" lean-forward="true" selection-start-line="88" selection-start-column="9" selection-end-line="88" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -94,7 +82,7 @@
         <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="111">
-              <caret line="190" column="79" selection-start-line="190" selection-start-column="55" selection-end-line="190" selection-end-column="79" />
+              <caret line="190" column="78" selection-start-line="190" selection-start-column="54" selection-end-line="190" selection-end-column="78" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4741#4742#0" expanded="true" />
@@ -108,7 +96,7 @@
         <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/interfaces/BugManagerRemote.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
-              <caret line="24" column="72" selection-start-line="24" selection-start-column="72" selection-end-line="24" selection-end-column="72" />
+              <caret line="24" column="71" selection-start-line="24" selection-start-column="71" selection-end-line="24" selection-end-column="71" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -703,7 +691,7 @@
       <workItem from="1566218508917" duration="1271000" />
       <workItem from="1566732817930" duration="18900000" />
       <workItem from="1566823581052" duration="399000" />
-      <workItem from="1566824002278" duration="10013000" />
+      <workItem from="1566824002278" duration="10613000" />
     </task>
     <task id="LOCAL-00001" summary="in table Bugs, created_id, assgned_id =&gt; ...username">
       <created>1566211520223</created>
@@ -831,7 +819,28 @@
       <option name="project" value="LOCAL" />
       <updated>1566825124745</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="method for checking if User can be deactivated">
+      <created>1566889267408</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1566889267408</updated>
+    </task>
+    <task id="LOCAL-00020" summary="method for checking if User can be deactivated">
+      <created>1566889377082</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1566889377082</updated>
+    </task>
+    <task id="LOCAL-00021" summary="method for checking if User can be deactivated">
+      <created>1566889566378</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1566889566378</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -867,10 +876,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80948000" />
+    <option name="totallyTimeSpent" value="81548000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4980695" visible="true" weight="0.17583893" />
       <window_info id="Image Layers" order="1" />
@@ -886,17 +896,17 @@
       <window_info anchor="bottom" id="Application Servers" order="0" sideWeight="0.49597314" weight="0.3286119" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" sideWeight="0.49731544" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.7798658" visible="true" weight="0.34560907" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.7798658" weight="0.34560907" />
       <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.74161077" weight="0.398017" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49463087" weight="0.26628897" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" sideWeight="0.49395972" visible="true" weight="0.26628897" />
       <window_info anchor="bottom" id="Floobits" order="10" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49731544" weight="0.3286119" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.22013423" side_tool="true" visible="true" weight="0.34560907" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.5060403" side_tool="true" visible="true" weight="0.26628897" />
       <window_info anchor="bottom" id="Java Enterprise" order="14" />
       <window_info anchor="bottom" id="Messages" order="15" sideWeight="0.4986577" weight="0.3286119" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -969,7 +979,8 @@
     <MESSAGE value="edit bug with status transition included" />
     <MESSAGE value="insert bug with validation" />
     <MESSAGE value="Merge branch 'master' of https://github.com/silviuvranau/jBugs into JBG-edit-bugs&#10;&#10;# Conflicts:&#10;#&#9;backend/jbugs-service/jbugs-client/src/main/java/servlet/BugTestServlet.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/silviuvranau/jBugs into JBG-edit-bugs&#10;&#10;# Conflicts:&#10;#&#9;backend/jbugs-service/jbugs-client/src/main/java/servlet/BugTestServlet.java" />
+    <MESSAGE value="method for checking if User can be deactivated" />
+    <option name="LAST_COMMIT_MESSAGE" value="method for checking if User can be deactivated" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -978,7 +989,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/BugController.java</url>
-          <line>57</line>
+          <line>56</line>
           <properties class="controller.BugController" method="modifyBug">
             <option name="EMULATED" value="true" />
           </properties>
@@ -992,7 +1003,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java</url>
-          <line>194</line>
+          <line>193</line>
           <properties />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
@@ -1447,7 +1458,7 @@
     <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/interfaces/BugManagerRemote.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
-          <caret line="24" column="72" selection-start-line="24" selection-start-column="72" selection-end-line="24" selection-end-column="72" />
+          <caret line="24" column="71" selection-start-line="24" selection-start-column="71" selection-end-line="24" selection-end-column="71" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1457,7 +1468,7 @@
     <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="111">
-          <caret line="190" column="79" selection-start-line="190" selection-start-column="55" selection-end-line="190" selection-end-column="79" />
+          <caret line="190" column="78" selection-start-line="190" selection-start-column="54" selection-end-line="190" selection-end-column="78" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4741#4742#0" expanded="true" />
@@ -1468,8 +1479,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/BugController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="38" column="12" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
+        <state relative-caret-position="300">
+          <caret line="88" column="9" lean-forward="true" selection-start-line="88" selection-start-column="9" selection-end-line="88" selection-end-column="9" />
         </state>
       </provider>
     </entry>
