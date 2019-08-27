@@ -39,12 +39,12 @@ public class BugController {
             bugManagerRemote.canDeactivateUser(userDTO);
             return Response
                     .status(Response.Status.OK)
-                    .entity("You request was carried out successfully.")
+                    .entity("true")
                     .build();
         } catch (BusinessException e) {
             return Response
-                    .status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity("There are unclosed bugs!")
+                    .status(Response.Status.OK)
+                    .entity("false")
                     .build();
         }
     }
