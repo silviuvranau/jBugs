@@ -11,7 +11,6 @@ import entity.enums.NotificationType;
 import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.interceptors.Interceptor;
-import ro.msg.edu.jbugs.managers.interfaces.NotificationManagerRemote;
 import ro.msg.edu.jbugs.managers.interfaces.UserManagerRemote;
 import ro.msg.edu.jbugs.mappers.UserDTOEntityMapper;
 
@@ -19,7 +18,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
@@ -76,7 +74,7 @@ public class UserManager implements UserManagerRemote {
 
         Set<Role> roles = insertedUser.getRoles();
 
-        for(Integer roleId : userDTO.getRoleIds()){
+        for (Integer roleId : userDTO.getRoleIds()) {
             Role role = roleDao.findRole(roleId);
             roles.add(role);
         }
@@ -85,7 +83,7 @@ public class UserManager implements UserManagerRemote {
         return UserDTOEntityMapper.getDtoFromUser(insertedUser);
     }
 
-    public UserDTO findAUser(Integer id) throws BusinessException{
+    public UserDTO findAUser(Integer id) throws BusinessException {
         User userToBeFound = userDao.findUser(id);
         UserDTO userDTO = UserDTOEntityMapper.getDtoFromUser(userToBeFound);
         return userDTO;
@@ -109,7 +107,7 @@ public class UserManager implements UserManagerRemote {
     }
 
     @Override
-    public UserDTO modifyUser(UserDTO userDTO) throws BusinessException{
+    public UserDTO modifyUser(UserDTO userDTO) throws BusinessException {
         User user = userDao.findUser(userDTO.getId());
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
@@ -123,7 +121,7 @@ public class UserManager implements UserManagerRemote {
         user.setPassword(hashedPassword);
 
         Set<Role> roles = new HashSet<>();
-        for(Integer roleId : userDTO.getRoleIds()){
+        for (Integer roleId : userDTO.getRoleIds()) {
             Role role = roleDao.findRole(roleId);
             roles.add(role);
         }
@@ -144,8 +142,8 @@ public class UserManager implements UserManagerRemote {
         }
         int charPosition = 0;
         String username = (firstPart + firstName.charAt(charPosition)).toLowerCase();
-        username = username.replaceAll("\\s","");
-        username = username.replaceAll("\\W","");
+        username = username.replaceAll("\\s", "");
+        username = username.replaceAll("\\W", "");
         while(!userDao.checkUsernameUnique(username)){
             charPosition++;
             if(charPosition < firstName.length()) {
@@ -163,30 +161,27 @@ public class UserManager implements UserManagerRemote {
                 .toString();
 
         User user = new User();
-        try{
+        try {
             user = userDao.findUserByUsername(username);
-            if(user == null){
+            if (user == null) {
                 return null;
             }
-            if(user.isStatus() == false){
-                try{
+            if (user.isStatus() == false) {
+                try {
                     user = userDao.findUserByUsernameAndPassword(username, hashedPassword);
                     user.setCounter(0);
-                }
-                catch(BusinessException e){
+                } catch (BusinessException e) {
                     e.printStackTrace();
                     user.setCounter(user.getCounter() + 1);
-                    if(user.getCounter() > 5)
+                    if (user.getCounter() > 5)
                         user.setStatus(false);
                     return null;
                 }
-            }
-            else{
+            } else {
                 System.out.println("Account is blocked!");
                 return null;
             }
-        }
-        catch(BusinessException e){
+        } catch (BusinessException e) {
             e.printStackTrace();
 
         }

@@ -89,11 +89,26 @@ public class BugManager implements BugManagerRemote {
         return false;
     }
 
-    public BugDTO insertBug(BugDTO bugDTO) {
-        Bug bugToBeInserted = BugDTOEntityMapper.getBugFromDto(bugDTO);
-        Bug insertedBug = bugDao.insertBug(bugToBeInserted);
+    public BugDTO insertBug(BugDTO bugDTO) throws BusinessException {
+        if (bugDao.findBug(bugDTO.getId()) == null) {
+            Bug bugToBeInserted = BugDTOEntityMapper.getBugFromDto(bugDTO);
 
-        return BugDTOEntityMapper.getDtoFromBug(insertedBug);
+            //if Users are already in db
+            if (bugToBeInserted.getAssignedId() != null) {
+                User assignedUser = userDao.findUser(bugToBeInserted.getAssignedId().getId());
+                bugToBeInserted.setAssignedId(assignedUser);
+            }
+            if (bugToBeInserted.getCreatedId() != null) {
+                User createdByUser = userDao.findUser(bugToBeInserted.getCreatedId().getId());
+                bugToBeInserted.setCreatedId(createdByUser);
+            }
+
+            bugDao.insertBug(bugToBeInserted);
+
+            return bugDTO;
+        } else {
+            throw new BusinessException("msg-001", "The given user is already in the database.");
+        }
     }
 
     public BugDTO findABug(Integer id) {
@@ -135,7 +150,13 @@ public class BugManager implements BugManagerRemote {
                 searchedBug.setFixedVersion(bugDTO.getFixedVersion());
                 searchedBug.setSeverity(bugDTO.getSeverity());
                 searchedBug.setTargetDate(bugDTO.getTargetDate());
-                searchedBug.setStatus(bugDTO.getStatus());
+
+                //check if status is reachable
+                if (statusIsReachable(searchedBug.getStatus(), bugDTO.getStatus())) {
+                    searchedBug.setStatus(bugDTO.getStatus());
+                } else {
+                    throw new BusinessException("msg-001", "There is no such status transition.");
+                }
 
                 //changed assigned to and created by
                 if (bugDTO.getAssignedId().getId() != searchedBug.getAssignedId().getId()) {
@@ -164,6 +185,14 @@ public class BugManager implements BugManagerRemote {
             }
         } else {
             throw new BusinessException("msg-001", "Given id's are not equal.");
+        }
+    }
+
+    public boolean canDeactivateUser(UserDTO userDto) throws BusinessException {
+        if (bugDao.getClosedBugsByAssignedId(UserDTOEntityMapper.getUserFromUserDto(userDto)) == 0) {
+            return true;
+        } else {
+            throw new BusinessException("msg-001", "The user has unclosed bugs.");
         }
     }
 

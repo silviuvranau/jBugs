@@ -5,6 +5,7 @@ import entity.Bug;
 import entity.User;
 import entity.enums.Severity;
 import entity.enums.Status;
+import exceptions.BusinessException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +15,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.mappers.BugDTOEntityMapper;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 /**
@@ -39,9 +41,12 @@ public class BugManagerTest {
     @Test
     public void insertBug() {
         Bug bug = createBug();
-        when(bugDao.insertBug(bug)).thenReturn(createBug());
+        when(bugDao.insertBug(any(Bug.class))).thenReturn(bug);
         BugDTO bugToInsert = BugDTOEntityMapper.getDtoFromBug(createBug());
-        BugDTO bugReturned = bugManager.insertBug(bugToInsert);
+        BugDTO bugReturned = new BugDTO();
+        try {
+            bugReturned = bugManager.insertBug(bugToInsert);
+        } catch (BusinessException e) { }
 
         Assert.assertEquals(bugToInsert.getId(), bugReturned.getId());
         Assert.assertEquals(bugToInsert.getDescription(), bugReturned.getDescription());
@@ -90,6 +95,7 @@ public class BugManagerTest {
     @Test
     public void statusIsReachable() {
         Assert.assertFalse(bugManager.statusIsReachable(Status.CLOSED, Status.IN_PROGRESSS));
+        Assert.assertFalse(bugManager.statusIsReachable(Status.REJECTED, Status.IN_PROGRESSS));
         Assert.assertFalse(bugManager.statusIsReachable(Status.CLOSED, Status.NEW));
         Assert.assertTrue(bugManager.statusIsReachable(Status.IN_PROGRESSS, Status.NEW));
         Assert.assertTrue(bugManager.statusIsReachable(Status.IN_PROGRESSS, Status.CLOSED));

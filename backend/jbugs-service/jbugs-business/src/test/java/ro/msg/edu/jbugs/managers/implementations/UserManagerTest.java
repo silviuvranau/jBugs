@@ -1,6 +1,11 @@
 package ro.msg.edu.jbugs.managers.implementations;
 
+import com.google.common.hash.Hashing;
+import dao.NotificationDao;
+import dao.RoleDao;
 import dao.UserDao;
+import entity.Notification;
+import entity.Role;
 import entity.User;
 import exceptions.BusinessException;
 import org.junit.Test;
@@ -9,8 +14,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import ro.msg.edu.jbugs.dto.UserDTO;
+import ro.msg.edu.jbugs.mappers.UserDTOEntityMapper;
+
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.when;
 
@@ -25,8 +35,15 @@ public class UserManagerTest {
     @InjectMocks
     private UserManager userManager;
 
+
     @Mock
     private UserDao userDao;
+
+    @Mock
+    private RoleDao roleDao;
+
+    @Mock
+    private NotificationDao notificationDao;
 
     public UserManagerTest() {
         this.userManager = new UserManager();
@@ -124,6 +141,59 @@ public class UserManagerTest {
     @Test(expected = BusinessException.class)
     public void loginThatExceedsCounter() throws BusinessException{
         User persistedUser = createUser();
+
+    }
+
+
+    @Test
+    public void insertUser() {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setFirstName("Gini");
+        userDTO.setLastName("Wijnaldum");
+        userDTO.setEmail("giniwijnaldum@msggroup.com");
+        userDTO.setCounter(0);
+        userDTO.setMobileNumber("+40754498876");
+        userDTO.setPassword("test");
+        List<Integer> roles = userDTO.getRoleIds();
+        roles.add(1);
+        userDTO.setRoleIds(roles);
+
+        User user = UserDTOEntityMapper.getUserFromUserDto(userDTO);
+
+//        when(userManager.generateUsername("Gini", "Wijnaldum")).thenReturn("wijnag");
+        when(userDao.checkUsernameUnique("wijnag")).thenReturn(true);
+
+        String hashedPassword = Hashing.sha256()
+                .hashString(userDTO.getPassword(), StandardCharsets.UTF_8)
+                .toString();
+
+        User returnedUser = UserDTOEntityMapper.getUserFromUserDto(userDTO);
+        returnedUser.setUsername("wijnag");
+        returnedUser.setId(1);
+        returnedUser.setPassword(hashedPassword);
+        Role role = new Role();
+        role.setId(1);
+        role.setType("ADM");
+
+
+        when(roleDao.findRole(1)).thenReturn(role);
+
+
+        when(userDao.insertUser(any(User.class))).thenReturn(returnedUser);
+        when(notificationDao.insertNotification(any(Notification.class)))
+                .thenReturn(new Notification());
+
+        UserDTO insertedUser = userManager.insertUser(userDTO);
+//        UserDTO insertedUser = new UserDTO();
+
+        assertEquals(insertedUser.getFirstName(), "Gini");
+        assertEquals(insertedUser.getLastName(), "Wijnaldum");
+        assertEquals(insertedUser.getEmail(), "giniwijnaldum@msggroup.com");
+        assertEquals(insertedUser.getCounter(), Integer.valueOf(0));
+        assertEquals(userDTO.getMobileNumber(), "+40754498876");
+        assertEquals(insertedUser.getPassword(), hashedPassword);
+        assertEquals(insertedUser.getUsername(), "wijnag");
+        assertEquals(insertedUser.getRoleIds().get(0), Integer.valueOf(1));
 
     }
 }

@@ -40,7 +40,6 @@ public class LoginController {
             return null;
         }
         HttpSession session = request.getSession();
-        System.out.println("CREATIONTIME" + session.getCreationTime());
         session.setAttribute("username",credentialDTO.getUsername());
         System.out.println(session.getAttribute("username"));
         return Response.ok(userDto).build();

@@ -4,6 +4,8 @@ package ro.msg.edu.jbugs.dto;
 import entity.enums.Severity;
 import entity.enums.Status;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 /**
@@ -14,10 +16,19 @@ import java.io.Serializable;
  */
 public class BugDTO implements Serializable {
     private Integer id;
+    @NotNull
     private String title;
+    @NotNull
+    @Pattern(regexp = "[\\s\\S]{250,}",
+            message = "INVALID_DESCRIPTION_EXCEPTION")
     private String description;
+    @NotNull
+    @Pattern(regexp = "[a-zA-Z0-9.]+",
+            message = "INVALID_VERSION_EXCEPTION")
     private String version;
     private String targetDate;
+    @Pattern(regexp = "[a-zA-Z0-9.]+",
+            message = "INVALID_VERSION_EXCEPTION")
     private String fixedVersion;
     private Severity severity;
     private UserDTO createdId;

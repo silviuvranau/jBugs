@@ -1,7 +1,5 @@
 package servlet;
 
-import exceptions.BusinessException;
-import ro.msg.edu.jbugs.dto.NotificationDTO;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.managers.interfaces.BugManagerRemote;
 import ro.msg.edu.jbugs.managers.interfaces.CommentManagerRemote;
@@ -9,18 +7,9 @@ import ro.msg.edu.jbugs.managers.interfaces.NotificationManagerRemote;
 import ro.msg.edu.jbugs.managers.interfaces.UserManagerRemote;
 
 import javax.ejb.EJB;
-import javax.jms.*;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 
 /**
  * Document me.

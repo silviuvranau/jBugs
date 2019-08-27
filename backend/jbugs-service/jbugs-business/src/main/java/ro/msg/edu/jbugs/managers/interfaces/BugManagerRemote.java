@@ -15,12 +15,14 @@ import java.util.List;
  */
 @Remote
 public interface BugManagerRemote {
-    BugDTO insertBug(BugDTO bugDTO);
+    BugDTO insertBug(BugDTO bugDTO) throws BusinessException;
     BugDTO findABug(Integer id);
     List<BugDTO> findAllBugs();
     List<BugDTO> findBugsByCreatedId(UserDTO userDTO);
     List<BugDTO> findBugsByAssignedId(UserDTO userDTO);
     Integer deleteExceedingBugs();
+
+    boolean canDeactivateUser(UserDTO userDTO) throws BusinessException;
 
     BugDTO updateBug(Integer id, BugDTO bugDTO) throws BusinessException;
 }
