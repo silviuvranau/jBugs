@@ -33,7 +33,7 @@ public class BugController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/canDeactivateUser")
-    public Response getAllClosedBugs(UserDTO userDTO) {
+    public Response checkIfCanDeactivateUser(UserDTO userDTO) {
 
         try {
             bugManagerRemote.canDeactivateUser(userDTO);
