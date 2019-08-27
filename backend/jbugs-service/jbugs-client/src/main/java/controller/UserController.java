@@ -1,5 +1,6 @@
 package controller;
 
+import configuration.Authentication;
 import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.managers.interfaces.UserManagerRemote;
@@ -35,14 +36,15 @@ public class UserController {
     }
 
     @GET
-    public Response getAllUsers(){
+    public Response getAllUsers(@CookieParam("username") String username){
+        System.out.println("Cookie val" + username);
         List<UserDTO> result =  userManager.findAllUsers();
         return Response.ok(result).build();
     }
 
     @POST
-    public Response createUser(@Valid UserDTO userDTO) {
-        Response response = checkUserManagementRights();
+    public Response createUser(@CookieParam("username") String username, @Valid UserDTO userDTO) {
+        Response response = checkUserManagementRights(username);
         if(response != null)
             return response;
         UserDTO result =  userManager.insertUser(userDTO);
@@ -50,8 +52,8 @@ public class UserController {
     }
 
     @PUT
-    public Response editUser(@Valid UserDTO userDTO) {
-        Response response = checkUserManagementRights();
+    public Response editUser(@CookieParam("username") String username, @Valid UserDTO userDTO) {
+        Response response = checkUserManagementRights(username);
         if(response != null)
             return response;
 
@@ -68,10 +70,7 @@ public class UserController {
         return Response.ok(result).build();
     }
 
-    private Response checkUserManagementRights(){
-        HttpSession session = request.getSession();
-        System.out.println("CREATIONTIME" + session.getCreationTime());
-        String loggedInUsername = (String)session.getAttribute("username");
+    private Response checkUserManagementRights(String loggedInUsername){
         if(loggedInUsername == null){
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("User is not logged in !")
@@ -91,6 +90,8 @@ public class UserController {
         }
         return null;
     }
+
+
 
 
 }
