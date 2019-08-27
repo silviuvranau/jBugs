@@ -76,7 +76,7 @@ public class BugController {
     public Response insertBug(@Valid BugDTO bugDTO) {
         try {
             BugDTO insertedBug = bugManagerRemote.insertBug(bugDTO);
-            return Response
+                return Response
                     .status(Response.Status.OK)
                     .entity("You request was carried out successfully.")
                     .build();
