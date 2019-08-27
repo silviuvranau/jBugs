@@ -188,6 +188,14 @@ public class BugManager implements BugManagerRemote {
         }
     }
 
+    public boolean canDeactivateUser(UserDTO userDto) throws BusinessException {
+        if (bugDao.getClosedBugsByAssignedId(UserDTOEntityMapper.getUserFromUserDto(userDto)) == 0) {
+            return true;
+        } else {
+            throw new BusinessException("msg-001", "The user has unclosed bugs.");
+        }
+    }
+
 //    public void insertBug(BugDTO bugDTO){
 //        Bug bug = BugDTOEntityMapper.getBugFromDto(bugDTO);
 //        bugDao.insertBug(bug);
