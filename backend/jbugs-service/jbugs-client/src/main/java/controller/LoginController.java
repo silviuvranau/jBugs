@@ -35,11 +35,12 @@ public class LoginController {
         UserDTO userDto;
         try {
             userDto = userManager.login(credentialDTO.getUsername(), credentialDTO.getPassword());
-        } catch (BusinessException e) {
+        }
+        catch (BusinessException e){
             return null;
         }
         HttpSession session = request.getSession();
-        session.setAttribute("username", credentialDTO.getUsername());
+        session.setAttribute("username",credentialDTO.getUsername());
         System.out.println(session.getAttribute("username"));
         return Response.ok(userDto).build();
     }
