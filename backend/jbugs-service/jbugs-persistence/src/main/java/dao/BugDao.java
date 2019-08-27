@@ -2,6 +2,7 @@ package dao;
 
 import entity.Bug;
 import entity.User;
+import entity.enums.Status;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -66,4 +67,17 @@ public class BugDao {
         return deletedBugs;
     }
 
+    /**
+     * Method that returns for a specific user how many unclosed bugs there are.
+     *
+     * @param user
+     * @return
+     */
+    public Integer getClosedBugsByAssignedId(User user) {
+        Query query = entityManager.createNamedQuery(Bug.GET_CLOSED_BUGS_BY_ASSIGNED_ID, Bug.class);
+        query.setParameter("user", user);
+        query.setParameter("status", Status.CLOSED);
+        int count = ((Number) query.getSingleResult()).intValue();
+        return count;
+    }
 }

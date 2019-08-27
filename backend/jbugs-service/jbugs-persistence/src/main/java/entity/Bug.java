@@ -25,14 +25,15 @@ import java.util.Set;
 //                "WHERE b.targetDate < :date")
         @NamedQuery(name=Bug.DELETE_BUGS, query = "Update Bug b set b.status= 'closed' " +
                 "WHERE b.targetDate < :date and b.status <> 'closed'"),
-        //@NamedQuery(name=Bug.FILTER_BUGS, query = "")
+        @NamedQuery(name = Bug.GET_CLOSED_BUGS_BY_ASSIGNED_ID, query = "SELECT COUNT(b) FROM Bug b" +
+                " WHERE b.assignedId = :user AND b.status <> :status")
 })
 public class Bug implements Serializable {
     public static final String GET_ALL_BUGS = "findAllBugs";
     public static final String GET_BY_CREATED_ID = "findByCreatedId";
     public static final String GET_BY_ASSIGNED_ID = "findByAssignedId";
     public static final String DELETE_BUGS="deleteBugsWhoExceededDate";
-    public static final String FILTER_BUGS = "filterBugs";
+    public static final String GET_CLOSED_BUGS_BY_ASSIGNED_ID = "getClosedBugsByAssignedId";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

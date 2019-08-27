@@ -27,7 +27,6 @@ public class BugDTO implements Serializable {
             message = "INVALID_VERSION_EXCEPTION")
     private String version;
     private String targetDate;
-    @NotNull
     @Pattern(regexp = "[a-zA-Z0-9.]+",
             message = "INVALID_VERSION_EXCEPTION")
     private String fixedVersion;

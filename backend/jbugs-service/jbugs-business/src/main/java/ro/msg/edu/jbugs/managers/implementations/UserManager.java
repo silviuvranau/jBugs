@@ -19,6 +19,7 @@ import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -82,7 +83,7 @@ public class UserManager implements UserManagerRemote {
         return UserDTOEntityMapper.getDtoFromUser(insertedUser);
     }
 
-    public UserDTO findAUser(Integer id){
+    public UserDTO findAUser(Integer id) throws BusinessException {
         User userToBeFound = userDao.findUser(id);
         UserDTO userDTO = UserDTOEntityMapper.getDtoFromUser(userToBeFound);
         return userDTO;
@@ -103,6 +104,31 @@ public class UserManager implements UserManagerRemote {
     @Override
     public Integer deleteUser(Integer id) {
         return userDao.deleteUser(id);
+    }
+
+    @Override
+    public UserDTO modifyUser(UserDTO userDTO) throws BusinessException {
+        User user = userDao.findUser(userDTO.getId());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setMobileNumber(userDTO.getMobileNumber());
+        user.setEmail(userDTO.getEmail());
+
+        String hashedPassword = Hashing.sha256()
+                .hashString(userDTO.getPassword(), StandardCharsets.UTF_8)
+                .toString();
+
+        user.setPassword(hashedPassword);
+
+        Set<Role> roles = new HashSet<>();
+        for (Integer roleId : userDTO.getRoleIds()) {
+            Role role = roleDao.findRole(roleId);
+            roles.add(role);
+        }
+        user.setRoles(roles);
+
+
+        return UserDTOEntityMapper.getDtoFromUser(user);
     }
 
     @Override
@@ -130,6 +156,10 @@ public class UserManager implements UserManagerRemote {
     }
 
     public UserDTO login(String username, String password) throws BusinessException {
+        String hashedPassword = Hashing.sha256()
+                .hashString(password, StandardCharsets.UTF_8)
+                .toString();
+
         User user = new User();
         try {
             user = userDao.findUserByUsername(username);
@@ -138,7 +168,7 @@ public class UserManager implements UserManagerRemote {
             }
             if (user.isStatus() == false) {
                 try {
-                    user = userDao.findUserByUsernameAndPassword1(username, password);
+                    user = userDao.findUserByUsernameAndPassword(username, hashedPassword);
                     user.setCounter(0);
                 } catch (BusinessException e) {
                     e.printStackTrace();

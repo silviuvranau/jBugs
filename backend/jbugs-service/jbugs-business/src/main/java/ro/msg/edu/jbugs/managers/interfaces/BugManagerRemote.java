@@ -22,5 +22,7 @@ public interface BugManagerRemote {
     List<BugDTO> findBugsByAssignedId(UserDTO userDTO);
     Integer deleteExceedingBugs();
 
+    boolean canDeactivateUser(UserDTO userDTO) throws BusinessException;
+
     BugDTO updateBug(Integer id, BugDTO bugDTO) throws BusinessException;
 }
