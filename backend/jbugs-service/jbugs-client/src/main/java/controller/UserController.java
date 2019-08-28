@@ -1,5 +1,6 @@
 package controller;
 
+import configuration.Authentication;
 import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.managers.interfaces.UserManagerRemote;
@@ -30,35 +31,37 @@ public class UserController {
     @GET
     @Path("{userId}")
     public Response getUserById(@PathParam("userId") Integer userId) throws BusinessException {
-        UserDTO result = userManager.findAUser(userId);
+        UserDTO result =  userManager.findAUser(userId);
         return Response.ok(result).build();
     }
 
     @GET
-    public Response getAllUsers() {
-        List<UserDTO> result = userManager.findAllUsers();
+    public Response getAllUsers(@CookieParam("username") String username){
+        System.out.println("Cookie val" + username);
+        List<UserDTO> result =  userManager.findAllUsers();
         return Response.ok(result).build();
     }
 
     @POST
-    public Response createUser(@Valid UserDTO userDTO) {
-        Response response = checkUserManagementRights();
-        if (response != null)
+    public Response createUser(@CookieParam("username") String username, @Valid UserDTO userDTO) {
+        Response response = checkUserManagementRights(username);
+        if(response != null)
             return response;
-        UserDTO result = userManager.insertUser(userDTO);
+        UserDTO result =  userManager.insertUser(userDTO);
         return Response.ok(result).build();
     }
 
     @PUT
-    public Response editUser(@Valid UserDTO userDTO) {
-        Response response = checkUserManagementRights();
-        if (response != null)
+    public Response editUser(@CookieParam("username") String username, @Valid UserDTO userDTO) {
+        Response response = checkUserManagementRights(username);
+        if(response != null)
             return response;
 
         UserDTO result;
         try {
             result = userManager.modifyUser(userDTO);
-        } catch (BusinessException e) {
+        }
+        catch (BusinessException e){
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
                     .build();
@@ -67,27 +70,28 @@ public class UserController {
         return Response.ok(result).build();
     }
 
-    private Response checkUserManagementRights() {
-        HttpSession session = request.getSession();
-        String loggedInUsername = (String) session.getAttribute("username");
-        if (loggedInUsername == null) {
+    private Response checkUserManagementRights(String loggedInUsername){
+        if(loggedInUsername == null){
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("User is not logged in !")
                     .build();
         }
 
         try {
-            if (!permissionChecker.checkPermission(loggedInUsername, "USER_MANAGEMENT"))
+            if(!permissionChecker.checkPermission(loggedInUsername, "USER_MANAGEMENT"))
                 return Response.status(Response.Status.BAD_REQUEST)
                         .entity("User doesn't have the required permissions (USER_MANAGEMENT) !")
                         .build();
-        } catch (BusinessException e) {
+        }
+        catch (BusinessException e){
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
                     .build();
         }
         return null;
     }
+
+
 
 
 }
