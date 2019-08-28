@@ -4,7 +4,7 @@ import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.RoleDTO;
 import ro.msg.edu.jbugs.dto.RolePermissionDTO;
 import ro.msg.edu.jbugs.managers.interfaces.RoleManagerRemote;
-import utils.RightsUtils;
+import ro.msg.edu.jbugs.util.RightsUtils;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;

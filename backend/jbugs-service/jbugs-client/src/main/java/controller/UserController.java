@@ -1,20 +1,15 @@
 package controller;
 
-import configuration.Authentication;
 import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.managers.interfaces.UserManagerRemote;
-import ro.msg.edu.jbugs.util.PermissionChecker;
-import utils.RightsUtils;
+import ro.msg.edu.jbugs.util.RightsUtils;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 

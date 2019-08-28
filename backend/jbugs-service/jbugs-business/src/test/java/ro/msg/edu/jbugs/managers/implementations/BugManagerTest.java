@@ -101,7 +101,7 @@ public class BugManagerTest {
         when(bugDao.findBug(bug.getId())).thenReturn(bug);
 
         try {
-            BugDTO returnedBug = bugManager.updateBug(newBug.getId(), BugDTOEntityMapper.getDtoFromBug(newBug));
+            BugDTO returnedBug = bugManager.updateBug(BugDTOEntityMapper.getDtoFromBug(newBug), "popm");
             Assert.assertEquals(newBug.getTitle(), returnedBug.getTitle());
         } catch (BusinessException e) {
         }
@@ -116,7 +116,7 @@ public class BugManagerTest {
 
         when(bugDao.findBug(bug.getId())).thenReturn(null);
 
-        bugManager.updateBug(newBug.getId(), BugDTOEntityMapper.getDtoFromBug(newBug));
+        bugManager.updateBug(BugDTOEntityMapper.getDtoFromBug(newBug), "popm");
     }
 
     /**
@@ -141,7 +141,7 @@ public class BugManagerTest {
         newBug.setStatus(Status.IN_PROGRESSS);
         BugDTO bugDto = BugDTOEntityMapper.getDtoFromBug(newBug);
 
-        bugManager.updateBug(13, bugDto);
+        bugManager.updateBug(bugDto, "popm");
     }
 
     @Test(expected = BusinessException.class)

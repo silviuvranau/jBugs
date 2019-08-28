@@ -4,7 +4,7 @@ import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.managers.interfaces.BugManagerRemote;
-import utils.RightsUtils;
+import ro.msg.edu.jbugs.util.RightsUtils;
 
 import javax.ejb.EJB;
 import javax.validation.Valid;
@@ -25,6 +25,9 @@ public class BugController {
     @EJB
     BugManagerRemote bugManagerRemote;
 
+    @EJB
+    RightsUtils rightsUtils;
+
     @GET
     public Response getAllBugs(@CookieParam("username") String username) {
         Response response = rightsUtils .checkUserRights(username, "BUG_MANAGEMENT");
@@ -34,9 +37,6 @@ public class BugController {
         List<BugDTO> result = bugManagerRemote.findAllBugs();
         return Response.ok(result).build();
     }
-
-    @EJB
-    RightsUtils rightsUtils;
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -69,7 +69,7 @@ public class BugController {
 
         BugDTO result;
         try {
-            result = bugManagerRemote.updateBug(bugDTO.getId(), bugDTO);
+            result = bugManagerRemote.updateBug(bugDTO, username);
         }
         catch (BusinessException e){
             return Response.status(Response.Status.BAD_REQUEST)
