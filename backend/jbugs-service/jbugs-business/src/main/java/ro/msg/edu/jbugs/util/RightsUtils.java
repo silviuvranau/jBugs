@@ -1,7 +1,6 @@
-package utils;
+package ro.msg.edu.jbugs.util;
 
 import exceptions.BusinessException;
-import ro.msg.edu.jbugs.util.PermissionChecker;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
