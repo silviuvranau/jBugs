@@ -5,13 +5,16 @@ import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.managers.interfaces.UserManagerRemote;
 import ro.msg.edu.jbugs.util.PermissionChecker;
+import utils.RightsUtils;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
@@ -22,11 +25,11 @@ public class UserController {
     @EJB
     UserManagerRemote userManager;
 
-    @EJB
-    PermissionChecker permissionChecker;
-
     @Context
     private HttpServletRequest request;
+
+    @EJB
+    RightsUtils rightsUtils;
 
     @GET
     @Path("{userId}")
@@ -44,7 +47,7 @@ public class UserController {
 
     @POST
     public Response createUser(@CookieParam("username") String username, @Valid UserDTO userDTO) {
-        Response response = checkUserManagementRights(username);
+        Response response = rightsUtils.checkUserRights(username, "USER_MANAGEMENT");
         if(response != null)
             return response;
         UserDTO result =  userManager.insertUser(userDTO);
@@ -53,7 +56,7 @@ public class UserController {
 
     @PUT
     public Response editUser(@CookieParam("username") String username, @Valid UserDTO userDTO) {
-        Response response = checkUserManagementRights(username);
+        Response response = rightsUtils.checkUserRights(username, "USER_MANAGEMENT");
         if(response != null)
             return response;
 
@@ -69,30 +72,6 @@ public class UserController {
 
         return Response.ok(result).build();
     }
-
-    private Response checkUserManagementRights(String loggedInUsername){
-        if(loggedInUsername == null){
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("User is not logged in !")
-                    .build();
-        }
-
-        try {
-            if(!permissionChecker.checkPermission(loggedInUsername, "USER_MANAGEMENT"))
-                return Response.status(Response.Status.BAD_REQUEST)
-                        .entity("User doesn't have the required permissions (USER_MANAGEMENT) !")
-                        .build();
-        }
-        catch (BusinessException e){
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(e.getMessage())
-                    .build();
-        }
-        return null;
-    }
-
-
-
 
 }
 

@@ -4,6 +4,7 @@ import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.managers.interfaces.BugManagerRemote;
+import utils.RightsUtils;
 
 import javax.ejb.EJB;
 import javax.validation.Valid;
@@ -29,6 +30,9 @@ public class BugController {
         return bugManagerRemote.findAllBugs();
     }
 
+    @EJB
+    RightsUtils rightsUtils;
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
@@ -49,36 +53,35 @@ public class BugController {
         }
     }
 
-    //@POST
     @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
-    @Path("/{id}")
-    public Response modifyBug(@PathParam("id") Integer id, @Valid BugDTO bugDTO) {
+    public Response modifyBug(@CookieParam("username") String username, @Valid BugDTO bugDTO) {
+        Response response = rightsUtils .checkUserRights(username, "BUG_MANAGEMENT");
+        if(response != null)
+            return response;
+
+        BugDTO result;
         try {
-            bugManagerRemote.updateBug(id, bugDTO);
-            return Response
-                    .status(Response.Status.OK)
-                    .entity("You request was carried out successfully.")
-                    .build();
-        } catch (BusinessException e) {
-            e.printStackTrace();
-            return Response
-                    .status(Response.Status.INTERNAL_SERVER_ERROR)
+            result = bugManagerRemote.updateBug(bugDTO.getId(), bugDTO);
+        }
+        catch (BusinessException e){
+            return Response.status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
                     .build();
         }
+
+        return Response.ok(result).build();
     }
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response insertBug(@Valid BugDTO bugDTO) {
+    public Response insertBug(@CookieParam("username") String username, @Valid BugDTO bugDTO) {
+        Response response = rightsUtils.checkUserRights(username, "BUG_MANAGEMENT");
+        if(response != null)
+            return response;
         try {
-            BugDTO insertedBug = bugManagerRemote.insertBug(bugDTO);
+            BugDTO result = bugManagerRemote.insertBug(bugDTO);
             return Response
                     .status(Response.Status.OK)
-                    .entity("You request was carried out successfully.")
+                    .entity(result)
                     .build();
         } catch (BusinessException e) {
             e.printStackTrace();
