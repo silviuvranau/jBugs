@@ -11,6 +11,7 @@ import java.sql.Blob;
  */
 public class AttachmentDTO implements Serializable {
     private Integer id;
+
     private Blob attContent;
     private BugDTO bug;
 

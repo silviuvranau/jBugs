@@ -13,7 +13,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import ro.msg.edu.jbugs.dto.BugDTO;
+import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.mappers.BugDTOEntityMapper;
+import ro.msg.edu.jbugs.mappers.UserDTOEntityMapper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
@@ -41,9 +46,11 @@ public class BugManagerTest {
     @Test
     public void insertBug() {
         Bug bug = createBug();
+        when(bugDao.findBug(any(Integer.class))).thenReturn(bug);
         when(bugDao.insertBug(any(Bug.class))).thenReturn(bug);
-        BugDTO bugToInsert = BugDTOEntityMapper.getDtoFromBug(createBug());
-        BugDTO bugReturned = new BugDTO();
+
+        BugDTO bugToInsert = BugDTOEntityMapper.getDtoFromBug(bug);
+        BugDTO bugReturned = bugToInsert;
         try {
             bugReturned = bugManager.insertBug(bugToInsert);
         } catch (BusinessException e) { }
@@ -56,10 +63,106 @@ public class BugManagerTest {
 
     @Test
     public void findABug() {
+        Bug bug = createBug();
+        when(bugDao.findBug(bug.getId())).thenReturn(bug);
+
+        BugDTO searchedBugDto = bugManager.findABug(bug.getId());
+
+        Assert.assertEquals(bug.getTitle(), searchedBugDto.getTitle());
+        Assert.assertEquals(bug.getSeverity(), searchedBugDto.getSeverity());
+        Assert.assertEquals(bug.getAssignedId().getId(), searchedBugDto.getAssignedId().getId());
+        Assert.assertEquals(bug.getCreatedId().getId(), searchedBugDto.getCreatedId().getId());
+        Assert.assertEquals(bug.getDescription(), bug.getDescription());
+        Assert.assertEquals(bug.getFixedVersion(), searchedBugDto.getFixedVersion());
+        Assert.assertEquals(bug.getVersion(), searchedBugDto.getVersion());
+        Assert.assertEquals(bug.getStatus(), searchedBugDto.getStatus());
+        Assert.assertEquals(bug.getTargetDate(), searchedBugDto.getTargetDate());
     }
 
     @Test
     public void findAllBugs() {
+        List<Bug> bugsList = new ArrayList<>();
+        Bug bug = createBug();
+        bugsList.add(bug);
+        bug.setId(13);
+        bugsList.add(bug);
+
+        when(bugDao.findAllBugs()).thenReturn(bugsList);
+        List<BugDTO> returnedBugs = bugManager.findAllBugs();
+        Assert.assertEquals(2, returnedBugs.size());
+    }
+
+    @Test
+    public void updateBug() {
+        Bug bug = createBug();
+        Bug newBug = bug;
+        newBug.setTitle("updatedTitle");
+
+        when(bugDao.findBug(bug.getId())).thenReturn(bug);
+
+        try {
+            BugDTO returnedBug = bugManager.updateBug(newBug.getId(), BugDTOEntityMapper.getDtoFromBug(newBug));
+            Assert.assertEquals(newBug.getTitle(), returnedBug.getTitle());
+        } catch (BusinessException e) {
+        }
+
+    }
+
+    @Test(expected = BusinessException.class)
+    public void updateBugNotInDbException() throws BusinessException {
+        Bug bug = createBug();
+        Bug newBug = bug;
+        newBug.setTitle("updatedTitle");
+
+        when(bugDao.findBug(bug.getId())).thenReturn(null);
+
+        bugManager.updateBug(newBug.getId(), BugDTOEntityMapper.getDtoFromBug(newBug));
+    }
+
+    /**
+     * @Test(expected = BusinessException.class)
+     * public void updateBugStatusUnreachableException () throws BusinessException{
+     * Bug bug = createBug();
+     * Bug newBug = bug;
+     * newBug.setStatus(Status.IN_PROGRESSS);
+     * BugDTO bugDto = BugDTOEntityMapper.getDtoFromBug(newBug);
+     * <p>
+     * when(bugDao.findBug(bug.getId())).thenReturn(bug);
+     * when(bugManager.statusIsReachable(any(Status.class), any(Status.class))).thenReturn(false);
+     * <p>
+     * bugManager.updateBug(newBug.getId(), BugDTOEntityMapper.getDtoFromBug(newBug));
+     * }
+     **/
+
+    @Test(expected = BusinessException.class)
+    public void updateBugDifferentIdsException() throws BusinessException {
+        Bug bug = createBug();
+        Bug newBug = bug;
+        newBug.setStatus(Status.IN_PROGRESSS);
+        BugDTO bugDto = BugDTOEntityMapper.getDtoFromBug(newBug);
+
+        bugManager.updateBug(13, bugDto);
+    }
+
+    @Test(expected = BusinessException.class)
+    public void canDeactivateUserException() throws BusinessException {
+        Bug bug = createBug();
+        User user = bug.getAssignedId();
+        UserDTO userDTO = UserDTOEntityMapper.getDtoFromUser(user);
+        when(bugDao.getClosedBugsByAssignedId(any(User.class))).thenReturn(4);
+
+        bugManager.canDeactivateUser(userDTO);
+    }
+
+    @Test
+    public void canDeactivateUser() {
+        Bug bug = createBug();
+        when(bugDao.getClosedBugsByAssignedId(bug.getAssignedId())).thenReturn(0);
+
+        try {
+            Assert.assertTrue(bugManager.canDeactivateUser(UserDTOEntityMapper.getDtoFromUser(bug.getAssignedId())));
+        } catch (BusinessException e) {
+        }
     }
 
     @Test
@@ -77,6 +180,7 @@ public class BugManagerTest {
     private Bug createBug() {
         Bug bug = new Bug();
         User user = new User();
+        user.setId(1);
         bug.setId(1000);
         bug.setTitle("title");
         bug.setDescription("...");
@@ -86,8 +190,7 @@ public class BugManagerTest {
         bug.setCreatedId(user);
         bug.setAssignedId(user);
         bug.setTargetDate("2000-01-09 01:10:20");
-        bug.setStatus(Status.NEW);
-
+        bug.setStatus(Status.CLOSED);
 
         return bug;
     }
@@ -114,5 +217,6 @@ public class BugManagerTest {
         Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.REJECTED));
         Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.INFO_NEEDED));
     }
+
 
 }
