@@ -18,5 +18,5 @@ import java.util.List;
 public interface NotificationManagerRemote {
     Notification insertNotification(Notification notification, Integer userId) throws BusinessException;
     List<NotificationDTO> findAllNotifications();
-    List<NotificationDTO> findAllNotificationsByUser(Integer id) throws  BusinessException;
+    List<NotificationDTO> findAllNotificationsByUser(String username) throws  BusinessException;
 }

@@ -12,6 +12,7 @@ import ro.msg.edu.jbugs.interceptors.Interceptor;
 import ro.msg.edu.jbugs.managers.interfaces.BugManagerRemote;
 import ro.msg.edu.jbugs.mappers.BugDTOEntityMapper;
 import ro.msg.edu.jbugs.mappers.UserDTOEntityMapper;
+import ro.msg.edu.jbugs.util.RightsUtils;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -33,6 +34,9 @@ public class BugManager implements BugManagerRemote {
 
     @EJB
     private UserDao userDao;
+
+    @EJB
+    RightsUtils rightsUtils;
 
     private Map<Status, List<Status>> statusTransitions;
 
@@ -89,6 +93,13 @@ public class BugManager implements BugManagerRemote {
         return false;
     }
 
+    public boolean checkIfStatusCanBeClosed(Status statusOne, String username) {
+        if (statusOne == Status.FIXED && rightsUtils.checkUserRights(username, "BUG_CLOSE") != null) {
+            return true;
+        }
+        return false;
+    }
+
     public BugDTO insertBug(BugDTO bugDTO) throws BusinessException {
         if (bugDao.findBug(bugDTO.getId()) == null) {
             Bug bugToBeInserted = BugDTOEntityMapper.getBugFromDto(bugDTO);
@@ -138,53 +149,81 @@ public class BugManager implements BugManagerRemote {
         return bugDao.deleteBugs();
     }
 
-    public BugDTO updateBug(Integer id, BugDTO bugDTO) throws BusinessException {
-        if (id == bugDTO.getId()) {
-            Bug searchedBug = bugDao.findBug(bugDTO.getId());
+    public BugDTO updateBug(BugDTO bugDTO, String username) throws BusinessException {
+        Bug searchedBug = bugDao.findBug(bugDTO.getId());
+        if (searchedBug != null) {
+            searchedBug.setTitle(bugDTO.getTitle());
+            searchedBug.setDescription(bugDTO.getDescription());
+            searchedBug.setVersion(bugDTO.getVersion());
+            searchedBug.setFixedVersion(bugDTO.getFixedVersion());
+            searchedBug.setSeverity(bugDTO.getSeverity());
+            searchedBug.setTargetDate(bugDTO.getTargetDate());
 
-            if (searchedBug != null) {
+            try {
+                verifyCanSetStatus(bugDTO, searchedBug, username);
+                searchedBug.setStatus(bugDTO.getStatus());
+            } catch (BusinessException e) {
+                throw new BusinessException("msg-001", e.getMessage());
+            }
 
-                searchedBug.setTitle(bugDTO.getTitle());
-                searchedBug.setDescription(bugDTO.getDescription());
-                searchedBug.setVersion(bugDTO.getVersion());
-                searchedBug.setFixedVersion(bugDTO.getFixedVersion());
-                searchedBug.setSeverity(bugDTO.getSeverity());
-                searchedBug.setTargetDate(bugDTO.getTargetDate());
+            if (bugDTO.getAssignedId().getId() != searchedBug.getAssignedId().getId()) {
+                searchedBug.setAssignedId(setAssignedId(bugDTO, searchedBug));
+            }
 
+            if (bugDTO.getCreatedId().getId() != searchedBug.getCreatedId().getId()) {
+                searchedBug.setCreatedId(setCreatedId(bugDTO, searchedBug));
+            }
+
+            return bugDTO;
+        } else {
+            throw new BusinessException("msg-001", "There is no such bug.");
+        }
+    }
+
+    public boolean verifyCanSetStatus(BugDTO bugDTO, Bug searchedBug, String username) throws BusinessException {
+        if (bugDTO.getStatus() == Status.CLOSED) {
+            if (searchedBug.getStatus() == Status.FIXED) {
+                if (rightsUtils.checkUserRights(username, "BUG_CLOSE") == null) {
+                    return true;
+                } else {
+                    throw new BusinessException("msg-001", "User doesn't have the required permission. (CLOSE_BUG)");
+                }
+            } else {
                 //check if status is reachable
                 if (statusIsReachable(searchedBug.getStatus(), bugDTO.getStatus())) {
-                    searchedBug.setStatus(bugDTO.getStatus());
+                    return true;
                 } else {
                     throw new BusinessException("msg-001", "There is no such status transition.");
                 }
-
-                //changed assigned to and created by
-                if (bugDTO.getAssignedId().getId() != searchedBug.getAssignedId().getId()) {
-                    //if user is assigned to bug
-                    if (searchedBug.getAssignedId() != null) {
-                        //take user from db => managed state
-                        User assignedUser = userDao.findUser(searchedBug.getId());
-                        searchedBug.setAssignedId(UserDTOEntityMapper.getSearchedUserFromUserDto(bugDTO.getAssignedId(), assignedUser));
-                    } else {
-                        searchedBug.setAssignedId(UserDTOEntityMapper.getUserFromUserDto(bugDTO.getAssignedId()));
-                    }
-                }
-                //same but with created by User
-                if (bugDTO.getCreatedId().getId() != searchedBug.getCreatedId().getId()) {
-                    if (searchedBug.getCreatedId() != null) {
-                        User createdUser = userDao.findUser(searchedBug.getId());
-                        searchedBug.setCreatedId(UserDTOEntityMapper.getSearchedUserFromUserDto(bugDTO.getCreatedId(), createdUser));
-                    } else {
-                        searchedBug.setCreatedId(UserDTOEntityMapper.getUserFromUserDto(bugDTO.getCreatedId()));
-                    }
-                }
-
-                return bugDTO;
-            } else {
-                throw new BusinessException("msg-001", "There is no such bug.");
             }
         } else {
-            throw new BusinessException("msg-001", "Given id's are not equal.");
+            if (statusIsReachable(searchedBug.getStatus(), bugDTO.getStatus())) {
+                return true;
+            } else {
+                throw new BusinessException("msg-001", "There is no such status transition.");
+            }
+        }
+
+    }
+
+    public User setAssignedId(BugDTO bugDTO, Bug searchedBug) throws BusinessException {
+        //if user is assigned to bug
+        if (searchedBug.getAssignedId() != null) {
+            //take user from db => managed state
+            User assignedUser = userDao.findUser(bugDTO.getAssignedId().getId());
+            return UserDTOEntityMapper.getSearchedUserFromUserDto(bugDTO.getAssignedId(), assignedUser);
+
+        } else {
+            return UserDTOEntityMapper.getUserFromUserDto(bugDTO.getAssignedId());
+        }
+    }
+
+    public User setCreatedId(BugDTO bugDTO, Bug searchedBug) throws BusinessException {
+        if (searchedBug.getCreatedId() != null) {
+            User createdUser = userDao.findUser(bugDTO.getCreatedId().getId());
+            return UserDTOEntityMapper.getSearchedUserFromUserDto(bugDTO.getCreatedId(), createdUser);
+        } else {
+            return UserDTOEntityMapper.getUserFromUserDto(bugDTO.getCreatedId());
         }
     }
 
