@@ -4,7 +4,7 @@ import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.managers.interfaces.BugManagerRemote;
-import ro.msg.edu.jbugs.util.RightsUtils;
+import utils.RightsUtils;
 
 import javax.ejb.EJB;
 import javax.validation.Valid;

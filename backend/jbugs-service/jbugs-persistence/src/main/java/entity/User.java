@@ -30,7 +30,6 @@ public class User {
     public static final String GET_USER_WITH_USERNAME = "user.getUserCounter";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
     private Integer id;
 
     @Column(name = "counter")
