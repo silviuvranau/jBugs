@@ -141,29 +141,25 @@ public class BugManager implements BugManagerRemote {
     public BugDTO updateBug(Integer id, BugDTO bugDTO) throws BusinessException {
         if (id == bugDTO.getId()) {
             Bug searchedBug = bugDao.findBug(bugDTO.getId());
-
             if (searchedBug != null) {
-
                 searchedBug.setTitle(bugDTO.getTitle());
                 searchedBug.setDescription(bugDTO.getDescription());
                 searchedBug.setVersion(bugDTO.getVersion());
                 searchedBug.setFixedVersion(bugDTO.getFixedVersion());
                 searchedBug.setSeverity(bugDTO.getSeverity());
                 searchedBug.setTargetDate(bugDTO.getTargetDate());
-
                 //check if status is reachable
                 if (statusIsReachable(searchedBug.getStatus(), bugDTO.getStatus())) {
                     searchedBug.setStatus(bugDTO.getStatus());
                 } else {
                     throw new BusinessException("msg-001", "There is no such status transition.");
                 }
-
                 //changed assigned to and created by
                 if (bugDTO.getAssignedId().getId() != searchedBug.getAssignedId().getId()) {
                     //if user is assigned to bug
                     if (searchedBug.getAssignedId() != null) {
                         //take user from db => managed state
-                        User assignedUser = userDao.findUser(searchedBug.getId());
+                        User assignedUser = userDao.findUser(bugDTO.getAssignedId().getId());
                         searchedBug.setAssignedId(UserDTOEntityMapper.getSearchedUserFromUserDto(bugDTO.getAssignedId(), assignedUser));
                     } else {
                         searchedBug.setAssignedId(UserDTOEntityMapper.getUserFromUserDto(bugDTO.getAssignedId()));
@@ -172,13 +168,12 @@ public class BugManager implements BugManagerRemote {
                 //same but with created by User
                 if (bugDTO.getCreatedId().getId() != searchedBug.getCreatedId().getId()) {
                     if (searchedBug.getCreatedId() != null) {
-                        User createdUser = userDao.findUser(searchedBug.getId());
+                        User createdUser = userDao.findUser(bugDTO.getCreatedId().getId());
                         searchedBug.setCreatedId(UserDTOEntityMapper.getSearchedUserFromUserDto(bugDTO.getCreatedId(), createdUser));
                     } else {
                         searchedBug.setCreatedId(UserDTOEntityMapper.getUserFromUserDto(bugDTO.getCreatedId()));
                     }
                 }
-
                 return bugDTO;
             } else {
                 throw new BusinessException("msg-001", "There is no such bug.");

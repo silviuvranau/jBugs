@@ -26,8 +26,13 @@ public class BugController {
     BugManagerRemote bugManagerRemote;
 
     @GET
-    public List<BugDTO> getAllBugs() {
-        return bugManagerRemote.findAllBugs();
+    public Response getAllBugs(@CookieParam("username") String username) {
+        Response response = rightsUtils .checkUserRights(username, "BUG_MANAGEMENT");
+        if(response != null)
+            return response;
+
+        List<BugDTO> result = bugManagerRemote.findAllBugs();
+        return Response.ok(result).build();
     }
 
     @EJB
@@ -37,7 +42,10 @@ public class BugController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/canDeactivateUser")
-    public Response checkIfCanDeactivateUser(UserDTO userDTO) {
+    public Response checkIfCanDeactivateUser(@CookieParam("username") String username, UserDTO userDTO) {
+        Response response = rightsUtils .checkUserRights(username, "USER_MANAGEMENT");
+        if(response != null)
+            return response;
 
         try {
             bugManagerRemote.canDeactivateUser(userDTO);
