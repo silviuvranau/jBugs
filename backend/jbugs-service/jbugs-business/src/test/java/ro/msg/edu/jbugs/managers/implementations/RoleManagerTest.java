@@ -3,18 +3,22 @@ package ro.msg.edu.jbugs.managers.implementations;
 import dao.RoleDao;
 import entity.Permission;
 import entity.Role;
+import exceptions.BusinessException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import ro.msg.edu.jbugs.dto.PermissionDTO;
 import ro.msg.edu.jbugs.dto.RoleDTO;
+import ro.msg.edu.jbugs.mappers.PermissionDTOEntityMapper;
+import ro.msg.edu.jbugs.mappers.RoleDTOEntityMapper;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Document me.
@@ -55,40 +59,18 @@ public class RoleManagerTest {
         firstTestingRole.setId(1);
         secondTestingRole.setId(1);
         testingPermission.setId(1);
-// Asta e?
-        //Akma vrei sa testezi DAO-ul sau Managerul?
-        //Managerul. Ajunge daca testezi ca DAO-ul era apelat, pt ca numai atata face.
-        //Oh
-        //Okay :)) Got it.
 
-        // Daca vrei sa testezi DAO-ul devine un pic mai complicat.
-        //Pai si acela trebuie testat eventual. Dar de ce complicat?
-        //Adica nu trebuie doar sa verific daca arunca businessEx sau nu?
-        //Ah nu. Scratch that.
+        RoleManager roleManager = mock(RoleManager.class);
+        try {
+            doNothing().when(roleManager).modifyRolePermission(isA(RoleDTO.class), isA(PermissionDTO.class));
+            RoleDTO roleDTO = RoleDTOEntityMapper.getDtoFromRole(firstTestingRole);
+            PermissionDTO permissionDTO = PermissionDTOEntityMapper.getDtoFromPermission(testingPermission);
+            roleManager.modifyRolePermission(roleDTO, permissionDTO);
 
-        //Am inteles acum :))
-        // Trebuie sa mocuiesti EntityManagerul cea ce nu stiu daca e posibil.... Sau sa folosesti o BD numai pentru
-        // test si sa verifici daca chiar sau sters/inserat/... entitatile.... Ce ce e si mai complicat. Hmmm... Stai sa ma uit pe google.
+            verify(roleManager, times(1)).modifyRolePermission(roleDTO, permissionDTO);
+        } catch (BusinessException e) {
+        }
 
-        //Okay.
-
-        // Dao.modifyRolePermission(anyObject(), anyObject())).thenReturn(1);
-//
-//        assertEquals(roleManager.modifyRolePermission(RoleDTOEntityMapper.getDtoFromRole(firstTestingRole),
-//                PermissionDTOEntityMapper.getDtoFromPermission(testingPermission)), Integer.valueOf(1));
-//
-//        when(roleDao.modifyRolePermission(secondTestingRole, testingPermission)).thenReturn(1);
-//        assertEquals(roleManager.modifyRolePermission(RoleDTOEntityMapper.getDtoFromRole(secondTestingRole),
-//                PermissionDTOEntityMapper.getDtoFromPermission(testingPermission)), Integer.valueOf(1));
-
-//        ArgumentCaptor<RoleDTO> roleCaptor = ArgumentCaptor.forClass(RoleDTO.class);
-//        ArgumentCaptor<PermissionDTO> permissionCaptor = ArgumentCaptor.forClass(PermissionDTO.class);
-
-        //verify(mock()).modifyRolePermission(roleCaptor.capture(), permissionCaptor.capture());
-
-//        assertEquals(roleCaptor.getValue().getId(), firstTestingRole.getId());
-//        assertEquals(permissionCaptor.getValue().getId(), testingPermission.getId());
-
-//
     }
+
 }
