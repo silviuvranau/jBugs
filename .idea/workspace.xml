@@ -7,14 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca89a1a1-3ee2-45f0-9768-40c2af9d9ac1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/BugAttachmentDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/test/java/dao/RoleDaoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/test/java/ro/msg/edu/jbugs/managers/implementations/BugManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/test/java/ro/msg/edu/jbugs/managers/implementations/BugManagerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/test/java/ro/msg/edu/jbugs/managers/implementations/RoleManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/test/java/ro/msg/edu/jbugs/managers/implementations/RoleManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/NotificationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/NotificationManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/interfaces/NotificationManagerRemote.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/interfaces/NotificationManagerRemote.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/test/java/ro/msg/edu/jbugs/managers/implementations/UserManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/test/java/ro/msg/edu/jbugs/managers/implementations/UserManagerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/dao/NotificationDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/dao/NotificationDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/dao/RoleDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/dao/RoleDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/entity/Notification.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/entity/Notification.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/backend/jbugs-service/jbugs-ear/target/" />
     <ignored path="$PROJECT_DIR$/backend/jbugs-service/target/" />
@@ -68,11 +65,10 @@
         <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/NotificationController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="244">
-              <caret line="40" column="23" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
+              <caret line="37" column="23" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#590#591#0" expanded="true" />
-                <element signature="e#655#656#0" expanded="true" />
+                <element signature="e#702#703#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -770,7 +766,7 @@
       <workItem from="1566732817930" duration="18900000" />
       <workItem from="1566823581052" duration="399000" />
       <workItem from="1566824002278" duration="16290000" />
-      <workItem from="1566900884429" duration="20050000" />
+      <workItem from="1566900884429" duration="20308000" />
     </task>
     <task id="LOCAL-00001" summary="in table Bugs, created_id, assgned_id =&gt; ...username">
       <created>1566211520223</created>
@@ -940,7 +936,28 @@
       <option name="project" value="LOCAL" />
       <updated>1566917731887</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Rest get Notifications with given User">
+      <created>1566974044683</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1566974044683</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Rest get Notifications with given User">
+      <created>1566974142744</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1566974142744</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Rest get Notifications with given User">
+      <created>1566974192467</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1566974192467</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -976,11 +993,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="107275000" />
+    <option name="totallyTimeSpent" value="107533000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4980695" visible="true" weight="0.1785235" />
       <window_info id="Image Layers" order="1" />
@@ -1083,7 +1099,8 @@
     <MESSAGE value="method for checking if User can be deactivated" />
     <MESSAGE value="fixed version can be null" />
     <MESSAGE value="jUnit for UserManager, RoleManager and BugManager" />
-    <option name="LAST_COMMIT_MESSAGE" value="jUnit for UserManager, RoleManager and BugManager" />
+    <MESSAGE value="Rest get Notifications with given User" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rest get Notifications with given User" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1571,11 +1588,10 @@
     <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/NotificationController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="244">
-          <caret line="40" column="23" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
+          <caret line="37" column="23" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#590#591#0" expanded="true" />
-            <element signature="e#655#656#0" expanded="true" />
+            <element signature="e#702#703#0" expanded="true" />
           </folding>
         </state>
       </provider>

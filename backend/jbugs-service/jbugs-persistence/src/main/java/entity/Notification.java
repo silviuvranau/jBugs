@@ -15,9 +15,11 @@ import java.io.Serializable;
 @Table(name="notifications")
 @NamedQueries({
         @NamedQuery(name= Notification.FIND_ALL_NOTIFICATIONS, query = "select n from Notification n"),
+        @NamedQuery(name= Notification.FIND_ALL_NOTIFICATIONS_BY_USER, query = "select n from Notification n where n.user = :user"),
 })
 public class Notification implements Serializable {
     public static final String FIND_ALL_NOTIFICATIONS = "findAllNotifications";
+    public static final String FIND_ALL_NOTIFICATIONS_BY_USER = "findAllNotificationsByUser";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +32,7 @@ public class Notification implements Serializable {
     private String message;
 
     @Column(name="type")
+    @Enumerated(EnumType.STRING)
     private NotificationType type;
 
     @Column(name="url")

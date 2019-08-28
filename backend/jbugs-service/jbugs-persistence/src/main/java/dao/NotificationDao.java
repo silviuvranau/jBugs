@@ -1,6 +1,7 @@
 package dao;
 
 import entity.Notification;
+import entity.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -30,6 +31,13 @@ public class NotificationDao {
 
     public List<Notification> findAllNotifications(){
         Query query = entityManager.createNamedQuery(Notification.FIND_ALL_NOTIFICATIONS, Notification.class);
+        List<Notification> notifis = query.getResultList();
+        return notifis;
+    }
+
+    public List<Notification> findAllNotificationsByUser(User user) {
+        Query query = entityManager.createNamedQuery(Notification.FIND_ALL_NOTIFICATIONS_BY_USER, Notification.class);
+        query.setParameter("user", user);
         List<Notification> notifis = query.getResultList();
         return notifis;
     }
