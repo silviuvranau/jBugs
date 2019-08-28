@@ -160,7 +160,7 @@ public class UserManager implements UserManagerRemote {
                 .hashString(password, StandardCharsets.UTF_8)
                 .toString();
 
-        User user = new User();
+        User user;
 
         user = userDao.findUserByUsername(username);
         if (user == null) {
