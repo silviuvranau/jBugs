@@ -19,6 +19,7 @@ import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -63,7 +64,8 @@ public class UserManager implements UserManagerRemote {
 
         Notification welcomeNotification = new Notification();
         welcomeNotification.setMessage("Welcome: " + insertedUser.getUsername());
-        String date = LocalDateTime.now().toString();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm:ss");
+        String date = LocalDateTime.now().format(formatter);
         welcomeNotification.setDate(date);
         welcomeNotification.setType(NotificationType.WELCOME_NEW_USER);
         welcomeNotification.setUser(insertedUser);
