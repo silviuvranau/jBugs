@@ -30,10 +30,10 @@ public class NotificationController {
     }
 
     @GET
-    @Path("/{id}")
-    public List<NotificationDTO> getAllNotificationsByUser(@PathParam("id") Integer id) {
+    @Path("/{username}")
+    public List<NotificationDTO> getAllNotificationsByUser(@PathParam("username") String username) {
         try {
-            return notificationManager.findAllNotificationsByUser(id);
+            return notificationManager.findAllNotificationsByUser(username);
         } catch (BusinessException e) {
             return null;
         }

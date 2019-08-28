@@ -45,15 +45,15 @@ public class NotificationManager implements NotificationManagerRemote {
         return notifications.stream().map(NotificationDTOEntityMapper:: getDtoFromNotification).collect(Collectors.toList());
     }
 
-    public List<NotificationDTO> findAllNotificationsByUser(Integer id) throws BusinessException{
+    public List<NotificationDTO> findAllNotificationsByUser(String username) throws BusinessException{
         //check if given id is valid
-        User user = userDao.findUser(id);
+        User user = userDao.findUserByUsername(username);
         if (user != null){
             List<Notification> notifications = notificationDao.findAllNotificationsByUser(user);
             return notifications.stream().map(NotificationDTOEntityMapper:: getDtoFromNotification).collect(Collectors.toList());
         }
         else{
-            throw new BusinessException("msg-001", "Given id is not coresponding to a user.");
+            throw new BusinessException("msg-001", "Given username is not corresponding to a user.");
         }
     }
 }
