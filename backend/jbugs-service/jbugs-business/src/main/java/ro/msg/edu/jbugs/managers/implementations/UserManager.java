@@ -43,7 +43,7 @@ public class UserManager implements UserManagerRemote {
     private RoleDao roleDao;
 
 
-    public UserDTO insertUser(UserDTO userDTO){
+    public UserDTO insertUser(UserDTO userDTO) {
         String generatedUsername = generateUsername(userDTO.getFirstName(), userDTO.getLastName());
         userDTO.setUsername(generatedUsername);
 
@@ -89,13 +89,13 @@ public class UserManager implements UserManagerRemote {
         return userDTO;
     }
 
-    public List<UserDTO> findAllUsers(){
+    public List<UserDTO> findAllUsers() {
         List<User> users = userDao.findAll();
 
-        return users.stream().map(UserDTOEntityMapper :: getDtoFromUser).collect(Collectors.toList());
+        return users.stream().map(UserDTOEntityMapper::getDtoFromUser).collect(Collectors.toList());
     }
 
-    public Long findCreatedBugs(UserDTO userDTO){
+    public Long findCreatedBugs(UserDTO userDTO) {
         User user = UserDTOEntityMapper.getUserFromUserDto(userDTO);
         Long numberOfCreatedBugs = userDao.getCreatedBugs(user);
         return numberOfCreatedBugs;
@@ -135,19 +135,18 @@ public class UserManager implements UserManagerRemote {
     @Override
     public String generateUsername(String firstName, String lastName) {
         String firstPart;
-        if (lastName.length() >= 5){
+        if (lastName.length() >= 5) {
             firstPart = lastName.substring(0, 5);
-        }
-        else {
+        } else {
             firstPart = lastName;
         }
         int charPosition = 0;
         String username = (firstPart + firstName.charAt(charPosition)).toLowerCase();
         username = username.replaceAll("\\s", "");
         username = username.replaceAll("\\W", "");
-        while(!userDao.checkUsernameUnique(username)){
+        while (!userDao.checkUsernameUnique(username)) {
             charPosition++;
-            if(charPosition < firstName.length()) {
+            if (charPosition < firstName.length()) {
                 username = (username + (firstName.charAt(charPosition))).toLowerCase();
             } else {
                 username = username + "x";
@@ -162,30 +161,26 @@ public class UserManager implements UserManagerRemote {
                 .toString();
 
         User user = new User();
-        try {
-            user = userDao.findUserByUsername(username);
-            if (user == null) {
-                return null;
-            }
-            if (user.isStatus() == false) {
-                try {
-                    user = userDao.findUserByUsernameAndPassword(username, hashedPassword);
-                    user.setCounter(0);
-                } catch (BusinessException e) {
-                    e.printStackTrace();
-                    user.setCounter(user.getCounter() + 1);
-                    if (user.getCounter() > 5)
-                        user.setStatus(false);
-                    return null;
-                }
-            } else {
-                System.out.println("Account is blocked!");
-                return null;
-            }
-        } catch (BusinessException e) {
-            e.printStackTrace();
 
+        user = userDao.findUserByUsername(username);
+        if (user == null) {
+            throw new BusinessException("msg_005","User not found !");
         }
+        if (user.isStatus() == false) {
+            try {
+                user = userDao.findUserByUsernameAndPassword(username, hashedPassword);
+                user.setCounter(0);
+            } catch (BusinessException e) {
+                user.setCounter(user.getCounter() + 1);
+                if (user.getCounter() > 4)
+                    user.setStatus(true);
+                throw new BusinessException("msg_007", "Invalid credentials");
+            }
+        } else {
+            System.out.println("Account is blocked!");
+            throw new BusinessException("msg_006", "Account is blocked !");
+        }
+
         return UserDTOEntityMapper.getDtoFromUser(user);
     }
 

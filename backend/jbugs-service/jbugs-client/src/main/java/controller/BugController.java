@@ -29,7 +29,7 @@ public class BugController {
         return bugManagerRemote.findAllBugs();
     }
 
-    @GET
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/canDeactivateUser")

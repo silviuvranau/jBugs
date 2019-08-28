@@ -31,7 +31,7 @@ public class LoginController {
             userDto = userManager.login(credentialDTO.getUsername(), credentialDTO.getPassword());
         }
         catch (BusinessException e){
-            return null;
+            return Response.status(Response.Status.FORBIDDEN).entity(e.getMessage()).build();
         }
 
 
