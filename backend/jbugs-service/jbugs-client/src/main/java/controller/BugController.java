@@ -30,7 +30,7 @@ public class BugController {
 
     @GET
     public Response getAllBugs(@CookieParam("username") String username) {
-        Response response = rightsUtils .checkUserRights(username, "BUG_MANAGEMENT");
+        Response response = rightsUtils.checkUserRights(username, "BUG_MANAGEMENT");
         if(response != null)
             return response;
 
@@ -43,7 +43,7 @@ public class BugController {
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/canDeactivateUser")
     public Response checkIfCanDeactivateUser(@CookieParam("username") String username, UserDTO userDTO) {
-        Response response = rightsUtils .checkUserRights(username, "USER_MANAGEMENT");
+        Response response = rightsUtils.checkUserRights(username, "USER_MANAGEMENT");
         if(response != null)
             return response;
 
@@ -63,7 +63,7 @@ public class BugController {
 
     @PUT
     public Response modifyBug(@CookieParam("username") String username, @Valid BugDTO bugDTO) {
-        Response response = rightsUtils .checkUserRights(username, "BUG_MANAGEMENT");
+        Response response = rightsUtils.checkUserRights(username, "BUG_MANAGEMENT");
         if(response != null)
             return response;
 
