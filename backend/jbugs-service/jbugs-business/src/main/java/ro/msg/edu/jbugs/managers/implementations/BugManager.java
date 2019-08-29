@@ -12,7 +12,7 @@ import ro.msg.edu.jbugs.interceptors.Interceptor;
 import ro.msg.edu.jbugs.managers.interfaces.BugManagerRemote;
 import ro.msg.edu.jbugs.mappers.BugDTOEntityMapper;
 import ro.msg.edu.jbugs.mappers.UserDTOEntityMapper;
-import ro.msg.edu.jbugs.util.RightsUtils;
+import ro.msg.edu.jbugs.util.PermissionChecker;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -36,7 +36,7 @@ public class BugManager implements BugManagerRemote {
     private UserDao userDao;
 
     @EJB
-    RightsUtils rightsUtils;
+    PermissionChecker permissionChecker;
 
     private Map<Status, List<Status>> statusTransitions;
 
@@ -90,13 +90,6 @@ public class BugManager implements BugManagerRemote {
             }
         }
 
-        return false;
-    }
-
-    public boolean checkIfStatusCanBeClosed(Status statusOne, String username) {
-        if (statusOne == Status.FIXED && rightsUtils.checkUserRights(username, "BUG_CLOSE") != null) {
-            return true;
-        }
         return false;
     }
 
@@ -183,10 +176,10 @@ public class BugManager implements BugManagerRemote {
     public boolean verifyCanSetStatus(BugDTO bugDTO, Bug searchedBug, String username) throws BusinessException {
         if (bugDTO.getStatus() == Status.CLOSED) {
             if (searchedBug.getStatus() == Status.FIXED) {
-                if (rightsUtils.checkUserRights(username, "BUG_CLOSE") == null) {
-                    return true;
-                } else {
-                    throw new BusinessException("msg-001", "User doesn't have the required permission. (CLOSE_BUG)");
+                try {
+                    return permissionChecker.checkPermission(username, "BUG_CLOSE");
+                } catch (BusinessException e) {
+                    throw new BusinessException("msg-001", e.getMessage());
                 }
             } else {
                 //check if status is reachable
