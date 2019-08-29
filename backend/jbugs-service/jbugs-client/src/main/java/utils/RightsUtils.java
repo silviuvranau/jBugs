@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
  */
 
 @Stateless
-public class RightsUtilsClient {
+public class RightsUtils {
 
     @EJB
     PermissionChecker permissionChecker;

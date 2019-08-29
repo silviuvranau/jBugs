@@ -4,7 +4,7 @@ import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.managers.interfaces.BugManagerRemote;
-import utils.RightsUtilsClient;
+import utils.RightsUtils;
 
 import javax.ejb.EJB;
 import javax.validation.Valid;
@@ -26,11 +26,11 @@ public class BugController {
     BugManagerRemote bugManagerRemote;
 
     @EJB
-    RightsUtilsClient rightsUtilsClient;
+    RightsUtils rightsUtils;
 
     @GET
     public Response getAllBugs(@CookieParam("username") String username) {
-        Response response = rightsUtilsClient.checkUserRights(username, "BUG_MANAGEMENT");
+        Response response = rightsUtils.checkUserRights(username, "BUG_MANAGEMENT");
         if(response != null)
             return response;
 
@@ -43,7 +43,7 @@ public class BugController {
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/canDeactivateUser")
     public Response checkIfCanDeactivateUser(@CookieParam("username") String username, UserDTO userDTO) {
-        Response response = rightsUtilsClient.checkUserRights(username, "USER_MANAGEMENT");
+        Response response = rightsUtils.checkUserRights(username, "USER_MANAGEMENT");
         if(response != null)
             return response;
 
@@ -63,7 +63,7 @@ public class BugController {
 
     @PUT
     public Response modifyBug(@CookieParam("username") String username, @Valid BugDTO bugDTO) {
-        Response response = rightsUtilsClient.checkUserRights(username, "BUG_MANAGEMENT");
+        Response response = rightsUtils.checkUserRights(username, "BUG_MANAGEMENT");
         if(response != null)
             return response;
 
@@ -82,7 +82,7 @@ public class BugController {
 
     @POST
     public Response insertBug(@CookieParam("username") String username, @Valid BugDTO bugDTO) {
-        Response response = rightsUtilsClient.checkUserRights(username, "BUG_MANAGEMENT");
+        Response response = rightsUtils.checkUserRights(username, "BUG_MANAGEMENT");
         if(response != null)
             return response;
         try {

@@ -3,7 +3,7 @@ package controller;
 import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.managers.interfaces.UserManagerRemote;
-import utils.RightsUtilsClient;
+import utils.RightsUtils;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +24,7 @@ public class UserController {
     private HttpServletRequest request;
 
     @EJB
-    RightsUtilsClient rightsUtilsClient;
+    RightsUtils rightsUtils;
 
     @GET
     @Path("{userId}")
@@ -42,7 +42,7 @@ public class UserController {
 
     @POST
     public Response createUser(@CookieParam("username") String username, @Valid UserDTO userDTO) {
-        Response response = rightsUtilsClient.checkUserRights(username, "USER_MANAGEMENT");
+        Response response = rightsUtils.checkUserRights(username, "USER_MANAGEMENT");
         if(response != null)
             return response;
         UserDTO result =  userManager.insertUser(userDTO);
@@ -51,7 +51,7 @@ public class UserController {
 
     @PUT
     public Response editUser(@CookieParam("username") String username, @Valid UserDTO userDTO) {
-        Response response = rightsUtilsClient.checkUserRights(username, "USER_MANAGEMENT");
+        Response response = rightsUtils.checkUserRights(username, "USER_MANAGEMENT");
         if(response != null)
             return response;
 

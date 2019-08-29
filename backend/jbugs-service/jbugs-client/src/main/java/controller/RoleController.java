@@ -4,7 +4,7 @@ import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.RoleDTO;
 import ro.msg.edu.jbugs.dto.RolePermissionDTO;
 import ro.msg.edu.jbugs.managers.interfaces.RoleManagerRemote;
-import utils.RightsUtilsClient;
+import utils.RightsUtils;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -25,7 +25,7 @@ public class RoleController {
     RoleManagerRemote roleManagerRemote;
 
     @EJB
-    RightsUtilsClient rightsUtilsClient;
+    RightsUtils rightsUtils;
 
     @GET
     public List<RoleDTO> getAllRoles() {
@@ -36,7 +36,7 @@ public class RoleController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
     public Response modifyRolePermission(@CookieParam("username") String username, RolePermissionDTO rolePermissionDTO) {
-        Response response = rightsUtilsClient.checkUserRights(username, "PERMISSION_MANAGEMENT");
+        Response response = rightsUtils.checkUserRights(username, "PERMISSION_MANAGEMENT");
         if(response != null)
             return response;
         try {
