@@ -161,6 +161,9 @@ public class BugManager implements BugManagerRemote {
 
             if (bugDTO.getAssignedId() == null) {
                 searchedBug.setAssignedId(null);
+            } else if (searchedBug.getAssignedId() == null) {
+                User assignedToUser = userDao.findUser(bugDTO.getAssignedId().getId());
+                searchedBug.setAssignedId(assignedToUser);
             } else if (bugDTO.getAssignedId().getId() != searchedBug.getAssignedId().getId()) {
                 searchedBug.setAssignedId(setAssignedId(bugDTO, searchedBug));
             }
