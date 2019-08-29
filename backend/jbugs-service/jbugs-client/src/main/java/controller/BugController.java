@@ -1,6 +1,7 @@
 package controller;
 
 import exceptions.BusinessException;
+import ro.msg.edu.jbugs.dto.BugAttachmentWrapperDTO;
 import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.managers.interfaces.BugManagerRemote;
@@ -81,12 +82,13 @@ public class BugController {
     }
 
     @POST
-    public Response insertBug(@CookieParam("username") String username, @Valid BugDTO bugDTO) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response insertBug(@CookieParam("username") String username, BugAttachmentWrapperDTO bugAttWrapperDTO) {
         Response response = rightsUtils.checkUserRights(username, "BUG_MANAGEMENT");
         if(response != null)
             return response;
         try {
-            BugDTO result = bugManagerRemote.insertBug(bugDTO);
+            BugAttachmentWrapperDTO result = bugManagerRemote.insertBug(bugAttWrapperDTO);
             return Response
                     .status(Response.Status.OK)
                     .entity(result)

@@ -1,6 +1,7 @@
 package ro.msg.edu.jbugs.managers.interfaces;
 
 import exceptions.BusinessException;
+import ro.msg.edu.jbugs.dto.BugAttachmentWrapperDTO;
 import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.dto.UserDTO;
 
@@ -15,7 +16,7 @@ import java.util.List;
  */
 @Remote
 public interface BugManagerRemote {
-    BugDTO insertBug(BugDTO bugDTO) throws BusinessException;
+    BugAttachmentWrapperDTO insertBug(BugAttachmentWrapperDTO bugAttachmentWrapperDTO) throws BusinessException;
     BugDTO findABug(Integer id);
     List<BugDTO> findAllBugs();
     List<BugDTO> findBugsByCreatedId(UserDTO userDTO);

@@ -9,9 +9,9 @@ import ro.msg.edu.jbugs.dto.AttachmentDTO;
  * @author msg systems AG; User Name.
  * @since 19.1.2
  */
-public class AttachementDTOEntityMapper {
+public class AttachmentDTOEntityMapper {
 
-    public static Attachment getAttachementFromDto(AttachmentDTO attachmentDTO) {
+    public static Attachment getAttachmentFromDto(AttachmentDTO attachmentDTO) {
         Attachment attachment = new Attachment();
         attachment.setId(attachmentDTO.getId());
         attachment.setAttContent(attachmentDTO.getAttContent());
@@ -20,7 +20,7 @@ public class AttachementDTOEntityMapper {
         return attachment;
     }
 
-    public static AttachmentDTO getDtoFromAttachement(Attachment attachment) {
+    public static AttachmentDTO getDtoFromAttachment(Attachment attachment) {
         AttachmentDTO attachmentDTO = new AttachmentDTO();
         attachmentDTO.setId(attachment.getId());
         attachmentDTO.setAttContent(attachment.getAttContent());
