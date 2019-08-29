@@ -3,7 +3,7 @@ package controller;
 import exceptions.BusinessException;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.managers.interfaces.UserManagerRemote;
-import ro.msg.edu.jbugs.util.RightsUtils;
+import utils.RightsUtils;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
