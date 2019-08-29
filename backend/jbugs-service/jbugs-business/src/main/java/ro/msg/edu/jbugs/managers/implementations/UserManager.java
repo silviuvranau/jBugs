@@ -4,7 +4,6 @@ import com.google.common.hash.Hashing;
 import dao.NotificationDao;
 import dao.RoleDao;
 import dao.UserDao;
-import entity.Notification;
 import entity.Role;
 import entity.User;
 import entity.enums.NotificationType;
@@ -13,13 +12,12 @@ import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.interceptors.Interceptor;
 import ro.msg.edu.jbugs.managers.interfaces.UserManagerRemote;
 import ro.msg.edu.jbugs.mappers.UserDTOEntityMapper;
+import ro.msg.edu.jbugs.util.NotificationUtils;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,6 +41,8 @@ public class UserManager implements UserManagerRemote {
     @EJB
     private RoleDao roleDao;
 
+    @EJB
+    private NotificationUtils notificationUtils;
 
     public UserDTO insertUser(UserDTO userDTO) {
         String generatedUsername = generateUsername(userDTO.getFirstName(), userDTO.getLastName());
@@ -62,17 +62,7 @@ public class UserManager implements UserManagerRemote {
 
         User insertedUser = userDao.insertUser(userToBeInserted);
 
-        Notification welcomeNotification = new Notification();
-        welcomeNotification.setMessage("Welcome: " + insertedUser.getUsername());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm:ss");
-        String date = LocalDateTime.now().format(formatter);
-        welcomeNotification.setDate(date);
-        welcomeNotification.setType(NotificationType.WELCOME_NEW_USER);
-        welcomeNotification.setUser(insertedUser);
-        notificationDao.insertNotification(welcomeNotification);
-        Set<Notification> notifications = insertedUser.getNotifications();
-        notifications.add(welcomeNotification);
-        insertedUser.setNotifications(notifications);
+        notificationUtils.sendNotification(insertedUser, NotificationType.WELCOME_NEW_USER, "Welcome: " + insertedUser.getUsername());
 
         Set<Role> roles = insertedUser.getRoles();
 

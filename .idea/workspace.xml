@@ -7,8 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca89a1a1-3ee2-45f0-9768-40c2af9d9ac1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/util/NotificationUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/UserManager.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/backend/jbugs-service/jbugs-ear/target/" />
@@ -50,8 +49,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="171" column="140" lean-forward="true" selection-start-line="171" selection-start-column="140" selection-end-line="171" selection-end-column="140" />
+            <state relative-caret-position="391">
+              <caret line="83" column="39" lean-forward="true" selection-start-line="83" selection-start-column="39" selection-end-line="83" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -102,7 +101,7 @@
         <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/UserManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="731">
-              <caret line="67" column="134" selection-start-line="67" selection-start-column="134" selection-end-line="67" selection-end-column="134" />
+              <caret line="64" column="134" selection-start-line="64" selection-start-column="134" selection-end-line="64" selection-end-column="134" />
               <folding>
                 <element signature="e#3833#3834#0" expanded="true" />
                 <element signature="e#3878#3879#0" expanded="true" />
@@ -722,7 +721,7 @@
       <workItem from="1566977613532" duration="6683000" />
       <workItem from="1567060304833" duration="2495000" />
       <workItem from="1567067789217" duration="6084000" />
-      <workItem from="1567079859171" duration="8828000" />
+      <workItem from="1567079859171" duration="9363000" />
     </task>
     <task id="LOCAL-00001" summary="in table Bugs, created_id, assgned_id =&gt; ...username">
       <created>1566211520223</created>
@@ -934,7 +933,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567085951745</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="BUG notifications">
+      <created>1567090063045</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1567090063045</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -970,11 +976,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="135709000" />
+    <option name="totallyTimeSpent" value="136244000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.93342775" visible="true" weight="0.21275167" />
       <window_info id="Image Layers" order="1" />
@@ -1081,7 +1086,8 @@
     <MESSAGE value="Rest get Notifications with given User" />
     <MESSAGE value="commit pull" />
     <MESSAGE value="BUG UPDATED notification added" />
-    <option name="LAST_COMMIT_MESSAGE" value="BUG UPDATED notification added" />
+    <MESSAGE value="BUG notifications" />
+    <option name="LAST_COMMIT_MESSAGE" value="BUG notifications" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1526,7 +1532,7 @@
     <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/UserManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="731">
-          <caret line="67" column="134" selection-start-line="67" selection-start-column="134" selection-end-line="67" selection-end-column="134" />
+          <caret line="64" column="134" selection-start-line="64" selection-start-column="134" selection-end-line="64" selection-end-column="134" />
           <folding>
             <element signature="e#3833#3834#0" expanded="true" />
             <element signature="e#3878#3879#0" expanded="true" />
@@ -1543,8 +1549,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="171" column="140" lean-forward="true" selection-start-line="171" selection-start-column="140" selection-end-line="171" selection-end-column="140" />
+        <state relative-caret-position="391">
+          <caret line="83" column="39" lean-forward="true" selection-start-line="83" selection-start-column="39" selection-end-line="83" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
