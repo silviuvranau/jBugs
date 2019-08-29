@@ -159,7 +159,9 @@ public class BugManager implements BugManagerRemote {
                 throw new BusinessException("msg-001", e.getMessage());
             }
 
-            if (bugDTO.getAssignedId().getId() != searchedBug.getAssignedId().getId()) {
+            if (bugDTO.getAssignedId() == null) {
+                searchedBug.setAssignedId(null);
+            } else if (bugDTO.getAssignedId().getId() != searchedBug.getAssignedId().getId()) {
                 searchedBug.setAssignedId(setAssignedId(bugDTO, searchedBug));
             }
 
