@@ -247,20 +247,20 @@ public class BugManager implements BugManagerRemote {
             if (bugDTO.getAssignedId().getId() == bugDTO.getCreatedId().getId()){
                 User user = userDao.findUser(bugDTO.getAssignedId().getId());
                 user = UserDTOEntityMapper.getSearchedUserFromUserDto(bugDTO.getAssignedId(), user);
-                notificationUtils.sendNotification(user, type, message);
+                notificationUtils.sendNotification("http://localhost:4200/dashboard/bugs?bugId="+bugDTO.getId(), user, type, message);
             }
             //two different users
             else{
                 //send notif for assigned to user
                 User assignedToUser = userDao.findUser(bugDTO.getAssignedId().getId());
                 assignedToUser = UserDTOEntityMapper.getSearchedUserFromUserDto(bugDTO.getAssignedId(), assignedToUser);
-                notificationUtils.sendNotification(assignedToUser,  type, message);
+                notificationUtils.sendNotification("http://localhost:4200/dashboard/bugs?bugId="+bugDTO.getId(), assignedToUser,  type, message);
 
                 //check the permission and send notifs
                 if (permissionChecker.checkPermission(bugDTO.getCreatedId().getUsername(), permissionType)){
                     User createdByUser = userDao.findUser(bugDTO.getCreatedId().getId());
                     createdByUser = UserDTOEntityMapper.getSearchedUserFromUserDto(bugDTO.getCreatedId(), createdByUser);
-                    notificationUtils.sendNotification(createdByUser,  type, message);
+                    notificationUtils.sendNotification("http://localhost:4200/dashboard/bugs?bugId="+bugDTO.getId(), createdByUser,  type, message);
                 }
             }
         }
@@ -268,7 +268,7 @@ public class BugManager implements BugManagerRemote {
         else if (permissionChecker.checkPermission(bugDTO.getCreatedId().getUsername(), "BUG_MANAGEMENT")){
             User createdByUser = userDao.findUser(bugDTO.getCreatedId().getId());
             createdByUser = UserDTOEntityMapper.getSearchedUserFromUserDto(bugDTO.getCreatedId(), createdByUser);
-            notificationUtils.sendNotification(createdByUser,  type, message);
+            notificationUtils.sendNotification("http://localhost:4200/dashboard/bugs?bugId="+bugDTO.getId(), createdByUser,  type, message);
         }
     }
 

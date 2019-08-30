@@ -27,17 +27,18 @@ public class NotificationUtils {
     @EJB
     NotificationDao notificationDao;
 
-    public void sendNotification(User user, NotificationType type, String message) {
-        Notification updateNotification = new Notification();
-        updateNotification.setMessage(message);
+    public void sendNotification(String url, User user, NotificationType type, String message) {
+        Notification notification = new Notification();
+        notification.setMessage(message);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy hh:mm:ss");
         String date = LocalDateTime.now().format(formatter);
-        updateNotification.setDate(date);
-        updateNotification.setType(type);
-        updateNotification.setUser(user);
-        notificationDao.insertNotification(updateNotification);
+        notification.setUrl(url);
+        notification.setDate(date);
+        notification.setType(type);
+        notification.setUser(user);
+        notificationDao.insertNotification(notification);
         Set<Notification> notifications = user.getNotifications();
-        notifications.add(updateNotification);
+        notifications.add(notification);
         user.setNotifications(notifications);
     }
 }
