@@ -105,7 +105,6 @@ public class BugManagerTest {
             Assert.assertEquals(newBug.getTitle(), returnedBug.getTitle());
         } catch (BusinessException e) {
         }
-
     }
 
     @Test(expected = BusinessException.class)
@@ -132,7 +131,7 @@ public class BugManagerTest {
      * <p>
      * bugManager.updateBug(newBug.getId(), BugDTOEntityMapper.getDtoFromBug(newBug));
      * }
-     **/
+
 
     @Test(expected = BusinessException.class)
     public void updateBugDifferentIdsException() throws BusinessException {
@@ -141,8 +140,8 @@ public class BugManagerTest {
         newBug.setStatus(Status.IN_PROGRESSS);
         BugDTO bugDto = BugDTOEntityMapper.getDtoFromBug(newBug);
 
-        bugManager.updateBug(bugDto, "popm");
-    }
+    bugManager.updateBug(bugDto, 1);
+    }**/
 
     @Test(expected = BusinessException.class)
     public void canDeactivateUserException() throws BusinessException {
@@ -163,18 +162,6 @@ public class BugManagerTest {
             Assert.assertTrue(bugManager.canDeactivateUser(UserDTOEntityMapper.getDtoFromUser(bug.getAssignedId())));
         } catch (BusinessException e) {
         }
-    }
-
-    @Test
-    public void findBugsByCreatedId() {
-    }
-
-    @Test
-    public void findBugsByAssignedId() {
-    }
-
-    @Test
-    public void deleteExceedingBugs() {
     }
 
     private Bug createBug() {
@@ -217,6 +204,5 @@ public class BugManagerTest {
         Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.REJECTED));
         Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.INFO_NEEDED));
     }
-
 
 }
