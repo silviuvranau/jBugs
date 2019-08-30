@@ -1,15 +1,20 @@
 package ro.msg.edu.jbugs.managers.implementations;
 
+import dao.AttachmentDao;
 import dao.BugDao;
 import dao.UserDao;
+import entity.Attachment;
 import entity.Bug;
 import entity.User;
 import entity.enums.Status;
 import exceptions.BusinessException;
+import ro.msg.edu.jbugs.dto.AttachmentDTO;
+import ro.msg.edu.jbugs.dto.BugAttachmentWrapperDTO;
 import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.interceptors.Interceptor;
 import ro.msg.edu.jbugs.managers.interfaces.BugManagerRemote;
+import ro.msg.edu.jbugs.mappers.AttachmentDTOEntityMapper;
 import ro.msg.edu.jbugs.mappers.BugDTOEntityMapper;
 import ro.msg.edu.jbugs.mappers.UserDTOEntityMapper;
 import ro.msg.edu.jbugs.util.PermissionChecker;
@@ -34,6 +39,9 @@ public class BugManager implements BugManagerRemote {
 
     @EJB
     private UserDao userDao;
+
+    @EJB
+    private AttachmentDao attachmentDao;
 
     @EJB
     PermissionChecker permissionChecker;
@@ -93,27 +101,68 @@ public class BugManager implements BugManagerRemote {
         return false;
     }
 
-    public BugDTO insertBug(BugDTO bugDTO) throws BusinessException {
-        if (bugDao.findBug(bugDTO.getId()) == null) {
-            Bug bugToBeInserted = BugDTOEntityMapper.getBugFromDto(bugDTO);
+    public BugAttachmentWrapperDTO insertBug(BugAttachmentWrapperDTO bugAttachmentWrapper) throws BusinessException {
+        if (bugAttachmentWrapper.getBugDTO() == null) {
+            throw new BusinessException("msg-009", "Empty entity received.");
+        }
 
-            //if Users are already in db
-            if (bugToBeInserted.getAssignedId() != null) {
-                User assignedUser = userDao.findUser(bugToBeInserted.getAssignedId().getId());
-                bugToBeInserted.setAssignedId(assignedUser);
+        Bug bugToBePersisted = BugDTOEntityMapper.getBugFromDto(bugAttachmentWrapper.getBugDTO());
+
+        if (bugToBePersisted.getAssignedId() != null) {
+            User assignedUser = userDao.findUser(bugToBePersisted.getAssignedId().getId());
+            if (assignedUser != null) {
+                bugToBePersisted.setAssignedId(assignedUser);
+            } else {
+                throw new BusinessException("msg-009", "Assigned user does not exist.");
             }
-            if (bugToBeInserted.getCreatedId() != null) {
-                User createdByUser = userDao.findUser(bugToBeInserted.getCreatedId().getId());
-                bugToBeInserted.setCreatedId(createdByUser);
-            }
-
-            bugDao.insertBug(bugToBeInserted);
-
-            return bugDTO;
         } else {
-            throw new BusinessException("msg-001", "The given user is already in the database.");
+            bugToBePersisted.setAssignedId(null);
+        }
+
+        if (bugToBePersisted.getCreatedId() != null) {
+            User createdUser = userDao.findUser(bugToBePersisted.getCreatedId().getId());
+            if (createdUser != null) {
+                bugToBePersisted.setCreatedId(createdUser);
+            } else {
+                throw new BusinessException("msg-009", "The user who created the bug does not exist.");
+            }
+        } else {
+            throw new BusinessException("msg-009", "The user who created the bug must be assigned");
+        }
+
+        Bug persistedBug = bugDao.insertBug(bugToBePersisted);
+        if (persistedBug.getId() == null) {
+            throw new BusinessException("msg-009", "Created bug could not be persisted");
+        }
+
+        if (bugAttachmentWrapper.getAttachmentDTO().getAttContent() != null && bugAttachmentWrapper.getAttachmentDTO().getAttContent().length != 0) {
+            AttachmentDTO persistedAttachmentDTO = insertAttachment(bugAttachmentWrapper.getAttachmentDTO(), persistedBug);
+            return new BugAttachmentWrapperDTO(
+                    BugDTOEntityMapper.getDtoFromBug(persistedBug),
+                    persistedAttachmentDTO
+            );
+        } else {
+            return new BugAttachmentWrapperDTO(
+                    BugDTOEntityMapper.getDtoFromBug(persistedBug),
+                    null
+            );
         }
     }
+
+
+    public AttachmentDTO insertAttachment(AttachmentDTO attachmentDTO, Bug assignedBug) throws BusinessException {
+        attachmentDTO.setBug(BugDTOEntityMapper.getDtoFromBug(assignedBug));
+        Attachment attachmentToBePersisted = AttachmentDTOEntityMapper.getAttachmentFromDto(attachmentDTO);
+        //attachmentToBePersisted.setBug(assignedBug);
+
+        Attachment persistedAttachment = attachmentDao.insertAttachment(attachmentToBePersisted);
+        if (persistedAttachment.getId() == null) {
+            throw new BusinessException("msg-009", "CCreated attachment could not be persisted");
+        } else {
+            return AttachmentDTOEntityMapper.getDtoFromAttachment(persistedAttachment);
+        }
+    }
+
 
     public BugDTO findABug(Integer id) {
         Bug bugToBeFound = bugDao.findBug(id);
