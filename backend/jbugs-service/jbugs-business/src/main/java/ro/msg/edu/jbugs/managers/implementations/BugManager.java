@@ -1,10 +1,8 @@
 package ro.msg.edu.jbugs.managers.implementations;
 
 import dao.BugDao;
-import dao.NotificationDao;
 import dao.UserDao;
 import entity.Bug;
-import entity.Notification;
 import entity.User;
 import entity.enums.NotificationType;
 import entity.enums.Status;
@@ -21,8 +19,6 @@ import ro.msg.edu.jbugs.util.PermissionChecker;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -304,31 +300,4 @@ public class BugManager implements BugManagerRemote {
             throw new BusinessException("msg-001", "The user has unclosed bugs.");
         }
     }
-
-//    public void insertBug(BugDTO bugDTO){
-//        Bug bug = BugDTOEntityMapper.getBugFromDto(bugDTO);
-//        bugDao.insertBug(bug);
-//    }
-//
-//    public List<BugDTO> findAllBugs(){
-//        List<Bug> bugs = bugDao.findAllBugs();
-//        return bugs.stream().map(BugDTOEntityMapper :: getDtoFromBug).collect(Collectors.toList());
-//    }
-//
-//    public BugDTO findBug (Integer id){
-//        Bug bug = bugDao.findBug(id);
-//        BugDTO bugDTO = BugDTOEntityMapper.getDtoFromBug(bug);
-//        return bugDTO;
-//    }
-//
-//    public List<BugDTO> findAllBugs(User managers){
-//        List<Bug> bugs = bugDao.findAllCreatedByUser(managers);
-//
-//        return bugs.stream().map(BugDTOEntityMapper :: getDtoFromBug).collect(Collectors.toList());
-//    }
-//
-//    public Integer countBugs(User managers){
-//        Integer count = bugDao.countCreatedBugs(managers);
-//        return count;
-//    }
 }
