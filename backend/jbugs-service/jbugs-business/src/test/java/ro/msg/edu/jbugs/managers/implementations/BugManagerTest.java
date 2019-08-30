@@ -62,7 +62,7 @@ public class BugManagerTest {
     }
 
     @Test
-    public void findABug() {
+    public void findABug() throws BusinessException{
         Bug bug = createBug();
         when(bugDao.findBug(bug.getId())).thenReturn(bug);
 

@@ -115,8 +115,10 @@ public class BugManager implements BugManagerRemote {
         }
     }
 
-    public BugDTO findABug(Integer id) {
+    public BugDTO findABug(Integer id) throws BusinessException{
         Bug bugToBeFound = bugDao.findBug(id);
+        if(bugToBeFound == null)
+            throw new BusinessException("msg_010", "Bug not found exception");
         BugDTO bugDTO = BugDTOEntityMapper.getDtoFromBug(bugToBeFound);
         return bugDTO;
     }

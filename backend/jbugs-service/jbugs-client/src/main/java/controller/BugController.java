@@ -29,6 +29,24 @@ public class BugController {
     RightsUtils rightsUtils;
 
     @GET
+    @Path("{bugId}")
+    public Response getBugById(@CookieParam("username") String username,
+                               @PathParam("bugId") Integer bugId) {
+        Response response = rightsUtils.checkUserRights(username, "BUG_MANAGEMENT");
+        if(response != null)
+            return response;
+
+        BugDTO result;
+        try {
+            result = bugManagerRemote.findABug(bugId);
+        }
+        catch(BusinessException e){
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+        return Response.ok(result).build();
+    }
+
+    @GET
     public Response getAllBugs(@CookieParam("username") String username) {
         Response response = rightsUtils.checkUserRights(username, "BUG_MANAGEMENT");
         if(response != null)
