@@ -2,7 +2,6 @@ package entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Blob;
 
 /**
  * Document me.
@@ -17,10 +16,11 @@ public class Attachment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Lob
     @Column(name="att_content")
-    private Blob attContent;
+    private byte[] attContent;
 
-    @ManyToOne(cascade= CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="bug_id", referencedColumnName = "ID")
     private Bug bug;
 
@@ -32,11 +32,12 @@ public class Attachment implements Serializable {
         return bug;
     }
 
-    public Blob getAttContent() {
+
+    public byte[] getAttContent() {
         return attContent;
     }
 
-    public void setAttContent(Blob attContent) {
+    public void setAttContent(byte[] attContent) {
         this.attContent = attContent;
     }
 

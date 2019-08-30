@@ -1,7 +1,6 @@
 package ro.msg.edu.jbugs.dto;
 
 import java.io.Serializable;
-import java.sql.Blob;
 
 /**
  * Document me.
@@ -11,9 +10,11 @@ import java.sql.Blob;
  */
 public class AttachmentDTO implements Serializable {
     private Integer id;
-
-    private Blob attContent;
+    private byte[] attContent;
     private BugDTO bug;
+
+    public AttachmentDTO() {
+    }
 
     public Integer getId() {
         return id;
@@ -21,14 +22,6 @@ public class AttachmentDTO implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Blob getAttContent() {
-        return attContent;
-    }
-
-    public void setAttContent(Blob attContent) {
-        this.attContent = attContent;
     }
 
     public BugDTO getBug() {
@@ -39,12 +32,20 @@ public class AttachmentDTO implements Serializable {
         this.bug = bug;
     }
 
+    public byte[] getAttContent() {
+        return attContent;
+    }
+
+    public void setAttContent(byte[] attContent) {
+        this.attContent = attContent;
+    }
+
     @Override
     public String toString() {
         return "AttachmentDTO{" +
                 "id=" + id +
                 ", attContent='" + attContent + '\'' +
-                ", bug=" + bug +
+//                ", bug=" + bug +
                 '}';
     }
 }

@@ -1,17 +1,24 @@
 package ro.msg.edu.jbugs.managers.implementations;
 
+import dao.AttachmentDao;
 import dao.BugDao;
 import dao.UserDao;
+import entity.Attachment;
 import entity.Bug;
 import entity.User;
+import entity.enums.NotificationType;
 import entity.enums.Status;
 import exceptions.BusinessException;
+import ro.msg.edu.jbugs.dto.AttachmentDTO;
+import ro.msg.edu.jbugs.dto.BugAttachmentWrapperDTO;
 import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.interceptors.Interceptor;
 import ro.msg.edu.jbugs.managers.interfaces.BugManagerRemote;
+import ro.msg.edu.jbugs.mappers.AttachmentDTOEntityMapper;
 import ro.msg.edu.jbugs.mappers.BugDTOEntityMapper;
 import ro.msg.edu.jbugs.mappers.UserDTOEntityMapper;
+import ro.msg.edu.jbugs.util.NotificationUtils;
 import ro.msg.edu.jbugs.util.PermissionChecker;
 
 import javax.ejb.EJB;
@@ -36,7 +43,13 @@ public class BugManager implements BugManagerRemote {
     private UserDao userDao;
 
     @EJB
+    private AttachmentDao attachmentDao;
+
+    @EJB
     PermissionChecker permissionChecker;
+
+    @EJB
+    private NotificationUtils notificationUtils;
 
     private Map<Status, List<Status>> statusTransitions;
 
@@ -93,27 +106,68 @@ public class BugManager implements BugManagerRemote {
         return false;
     }
 
-    public BugDTO insertBug(BugDTO bugDTO) throws BusinessException {
-        if (bugDao.findBug(bugDTO.getId()) == null) {
-            Bug bugToBeInserted = BugDTOEntityMapper.getBugFromDto(bugDTO);
+    public BugAttachmentWrapperDTO insertBug(BugAttachmentWrapperDTO bugAttachmentWrapper) throws BusinessException {
+        if (bugAttachmentWrapper.getBugDTO() == null) {
+            throw new BusinessException("msg-009", "Empty entity received.");
+        }
 
-            //if Users are already in db
-            if (bugToBeInserted.getAssignedId() != null) {
-                User assignedUser = userDao.findUser(bugToBeInserted.getAssignedId().getId());
-                bugToBeInserted.setAssignedId(assignedUser);
+        Bug bugToBePersisted = BugDTOEntityMapper.getBugFromDto(bugAttachmentWrapper.getBugDTO());
+
+        if (bugToBePersisted.getAssignedId() != null) {
+            User assignedUser = userDao.findUser(bugToBePersisted.getAssignedId().getId());
+            if (assignedUser != null) {
+                bugToBePersisted.setAssignedId(assignedUser);
+            } else {
+                throw new BusinessException("msg-009", "Assigned user does not exist.");
             }
-            if (bugToBeInserted.getCreatedId() != null) {
-                User createdByUser = userDao.findUser(bugToBeInserted.getCreatedId().getId());
-                bugToBeInserted.setCreatedId(createdByUser);
-            }
-
-            bugDao.insertBug(bugToBeInserted);
-
-            return bugDTO;
         } else {
-            throw new BusinessException("msg-001", "The given user is already in the database.");
+            bugToBePersisted.setAssignedId(null);
+        }
+
+        if (bugToBePersisted.getCreatedId() != null) {
+            User createdUser = userDao.findUser(bugToBePersisted.getCreatedId().getId());
+            if (createdUser != null) {
+                bugToBePersisted.setCreatedId(createdUser);
+            } else {
+                throw new BusinessException("msg-009", "The user who created the bug does not exist.");
+            }
+        } else {
+            throw new BusinessException("msg-009", "The user who created the bug must be assigned");
+        }
+
+        Bug persistedBug = bugDao.insertBug(bugToBePersisted);
+        if (persistedBug.getId() == null) {
+            throw new BusinessException("msg-009", "Created bug could not be persisted");
+        }
+
+        if (bugAttachmentWrapper.getAttachmentDTO().getAttContent() != null && bugAttachmentWrapper.getAttachmentDTO().getAttContent().length != 0) {
+            AttachmentDTO persistedAttachmentDTO = insertAttachment(bugAttachmentWrapper.getAttachmentDTO(), persistedBug);
+            return new BugAttachmentWrapperDTO(
+                    BugDTOEntityMapper.getDtoFromBug(persistedBug),
+                    persistedAttachmentDTO
+            );
+        } else {
+            return new BugAttachmentWrapperDTO(
+                    BugDTOEntityMapper.getDtoFromBug(persistedBug),
+                    null
+            );
         }
     }
+
+
+    public AttachmentDTO insertAttachment(AttachmentDTO attachmentDTO, Bug assignedBug) throws BusinessException {
+        attachmentDTO.setBug(BugDTOEntityMapper.getDtoFromBug(assignedBug));
+        Attachment attachmentToBePersisted = AttachmentDTOEntityMapper.getAttachmentFromDto(attachmentDTO);
+        //attachmentToBePersisted.setBug(assignedBug);
+
+        Attachment persistedAttachment = attachmentDao.insertAttachment(attachmentToBePersisted);
+        if (persistedAttachment.getId() == null) {
+            throw new BusinessException("msg-009", "CCreated attachment could not be persisted");
+        } else {
+            return AttachmentDTOEntityMapper.getDtoFromAttachment(persistedAttachment);
+        }
+    }
+
 
     public BugDTO findABug(Integer id) throws BusinessException{
         Bug bugToBeFound = bugDao.findBug(id);
@@ -154,25 +208,35 @@ public class BugManager implements BugManagerRemote {
             searchedBug.setSeverity(bugDTO.getSeverity());
             searchedBug.setTargetDate(bugDTO.getTargetDate());
 
+            //change status
             try {
                 verifyCanSetStatus(bugDTO, searchedBug, username);
                 searchedBug.setStatus(bugDTO.getStatus());
+                if (bugDTO.getStatus() == Status.CLOSED) {
+                    sendNotification(bugDTO, NotificationType.BUG_CLOSED, "Your bug has just been closed.", "BUG_MANAGEMENT");
+                } else {
+                    sendNotification(bugDTO, NotificationType.BUG_STATUS_UPDATED, "Your bug's status has just been updated.", "BUG_CLOSED");
+
+                }
             } catch (BusinessException e) {
                 throw new BusinessException("msg-001", e.getMessage());
             }
 
+            //chenge users
             if (bugDTO.getAssignedId() == null) {
                 searchedBug.setAssignedId(null);
             } else if (searchedBug.getAssignedId() == null) {
                 User assignedToUser = userDao.findUser(bugDTO.getAssignedId().getId());
                 searchedBug.setAssignedId(assignedToUser);
             } else if (bugDTO.getAssignedId().getId() != searchedBug.getAssignedId().getId()) {
-                searchedBug.setAssignedId(setAssignedId(bugDTO, searchedBug));
+                searchedBug.setAssignedId(getUserForAssignedId(bugDTO, searchedBug));
             }
 
             if (bugDTO.getCreatedId().getId() != searchedBug.getCreatedId().getId()) {
-                searchedBug.setCreatedId(setCreatedId(bugDTO, searchedBug));
+                searchedBug.setCreatedId(getUserForCreatedId(bugDTO, searchedBug));
             }
+
+            sendNotification(bugDTO, NotificationType.BUG_UPDATED, "Your bug was just updated.", "BUG_MANAGEMENT");
 
             return bugDTO;
         } else {
@@ -180,6 +244,54 @@ public class BugManager implements BugManagerRemote {
         }
     }
 
+    /**
+     * Method for sending UPDATE_BUG notification to assignedTo and createdBy Users of the bug.
+     * It checks if the two users are the same.
+     *
+     * @param bugDTO
+     */
+    public void sendNotification(BugDTO bugDTO, NotificationType type, String message, String permissionType) throws BusinessException {
+        //bug has also assignedBy User
+        if (bugDTO.getAssignedId() != null && permissionChecker.checkPermission(bugDTO.getAssignedId().getUsername(), permissionType)) {
+            //same user => send only one notif
+            if (bugDTO.getAssignedId().getId() == bugDTO.getCreatedId().getId()) {
+                User user = userDao.findUser(bugDTO.getAssignedId().getId());
+                user = UserDTOEntityMapper.getSearchedUserFromUserDto(bugDTO.getAssignedId(), user);
+                notificationUtils.sendNotification(user, type, message);
+            }
+            //two different users
+            else {
+                //send notif for assigned to user
+                User assignedToUser = userDao.findUser(bugDTO.getAssignedId().getId());
+                assignedToUser = UserDTOEntityMapper.getSearchedUserFromUserDto(bugDTO.getAssignedId(), assignedToUser);
+                notificationUtils.sendNotification(assignedToUser, type, message);
+
+                //check the permission and send notifs
+                if (permissionChecker.checkPermission(bugDTO.getCreatedId().getUsername(), permissionType)) {
+                    User createdByUser = userDao.findUser(bugDTO.getCreatedId().getId());
+                    createdByUser = UserDTOEntityMapper.getSearchedUserFromUserDto(bugDTO.getCreatedId(), createdByUser);
+                    notificationUtils.sendNotification(createdByUser, type, message);
+                }
+            }
+        }
+        //bug has only user for createdBy
+        else if (permissionChecker.checkPermission(bugDTO.getCreatedId().getUsername(), "BUG_MANAGEMENT")) {
+            User createdByUser = userDao.findUser(bugDTO.getCreatedId().getId());
+            createdByUser = UserDTOEntityMapper.getSearchedUserFromUserDto(bugDTO.getCreatedId(), createdByUser);
+            notificationUtils.sendNotification(createdByUser, type, message);
+        }
+    }
+
+    /**
+     * Method that checks: if there is a transition between the old state and the new state of the bug
+     * if the user has necessary rights to close a bu that is in FIXED state
+     *
+     * @param bugDTO
+     * @param searchedBug
+     * @param username
+     * @return
+     * @throws BusinessException
+     */
     public boolean verifyCanSetStatus(BugDTO bugDTO, Bug searchedBug, String username) throws BusinessException {
         if (bugDTO.getStatus() == Status.CLOSED) {
             if (searchedBug.getStatus() == Status.FIXED) {
@@ -206,7 +318,7 @@ public class BugManager implements BugManagerRemote {
 
     }
 
-    public User setAssignedId(BugDTO bugDTO, Bug searchedBug) throws BusinessException {
+    public User getUserForAssignedId(BugDTO bugDTO, Bug searchedBug) throws BusinessException {
         //if user is assigned to bug
         if (searchedBug.getAssignedId() != null) {
             //take user from db => managed state
@@ -218,7 +330,7 @@ public class BugManager implements BugManagerRemote {
         }
     }
 
-    public User setCreatedId(BugDTO bugDTO, Bug searchedBug) throws BusinessException {
+    public User getUserForCreatedId(BugDTO bugDTO, Bug searchedBug) throws BusinessException {
         if (searchedBug.getCreatedId() != null) {
             User createdUser = userDao.findUser(bugDTO.getCreatedId().getId());
             return UserDTOEntityMapper.getSearchedUserFromUserDto(bugDTO.getCreatedId(), createdUser);
@@ -227,6 +339,12 @@ public class BugManager implements BugManagerRemote {
         }
     }
 
+    /**
+     * Method that checks if a user has unclosed bugs.
+     * @param userDto
+     * @return
+     * @throws BusinessException
+     */
     public boolean canDeactivateUser(UserDTO userDto) throws BusinessException {
         if (bugDao.getClosedBugsByAssignedId(UserDTOEntityMapper.getUserFromUserDto(userDto)) == 0) {
             return true;
