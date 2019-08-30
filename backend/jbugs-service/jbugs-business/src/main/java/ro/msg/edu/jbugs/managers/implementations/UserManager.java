@@ -152,9 +152,7 @@ public class UserManager implements UserManagerRemote {
                 .hashString(password, StandardCharsets.UTF_8)
                 .toString();
 
-        User user;
-
-        user = userDao.findUserByUsername(username);
+        User user = userDao.findUserByUsername(username);
         if (user == null) {
             throw new BusinessException("msg_005","User not found !");
         }
