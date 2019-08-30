@@ -62,7 +62,7 @@ public class BugManagerTest {
     }
 
     @Test
-    public void findABug() {
+    public void findABug() throws BusinessException {
         Bug bug = createBug();
         when(bugDao.findBug(bug.getId())).thenReturn(bug);
 
@@ -105,6 +105,7 @@ public class BugManagerTest {
             Assert.assertEquals(newBug.getTitle(), returnedBug.getTitle());
         } catch (BusinessException e) {
         }
+
     }
 
     @Test(expected = BusinessException.class)
@@ -140,8 +141,8 @@ public class BugManagerTest {
         newBug.setStatus(Status.IN_PROGRESSS);
         BugDTO bugDto = BugDTOEntityMapper.getDtoFromBug(newBug);
 
-    bugManager.updateBug(bugDto, 1);
-    }**/
+    bugManager.updateBug(bugDto, "popm");
+    } **/
 
     @Test(expected = BusinessException.class)
     public void canDeactivateUserException() throws BusinessException {
@@ -204,5 +205,6 @@ public class BugManagerTest {
         Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.REJECTED));
         Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.INFO_NEEDED));
     }
+
 
 }

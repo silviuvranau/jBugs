@@ -16,8 +16,9 @@ import java.util.List;
  */
 @Remote
 public interface BugManagerRemote {
-    BugAttachmentWrapperDTO insertBug(BugAttachmentWrapperDTO bugAttachmentWrapperDTO) throws BusinessException;
-    BugDTO findABug(Integer id);
+    public BugAttachmentWrapperDTO insertBug(BugAttachmentWrapperDTO bugAttachmentWrapper) throws BusinessException;
+
+    BugDTO findABug(Integer id) throws BusinessException;
     List<BugDTO> findAllBugs();
     List<BugDTO> findBugsByCreatedId(UserDTO userDTO);
     List<BugDTO> findBugsByAssignedId(UserDTO userDTO);

@@ -162,7 +162,7 @@ public class UserManagerTest {
         when(userDao.insertUser(any(User.class))).thenReturn(user);
 
         NotificationUtils notificationUtils = mock(NotificationUtils.class);
-        doNothing().when(notificationUtils).sendNotification(isA(User.class), isA(NotificationType.class), eq("Welcome: " + user.getUsername()));
+        doNothing().when(notificationUtils).sendNotification("", isA(User.class), isA(NotificationType.class), eq("Welcome: " + user.getUsername()));
 
         UserDTO insertedUser = userManager.insertUser(userDTO);
 
