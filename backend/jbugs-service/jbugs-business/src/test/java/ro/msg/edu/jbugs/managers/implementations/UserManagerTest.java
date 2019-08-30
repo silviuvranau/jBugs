@@ -1,12 +1,11 @@
 package ro.msg.edu.jbugs.managers.implementations;
 
 import com.google.common.hash.Hashing;
-import dao.NotificationDao;
 import dao.RoleDao;
 import dao.UserDao;
-import entity.Notification;
 import entity.Role;
 import entity.User;
+import entity.enums.NotificationType;
 import exceptions.BusinessException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,15 +14,17 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.mappers.UserDTOEntityMapper;
+import ro.msg.edu.jbugs.util.NotificationUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.isA;
+import static org.mockito.Mockito.*;
 
 /**
  * Document me.
@@ -44,33 +45,45 @@ public class UserManagerTest {
     private RoleDao roleDao;
 
     @Mock
-    private NotificationDao notificationDao;
+    private NotificationUtils notificationUtils;
 
     public UserManagerTest() {
         this.userManager = new UserManager();
         this.userDao = new UserDao();
     }
 
-    @Test
-    public void generateUsername() throws Exception {
-        when(userDao.checkUsernameUnique(anyString())).thenReturn(true);
-        when(userDao.checkUsernameUnique("1")).thenReturn(true);
-        //when(userDao.checkUsernameUnique("pricos")).thenReturn(false);
+    private User createUser() {
 
-        assertTrue(userDao.checkUsernameUnique("1"));
+        User user = new User();
+        user.setId(1);
+        user.setFirstName("Gini");
+        user.setLastName("Wijnaldum");
+        user.setEmail("giniwijnaldum@msggroup.com");
+        user.setCounter(0);
+        user.setMobileNumber("+40754498876");
+        user.setUsername("wijnag");
 
-        //assertEquals("1", userManager.generateUsername("123", "456"));
-        assertEquals("pricos", userManager.generateUsername("Stefania", "Pricop"));
+        String hashedPassword = Hashing.sha256()
+                .hashString("test", StandardCharsets.UTF_8)
+                .toString();
+        user.setPassword(hashedPassword);
 
-        //verify(userDao, times(1)).checkUsernameUnique(anyString());
+        Role role = new Role();
+        role.setId(1);
+        role.setType("ADM");
+
+        return user;
     }
 
-    //@Test(expected = Exception.class)
     @Test
-    public void checkUsernameUnique() throws Exception {
-        //when(userDao.checkUsernameUnique("pricos")).thenReturn(true);
-        //assertEquals("pricos", userManager.generateUsername("Stefania", "Pricop"));
+    public void generateUsername() {
+        when(userDao.checkUsernameUnique("pricos")).thenReturn(true);
+        assertEquals("pricos", userManager.generateUsername("Stefania", "Pricop"));
+        assertNotEquals("pricost", userManager.generateUsername("Stefania", "Pricop"));
+    }
 
+    @Test
+    public void checkUsernameUnique() {
         when(userDao.checkUsernameUnique("baloz")).thenReturn(false);
         when(userDao.checkUsernameUnique("balozs")).thenReturn(false);
         when(userDao.checkUsernameUnique("balozso")).thenReturn(false);
@@ -82,118 +95,85 @@ public class UserManagerTest {
         assertEquals("balozsoltxx", userManager.generateUsername("Zsolt", "Balo"));
     }
 
-
+    //user not in database
      @Test(expected = BusinessException.class)
      public void login() throws BusinessException {
          User user = createUser();
-         when(userDao.findUserByUsernameAndPassword(user.getUsername(), user.getPassword())).thenReturn(null);
+         when(userDao.findUserByUsername(user.getUsername())).thenReturn(null);
          userManager.login(user.getUsername(), user.getPassword());
      }
 
+    //User deactivated
     @Test(expected = BusinessException.class)
     public void login2() throws BusinessException {
         User user = createUser();
-        user.setStatus(false);
+        user.setStatus(true);
+        when(userDao.findUserByUsername(user.getUsername())).thenReturn(user);
         when(userDao.findUserByUsernameAndPassword(user.getUsername(), user.getPassword())).thenReturn(user);
-        userManager.login("testt", "test");
-     }
-
-    private User createUser(){
-        User user = new User();
-        user.setId(1);
-        user.setFirstName("test");
-        user.setLastName("test");
-        user.setEmail("_");
-        user.setCounter(4);
-        user.setMobileNumber("1");
-        user.setUsername("testt");
-        user.setPassword("test");
-
-        return user;
+        userManager.login(user.getUsername(), user.getPassword());
     }
 
-    /**
-     @Test(expected = BusinessException.class)
-     public void loginV2() throws BusinessException {
-     when(userDao.findUserByUsername("testt")).thenReturn(null);
-     UserDTO user = userManager.login("testt", "test");
+    //wrong password
+    @Test(expected = BusinessException.class)
+    public void login3() throws BusinessException {
+        User user = createUser();
+        String hashedPassword = Hashing.sha256()
+                .hashString(user.getPassword(), StandardCharsets.UTF_8)
+                .toString();
+        when(userDao.findUserByUsername(user.getUsername())).thenReturn(user);
+        when(userDao.findUserByUsernameAndPassword(user.getUsername(), hashedPassword)).thenThrow(BusinessException.class);
+        userManager.login(user.getUsername(), user.getPassword());
+    }
 
-     assertNull(user);
-     }
+    //login with good login credentials
+    @Test
+    public void login4() throws BusinessException {
+        User user = createUser();
+        String hashedPassword = Hashing.sha256()
+                .hashString(user.getPassword(), StandardCharsets.UTF_8)
+                .toString();
+        when(userDao.findUserByUsername(user.getUsername())).thenReturn(user);
+        when(userDao.findUserByUsernameAndPassword(user.getUsername(), hashedPassword)).thenReturn(user);
+        UserDTO loggedUser = userManager.login(user.getUsername(), user.getPassword());
 
-     @Test public void loginThatReturnsNull() throws BusinessException{
-     User persistedUser = createUser();
-     when(userDao.findUserByUsername("testt")).thenReturn(persistedUser);
-     UserDTO userToLogin = userManager.login("testt", "wrong");
-
-     assertEquals((Integer)2, persistedUser.getCounter());
-     }
-
-     @Test public void loginThatHasRightPassword() throws BusinessException{
-     User persistedUser = createUser();
-     when(userDao.findUserByUsername("testt")).thenReturn(persistedUser);
-
-     UserDTO userToLogin = userManager.login("testt", "test");
-     assertEquals(persistedUser.getCounter(), userToLogin.getCounter());
-     assertEquals(persistedUser.isStatus(), userToLogin.getStatus());
-     }
-
-     @Test(expected = BusinessException.class)
-     public void loginThatExceedsCounter() throws BusinessException{
-     User persistedUser = createUser();
-
-     }**/
-
+        assertEquals(user.getFirstName(), loggedUser.getFirstName());
+        assertEquals(user.getLastName(), loggedUser.getLastName());
+        assertEquals(user.getUsername(), loggedUser.getUsername());
+        assertEquals(user.getCounter(), loggedUser.getCounter());
+        assertEquals(user.getEmail(), loggedUser.getEmail());
+        assertEquals(user.getMobileNumber(), loggedUser.getMobileNumber());
+        assertEquals(user.isStatus(), loggedUser.isStatus());
+    }
 
     @Test
     public void insertUser() {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setFirstName("Gini");
-        userDTO.setLastName("Wijnaldum");
-        userDTO.setEmail("giniwijnaldum@msggroup.com");
-        userDTO.setCounter(0);
-        userDTO.setMobileNumber("+40754498876");
+        User user = createUser();
+        UserDTO userDTO = UserDTOEntityMapper.getDtoFromUser(user);
         userDTO.setPassword("test");
-        List<Integer> roles = userDTO.getRoleIds();
-        roles.add(1);
-        userDTO.setRoleIds(roles);
+        userDTO.setUsername("");
 
-        User user = UserDTOEntityMapper.getUserFromUserDto(userDTO);
-
-//        when(userManager.generateUsername("Gini", "Wijnaldum")).thenReturn("wijnag");
-        when(userDao.checkUsernameUnique("wijnag")).thenReturn(true);
-
-        String hashedPassword = Hashing.sha256()
-                .hashString(userDTO.getPassword(), StandardCharsets.UTF_8)
-                .toString();
-
-        User returnedUser = UserDTOEntityMapper.getUserFromUserDto(userDTO);
-        returnedUser.setUsername("wijnag");
-        returnedUser.setId(1);
-        returnedUser.setPassword(hashedPassword);
         Role role = new Role();
         role.setId(1);
         role.setType("ADM");
 
-
+        when(userDao.checkUsernameUnique("wijnag")).thenReturn(true);
         when(roleDao.findRole(1)).thenReturn(role);
 
+        when(userDao.insertUser(any(User.class))).thenReturn(user);
 
-        when(userDao.insertUser(any(User.class))).thenReturn(returnedUser);
-        when(notificationDao.insertNotification(any(Notification.class)))
-                .thenReturn(new Notification());
+        NotificationUtils notificationUtils = mock(NotificationUtils.class);
+        doNothing().when(notificationUtils).sendNotification(isA(User.class), isA(NotificationType.class), eq("Welcome: " + user.getUsername()));
 
         UserDTO insertedUser = userManager.insertUser(userDTO);
-//        UserDTO insertedUser = new UserDTO();
 
         assertEquals(insertedUser.getFirstName(), "Gini");
         assertEquals(insertedUser.getLastName(), "Wijnaldum");
         assertEquals(insertedUser.getEmail(), "giniwijnaldum@msggroup.com");
         assertEquals(insertedUser.getCounter(), Integer.valueOf(0));
         assertEquals(userDTO.getMobileNumber(), "+40754498876");
-        assertEquals(insertedUser.getPassword(), hashedPassword);
+        assertEquals(insertedUser.getPassword(), user.getPassword());
         assertEquals(insertedUser.getUsername(), "wijnag");
-        assertEquals(insertedUser.getRoleIds().get(0), Integer.valueOf(1));
+        //assertEquals(insertedUser.getRoleIds().get(0), Integer.valueOf(1));
 
     }
 
