@@ -82,21 +82,21 @@ public class UserManagerTest {
         assertEquals("balozsoltxx", userManager.generateUsername("Zsolt", "Balo"));
     }
 
-    /**
+
      @Test(expected = BusinessException.class)
      public void login() throws BusinessException {
-     when(userDao.findUserByUsernameAndPassword("testt", "test")).thenThrow(BusinessException.class);
-     userManager.login("testt", "test");
+         User user = createUser();
+         when(userDao.findUserByUsernameAndPassword(user.getUsername(), user.getPassword())).thenReturn(null);
+         userManager.login(user.getUsername(), user.getPassword());
      }
 
-     @Test public void login2() throws BusinessException {
-     when(userDao.findUserByUsernameAndPassword("testt", "test")).thenReturn(createUser());
-     UserDTO userDTO = userManager.login("testt", "test");
-     assertEquals("testt", userDTO.getUsername());
-     assertEquals("test", userDTO.getFirstName());
-     assertEquals("test", userDTO.getLastName());
-
-     }**/
+    @Test(expected = BusinessException.class)
+    public void login2() throws BusinessException {
+        User user = createUser();
+        user.setStatus(false);
+        when(userDao.findUserByUsernameAndPassword(user.getUsername(), user.getPassword())).thenReturn(user);
+        userManager.login("testt", "test");
+     }
 
     private User createUser(){
         User user = new User();
