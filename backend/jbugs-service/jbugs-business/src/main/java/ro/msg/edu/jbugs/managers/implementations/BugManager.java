@@ -14,6 +14,7 @@ import ro.msg.edu.jbugs.dto.BugAttachmentWrapperDTO;
 import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.interceptors.Interceptor;
+import ro.msg.edu.jbugs.managers.interfaces.AttachmentManagerRemote;
 import ro.msg.edu.jbugs.managers.interfaces.BugManagerRemote;
 import ro.msg.edu.jbugs.mappers.AttachmentDTOEntityMapper;
 import ro.msg.edu.jbugs.mappers.BugDTOEntityMapper;
@@ -51,6 +52,9 @@ public class BugManager implements BugManagerRemote {
     @EJB
     private NotificationUtils notificationUtils;
 
+    @EJB
+    private AttachmentManagerRemote attachmentManager;
+
     private Map<Status, List<Status>> statusTransitions;
 
     public BugManager() {
@@ -78,6 +82,9 @@ public class BugManager implements BugManagerRemote {
      * @return true/false
      */
     public boolean statusIsReachable(Status statusOne, Status statusTwo) {
+        if(statusOne == statusTwo){
+            return true;
+        }
         List<Status> visited = new ArrayList<>();
         LinkedList<Status> queue = new LinkedList<>();
 
@@ -160,11 +167,11 @@ public class BugManager implements BugManagerRemote {
         Attachment attachmentToBePersisted = AttachmentDTOEntityMapper.getAttachmentFromDto(attachmentDTO);
         //attachmentToBePersisted.setBug(assignedBug);
 
-        Attachment persistedAttachment = attachmentDao.insertAttachment(attachmentToBePersisted);
+        AttachmentDTO persistedAttachment = attachmentManager.insertAttachment(attachmentToBePersisted);
         if (persistedAttachment.getId() == null) {
             throw new BusinessException("msg-009", "CCreated attachment could not be persisted");
         } else {
-            return AttachmentDTOEntityMapper.getDtoFromAttachment(persistedAttachment);
+            return persistedAttachment;
         }
     }
 
@@ -196,24 +203,24 @@ public class BugManager implements BugManagerRemote {
         return bugDao.deleteBugs();
     }
 
-    public BugDTO updateBug(BugDTO bugDTO, String username) throws BusinessException {
-        Bug searchedBug = bugDao.findBug(bugDTO.getId());
+    public BugAttachmentWrapperDTO updateBug(BugAttachmentWrapperDTO bugAttWrapper, String username) throws BusinessException {
+        Bug searchedBug = bugDao.findBug(bugAttWrapper.getBugDTO().getId());
         if (searchedBug != null) {
-            searchedBug.setTitle(bugDTO.getTitle());
-            searchedBug.setDescription(bugDTO.getDescription());
-            searchedBug.setVersion(bugDTO.getVersion());
-            searchedBug.setFixedVersion(bugDTO.getFixedVersion());
-            searchedBug.setSeverity(bugDTO.getSeverity());
-            searchedBug.setTargetDate(bugDTO.getTargetDate());
+            searchedBug.setTitle(bugAttWrapper.getBugDTO().getTitle());
+            searchedBug.setDescription(bugAttWrapper.getBugDTO().getDescription());
+            searchedBug.setVersion(bugAttWrapper.getBugDTO().getVersion());
+            searchedBug.setFixedVersion(bugAttWrapper.getBugDTO().getFixedVersion());
+            searchedBug.setSeverity(bugAttWrapper.getBugDTO().getSeverity());
+            searchedBug.setTargetDate(bugAttWrapper.getBugDTO().getTargetDate());
 
             //change status
             try {
-                verifyCanSetStatus(bugDTO, searchedBug, username);
-                searchedBug.setStatus(bugDTO.getStatus());
-                if (bugDTO.getStatus() == Status.CLOSED) {
-                    sendNotification(bugDTO, NotificationType.BUG_CLOSED, "Your bug has just been closed.", "BUG_MANAGEMENT");
+                verifyCanSetStatus(bugAttWrapper.getBugDTO(), searchedBug, username);
+                searchedBug.setStatus(bugAttWrapper.getBugDTO().getStatus());
+                if (bugAttWrapper.getBugDTO().getStatus() == Status.CLOSED) {
+                    sendNotification(bugAttWrapper.getBugDTO(), NotificationType.BUG_CLOSED, "Your bug has just been closed.", "BUG_MANAGEMENT");
                 } else {
-                    sendNotification(bugDTO, NotificationType.BUG_STATUS_UPDATED, "Your bug's status has just been updated.", "BUG_CLOSED");
+                    sendNotification(bugAttWrapper.getBugDTO(), NotificationType.BUG_STATUS_UPDATED, "Your bug's status has just been updated.", "BUG_CLOSED");
 
                 }
             } catch (BusinessException e) {
@@ -221,22 +228,32 @@ public class BugManager implements BugManagerRemote {
             }
 
             //chenge users
-            if (bugDTO.getAssignedId() == null) {
+            if (bugAttWrapper.getBugDTO().getAssignedId() == null) {
                 searchedBug.setAssignedId(null);
             } else if (searchedBug.getAssignedId() == null) {
-                User assignedToUser = userDao.findUser(bugDTO.getAssignedId().getId());
+                User assignedToUser = userDao.findUser(bugAttWrapper.getBugDTO().getAssignedId().getId());
                 searchedBug.setAssignedId(assignedToUser);
-            } else if (bugDTO.getAssignedId().getId() != searchedBug.getAssignedId().getId()) {
-                searchedBug.setAssignedId(getUserForAssignedId(bugDTO, searchedBug));
+            } else if (bugAttWrapper.getBugDTO().getAssignedId().getId() != searchedBug.getAssignedId().getId()) {
+                searchedBug.setAssignedId(getUserForAssignedId(bugAttWrapper.getBugDTO(), searchedBug));
             }
 
-            if (bugDTO.getCreatedId().getId() != searchedBug.getCreatedId().getId()) {
-                searchedBug.setCreatedId(getUserForCreatedId(bugDTO, searchedBug));
+            if (bugAttWrapper.getBugDTO().getCreatedId().getId() != searchedBug.getCreatedId().getId()) {
+                searchedBug.setCreatedId(getUserForCreatedId(bugAttWrapper.getBugDTO(), searchedBug));
             }
 
-            sendNotification(bugDTO, NotificationType.BUG_UPDATED, "Your bug was just updated.", "BUG_MANAGEMENT");
+            //change attachment
+            if(bugAttWrapper.getAttachmentDTO().getAttContent() != null && bugAttWrapper.getAttachmentDTO().getAttContent().length != 0 ){
+                AttachmentDTO attachmentInDatabase = attachmentManager.findAttachmentOfBug(BugDTOEntityMapper.getBugFromDto(bugAttWrapper.getBugDTO()));
+                //if attachment of bug exists in database, we delete and insert the newly received attachment
+                if (attachmentInDatabase != null){
+                    attachmentManager.deleteAttachment(attachmentInDatabase.getId());
+                    AttachmentDTO persistedNewAttachment = insertAttachment(bugAttWrapper.getAttachmentDTO(), BugDTOEntityMapper.getBugFromDto(bugAttWrapper.getBugDTO()));
+                }
+            }
 
-            return bugDTO;
+            sendNotification(bugAttWrapper.getBugDTO(), NotificationType.BUG_UPDATED, "Your bug was just updated.", "BUG_MANAGEMENT");
+
+            return new BugAttachmentWrapperDTO(bugAttWrapper.getBugDTO(), bugAttWrapper.getAttachmentDTO());
         } else {
             throw new BusinessException("msg-001", "There is no such bug.");
         }

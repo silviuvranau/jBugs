@@ -25,5 +25,5 @@ public interface BugManagerRemote {
 
     boolean canDeactivateUser(UserDTO userDTO) throws BusinessException;
 
-    BugDTO updateBug(BugDTO bugDTO, String username) throws BusinessException;
+    BugAttachmentWrapperDTO updateBug(BugAttachmentWrapperDTO bugAttWrapper, String username) throws BusinessException;
 }

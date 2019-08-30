@@ -63,14 +63,14 @@ public class BugController {
     }
 
     @PUT
-    public Response modifyBug(@CookieParam("username") String username, @Valid BugDTO bugDTO) {
+    public Response modifyBug(@CookieParam("username") String username, BugAttachmentWrapperDTO bugAttWrapperDTO) {
         Response response = rightsUtils.checkUserRights(username, "BUG_MANAGEMENT");
         if(response != null)
             return response;
 
-        BugDTO result;
+        BugAttachmentWrapperDTO result;
         try {
-            result = bugManagerRemote.updateBug(bugDTO, username);
+            result = bugManagerRemote.updateBug(bugAttWrapperDTO, username);
         }
         catch (BusinessException e){
             return Response.status(Response.Status.BAD_REQUEST)
