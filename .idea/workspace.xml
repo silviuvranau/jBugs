@@ -6,14 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca89a1a1-3ee2-45f0-9768-40c2af9d9ac1" name="Default Changelist" comment="Changed BugManager">
-      <change afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/BugAttachmentWrapperDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/dao/AttachmentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/AttachmentDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/AttachmentDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/BugAttachmentDTO.java" beforeDir="false" />
+    <list default="true" id="ca89a1a1-3ee2-45f0-9768-40c2af9d9ac1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/entity/Attachment.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/entity/Attachment.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/backend/jbugs-service/jbugs-ear/target/" />
     <ignored path="$PROJECT_DIR$/backend/jbugs-service/target/" />
@@ -51,7 +45,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/BugController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="279">
@@ -64,13 +58,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/CommentManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2091">
-              <caret line="146" column="14" selection-start-line="146" selection-start-column="14" selection-end-line="146" selection-end-column="14" />
+            <state relative-caret-position="136">
+              <caret line="250" column="24" lean-forward="true" selection-start-line="250" selection-start-column="24" selection-end-line="250" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/util/NotificationUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -225,7 +237,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -422,7 +434,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -671,6 +683,7 @@
       <workItem from="1566977613532" duration="6683000" />
       <workItem from="1567060304833" duration="2495000" />
       <workItem from="1567066361498" duration="21208000" />
+      <workItem from="1567149689840" duration="1002000" />
     </task>
     <task id="LOCAL-00001" summary="in table Bugs, created_id, assgned_id =&gt; ...username">
       <created>1566211520223</created>
@@ -896,7 +909,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567105251832</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Changed BugManager and NotificationUtils">
+      <created>1567149875276</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1567149875276</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -932,7 +952,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="144415000" />
+    <option name="totallyTimeSpent" value="145417000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -944,10 +964,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.93342775" visible="true" weight="0.17181209" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.93342775" visible="true" weight="0.20604026" />
       <window_info id="Image Layers" order="1" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -961,7 +980,7 @@
       <window_info anchor="bottom" id="Application Servers" order="0" sideWeight="0.49597314" weight="0.3286119" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" sideWeight="0.49731544" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.7684564" visible="true" weight="0.48866856" />
+      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.76778525" visible="true" weight="0.22096318" />
       <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.7308725" weight="0.45609066" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -971,7 +990,7 @@
       <window_info anchor="bottom" id="Floobits" order="10" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49731544" weight="0.3286119" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.26912752" side_tool="true" weight="0.5283286" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.23221476" side_tool="true" visible="true" weight="0.22096318" />
       <window_info anchor="bottom" id="Java Enterprise" order="14" />
       <window_info anchor="bottom" id="Messages" order="15" sideWeight="0.49731544" weight="0.3286119" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -1095,7 +1114,8 @@
     <MESSAGE value="Changed BugEntityMapper" />
     <MESSAGE value="Changed BugManager" />
     <MESSAGE value="Changed BugManager, Bug&amp;Attachment Entities and Dao's." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed BugManager, Bug&amp;Attachment Entities and Dao's." />
+    <MESSAGE value="Changed BugManager and NotificationUtils" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed BugManager and NotificationUtils" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1122,15 +1142,9 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java</url>
-          <line>104</line>
+          <line>100</line>
           <properties />
           <option name="timeStamp" value="65" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java</url>
-          <line>141</line>
-          <properties />
-          <option name="timeStamp" value="68" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/BugController.java</url>
@@ -1413,23 +1427,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/BugAttachmentWrapperDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="10" column="60" selection-start-line="10" selection-start-column="60" selection-end-line="10" selection-end-column="60" />
-          <folding>
-            <element signature="e#251#252#0" expanded="true" />
-            <element signature="e#280#281#0" expanded="true" />
-            <element signature="e#324#325#0" expanded="true" />
-            <element signature="e#360#361#0" expanded="true" />
-            <element signature="e#407#408#0" expanded="true" />
-            <element signature="e#443#444#0" expanded="true" />
-            <element signature="e#508#509#0" expanded="true" />
-            <element signature="e#558#559#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/interfaces/BugManagerRemote.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -1454,13 +1451,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/mappers/AttachmentDTOEntityMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -1580,16 +1570,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2091">
-          <caret line="146" column="14" selection-start-line="146" selection-start-column="14" selection-end-line="146" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/mappers/AttachmentDTOEntityMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -1613,6 +1593,30 @@
           <caret line="27" selection-start-line="27" selection-end-line="27" />
           <folding>
             <element signature="e#544#545#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/CommentManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/util/NotificationUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="250" column="24" lean-forward="true" selection-start-line="250" selection-start-column="24" selection-end-line="250" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
