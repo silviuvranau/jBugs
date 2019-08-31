@@ -107,11 +107,13 @@ public class UserManager implements UserManagerRemote {
         user.setEmail(userDTO.getEmail());
         user.setStatus(userDTO.getStatus());
 
-        String hashedPassword = Hashing.sha256()
-                .hashString(userDTO.getPassword(), StandardCharsets.UTF_8)
-                .toString();
+        if(userDTO.getPassword() != null) {
+            String hashedPassword = Hashing.sha256()
+                    .hashString(userDTO.getPassword(), StandardCharsets.UTF_8)
+                    .toString();
 
-        user.setPassword(hashedPassword);
+            user.setPassword(hashedPassword);
+        }
 
         Set<Role> roles = new HashSet<>();
         for (Integer roleId : userDTO.getRoleIds()) {
