@@ -51,6 +51,12 @@ public class AttachmentController {
         if(response != null)
             return response;
         attachmentManagerRemote.deleteAttachment(attachmentID);
-        return Response.ok().build();
+        try {
+            return Response.ok(attachmentManagerRemote.getAllAttachments()).build();
+        } catch (BusinessException e) {
+            return  Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity(e.getMessage())
+                    .build();
+        }
     }
 }
