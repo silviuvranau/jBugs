@@ -18,7 +18,9 @@ import ro.msg.edu.jbugs.util.NotificationUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -71,6 +73,11 @@ public class UserManagerTest {
         Role role = new Role();
         role.setId(1);
         role.setType("ADM");
+
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
+
+        user.setRoles(roles);
 
         return user;
     }
@@ -162,7 +169,7 @@ public class UserManagerTest {
         when(userDao.insertUser(any(User.class))).thenReturn(user);
 
         NotificationUtils notificationUtils = mock(NotificationUtils.class);
-        doNothing().when(notificationUtils).sendNotification("", isA(User.class), isA(NotificationType.class), eq("Welcome: " + user.getUsername()));
+        doNothing().when(notificationUtils).sendNotification(eq(""), isA(User.class), isA(NotificationType.class), eq("Welcome: " + user.getUsername()));
 
         UserDTO insertedUser = userManager.insertUser(userDTO);
 
@@ -173,7 +180,7 @@ public class UserManagerTest {
         assertEquals(userDTO.getMobileNumber(), "+40754498876");
         assertEquals(insertedUser.getPassword(), user.getPassword());
         assertEquals(insertedUser.getUsername(), "wijnag");
-        //assertEquals(insertedUser.getRoleIds().get(0), Integer.valueOf(1));
+        assertEquals(insertedUser.getRoleIds().get(0), Integer.valueOf(1));
 
     }
 
@@ -228,20 +235,27 @@ public class UserManagerTest {
     @Test
     public void modifyUser() throws BusinessException {
         User user = createUser();
-        User newUser = user;
-        user.setStatus(true);
+        UserDTO newUser = UserDTOEntityMapper.getDtoFromUser(user);
+        newUser.setStatus(true);
+        newUser.setPassword("test");
+
+        Role role = new Role();
+        role.setId(1);
+        role.setType("ADM");
 
         when(userDao.findUser(newUser.getId())).thenReturn(user);
+        when(roleDao.findRole(1)).thenReturn(role);
 
-        UserDTO userDTO = userManager.modifyUser(UserDTOEntityMapper.getDtoFromUser(newUser));
+        UserDTO userDTO = userManager.modifyUser(newUser);
 
         assertEquals(userDTO.getFirstName(), newUser.getFirstName());
         assertEquals(userDTO.getLastName(), newUser.getLastName());
         assertEquals(userDTO.getEmail(), newUser.getEmail());
         assertEquals(userDTO.getCounter(), newUser.getCounter());
         assertEquals(userDTO.getMobileNumber(), newUser.getMobileNumber());
-        assertEquals(userDTO.getPassword(), newUser.getPassword());
+        assertEquals(userDTO.getPassword(), user.getPassword());
         assertEquals(userDTO.getUsername(), newUser.getUsername());
+        assertEquals(userDTO.getStatus(), true);
     }
 
 }
