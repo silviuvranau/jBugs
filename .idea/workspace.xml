@@ -7,13 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca89a1a1-3ee2-45f0-9768-40c2af9d9ac1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/arquillianContainers.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/test/java/ro/msg/edu/jbugs/managers/implementations/CommentManagerTest.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/test/java/ro/msg/edu/jbugs/managers/implementations/NotificationManagerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/test/java/ro/msg/edu/jbugs/managers/implementations/PermissionManagerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/CommentManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/CommentManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/UserManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/UserManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/test/java/ro/msg/edu/jbugs/managers/implementations/UserManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/test/java/ro/msg/edu/jbugs/managers/implementations/UserManagerTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/backend/jbugs-service/jbugs-ear/target/" />
     <ignored path="$PROJECT_DIR$/backend/jbugs-service/target/" />
@@ -27,7 +26,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageViewManager">
-    <option name="myElementSize" value="48" />
+    <option name="myElementSize" value="44" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -81,7 +80,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/test/java/ro/msg/edu/jbugs/managers/implementations/PermissionManagerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
+            <state relative-caret-position="816">
               <caret line="63" column="22" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
             </state>
           </provider>
@@ -715,7 +714,7 @@
       <workItem from="1567078092713" duration="196000" />
       <workItem from="1567078379598" duration="137000" />
       <workItem from="1567166040993" duration="3643000" />
-      <workItem from="1567170225806" duration="6486000" />
+      <workItem from="1567170225806" duration="7518000" />
     </task>
     <task id="LOCAL-00001" summary="in table Bugs, created_id, assgned_id =&gt; ...username">
       <created>1566211520223</created>
@@ -920,19 +919,17 @@
       <option name="project" value="LOCAL" />
       <updated>1567166487158</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="new tests added">
+      <created>1567253008534</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1567253008534</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="NotificationManagerTest_findAllNotificationsByUserWithNoUserInDb - 2019.08.31 at 12h 52m 59s.xml">
-      <configuration name="NotificationManagerTest.findAllNotificationsByUserWithNoUserInDb" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="NotificationManagerTest_findAllNotificationsByUserWithNoUserInDb - 2019.08.31 at 12h 53m 06s.xml">
-      <configuration name="NotificationManagerTest.findAllNotificationsByUserWithNoUserInDb" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="NotificationManagerTest_findAllNotificationsByUserWithNoUserInDb - 2019.08.31 at 12h 53m 44s.xml">
-      <configuration name="NotificationManagerTest.findAllNotificationsByUserWithNoUserInDb" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="NotificationManagerTest_findAllNotificationsByUserWithNoUserInDb - 2019.08.31 at 12h 53m 55s.xml">
       <configuration name="NotificationManagerTest.findAllNotificationsByUserWithNoUserInDb" configurationId="JUnit" />
     </history-entry>
@@ -954,15 +951,23 @@
     <history-entry file="PermissionManagerTest_findAllPermissions - 2019.08.31 at 14h 55m 58s.xml">
       <configuration name="PermissionManagerTest.findAllPermissions" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="PermissionManagerTest_findAllPermissions - 2019.08.31 at 15h 00m 34s.xml">
+      <configuration name="PermissionManagerTest.findAllPermissions" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PermissionManagerTest_findAllPermissions - 2019.08.31 at 15h 00m 42s.xml">
+      <configuration name="PermissionManagerTest.findAllPermissions" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GlassFish_Embedded_3_1__All_in_jbugs-business - 2019.08.31 at 15h 00m 52s.xml">
+      <configuration name="GlassFish Embedded 3.1: All in jbugs-business" configurationId="ArquillianJUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="132307000" />
+    <option name="totallyTimeSpent" value="133339000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.93342775" visible="true" weight="0.1885906" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.93342775" visible="true" weight="0.2080537" />
       <window_info id="Image Layers" order="1" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -976,17 +981,17 @@
       <window_info anchor="bottom" id="Application Servers" order="0" sideWeight="0.65482575" weight="0.3281471" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" sideWeight="0.49731544" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.73355705" visible="true" weight="0.35835695" />
+      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.73355705" weight="0.35835695" />
       <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.72885907" weight="0.4631728" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49395972" weight="0.26628897" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" sideWeight="0.49328858" visible="true" weight="0.26628897" />
       <window_info anchor="bottom" id="Floobits" order="10" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.49731544" weight="0.3286119" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.26644295" side_tool="true" visible="true" weight="0.35835695" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.5067114" side_tool="true" visible="true" weight="0.26628897" />
       <window_info anchor="bottom" id="Java Enterprise" order="14" />
       <window_info anchor="bottom" id="Messages" order="15" sideWeight="0.49731544" weight="0.3281471" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -994,14 +999,14 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Theme Preview" order="4" />
-      <window_info anchor="right" id="Maven" order="5" sideWeight="0.49448124" visible="true" weight="0.19261745" />
+      <window_info anchor="right" id="Maven" order="5" sideWeight="0.49420848" visible="true" weight="0.19261745" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Database" order="8" weight="0.3295302" />
       <window_info anchor="right" id="JSF" order="9" />
       <window_info anchor="right" id="CDI" order="10" />
       <window_info anchor="right" id="Bean Validation" order="11" />
-      <window_info anchor="right" id="Coverage" order="12" sideWeight="0.50551873" side_tool="true" visible="true" weight="0.19261745" />
+      <window_info anchor="right" id="Coverage" order="12" sideWeight="0.5057915" side_tool="true" visible="true" weight="0.19261745" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1066,7 +1071,8 @@
     <MESSAGE value="UserPermissionCheckerController added" />
     <MESSAGE value="Rest get Notifications with given User" />
     <MESSAGE value="url for notifs" />
-    <option name="LAST_COMMIT_MESSAGE" value="url for notifs" />
+    <MESSAGE value="new tests added" />
+    <option name="LAST_COMMIT_MESSAGE" value="new tests added" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1105,7 +1111,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/test/java/ro/msg/edu/jbugs/managers/implementations/NotificationManagerTest.java</url>
-          <line>122</line>
+          <line>121</line>
           <properties />
           <option name="timeStamp" value="51" />
         </line-breakpoint>
@@ -1490,7 +1496,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/test/java/ro/msg/edu/jbugs/managers/implementations/PermissionManagerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
+        <state relative-caret-position="816">
           <caret line="63" column="22" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
         </state>
       </provider>

@@ -20,6 +20,7 @@ public class CommentManager implements CommentManagerRemote {
     @EJB
     private CommentDao commentDao;
 
-    public Integer deleteComments(){ return commentDao.deleteComments();}
-
+    public Integer deleteComments() {
+        return commentDao.deleteComments();
+    }
 }
