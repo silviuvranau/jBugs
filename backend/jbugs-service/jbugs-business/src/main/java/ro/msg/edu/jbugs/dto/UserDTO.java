@@ -17,11 +17,11 @@ public class UserDTO implements Serializable {
     private Integer id;
     private Integer counter;
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+    @Pattern(regexp = "^[a-zA-ZÖöÜüÄäĂăÀàÁáÂâßÎîŢţşş]+(([',. -][a-zA-ZÖöÜüÄäĂăÀàÁáÂâßÎîŢţşş])?[a-zA-ZÖöÜüÄäĂăÀàÁáÂâßÎîŢţşş]*)*$",
             message = "INVALID_FIRST_NAME_EXCEPTION")
     private String firstName;
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",
+    @Pattern(regexp = "^[a-zA-ZÖöÜüÄäĂăÀàÁáÂâßÎîŢţşş]+(([',. -][a-zA-ZÖöÜüÄäĂăÀàÁáÂâßÎîŢţşş])?[a-zA-ZÖöÜüÄäĂăÀàÁáÂâßÎîŢţşş]*)*$",
             message = "INVALID_LAST_NAME_EXCEPTION")
     private String lastName;
     @NotNull
