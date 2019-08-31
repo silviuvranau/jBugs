@@ -1,9 +1,9 @@
 package ro.msg.edu.jbugs.managers.implementations;
 
 import com.google.common.hash.Hashing;
-import dao.NotificationDao;
 import dao.RoleDao;
 import dao.UserDao;
+import dao.NotificationDao;
 import entity.Role;
 import entity.User;
 import entity.enums.NotificationType;
@@ -36,14 +36,15 @@ public class UserManager implements UserManagerRemote {
     private UserDao userDao;
 
     @EJB
-    private NotificationDao notificationDao;
+    private RoleDao roleDao;
 
     @EJB
-    private RoleDao roleDao;
+    private NotificationDao notificationDao;
 
     @EJB
     private NotificationUtils notificationUtils;
 
+    @Override
     public UserDTO insertUser(UserDTO userDTO) {
         String generatedUsername = generateUsername(userDTO.getFirstName(), userDTO.getLastName());
         userDTO.setUsername(generatedUsername);
@@ -76,18 +77,27 @@ public class UserManager implements UserManagerRemote {
         return UserDTOEntityMapper.getDtoFromUser(insertedUser);
     }
 
+    @Override
     public UserDTO findAUser(Integer id) throws BusinessException {
         User userToBeFound = userDao.findUser(id);
         UserDTO userDTO = UserDTOEntityMapper.getDtoFromUser(userToBeFound);
         return userDTO;
     }
 
+    @Override
     public List<UserDTO> findAllUsers() {
         List<User> users = userDao.findAll();
 
         return users.stream().map(UserDTOEntityMapper::getDtoFromUser).collect(Collectors.toList());
     }
 
+    /**
+     * Get how many bugs a User created.
+     *
+     * @param userDTO
+     * @return
+     */
+    @Override
     public Long findCreatedBugs(UserDTO userDTO) {
         User user = UserDTOEntityMapper.getUserFromUserDto(userDTO);
         Long numberOfCreatedBugs = userDao.getCreatedBugs(user);
@@ -121,10 +131,20 @@ public class UserManager implements UserManagerRemote {
         }
         user.setRoles(roles);
 
-
         return UserDTOEntityMapper.getDtoFromUser(user);
     }
 
+    /**
+     * Generate username for User:
+     * first 5 letters from lastName
+     * first letter from firstName:
+     * if exists => take next letters
+     * if letters run out => put x
+     *
+     * @param firstName
+     * @param lastName
+     * @return
+     */
     @Override
     public String generateUsername(String firstName, String lastName) {
         String firstPart;
@@ -148,6 +168,15 @@ public class UserManager implements UserManagerRemote {
         return username;
     }
 
+    /**
+     * Checks if user exista in database,
+     *        if login credentials are AND
+     *        if user is blocked or not
+     * @param username
+     * @param password
+     * @return
+     * @throws BusinessException
+     */
     public UserDTO login(String username, String password) throws BusinessException {
         String hashedPassword = Hashing.sha256()
                 .hashString(password, StandardCharsets.UTF_8)
