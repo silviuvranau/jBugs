@@ -62,7 +62,7 @@ public class UserManager implements UserManagerRemote {
 
         User insertedUser = userDao.insertUser(userToBeInserted);
 
-        notificationUtils.sendNotification(insertedUser, NotificationType.WELCOME_NEW_USER, "Welcome: " + insertedUser.getUsername());
+        notificationUtils.sendNotification(null,insertedUser, NotificationType.WELCOME_NEW_USER, "Welcome: " + insertedUser.getUsername());
 
         Set<Role> roles = insertedUser.getRoles();
 
