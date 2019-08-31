@@ -54,15 +54,16 @@ public class UserManager implements UserManagerRemote {
         userDTO.setPassword(hashedPassword);
         User userToBeInserted = UserDTOEntityMapper.getUserFromUserDto(userDTO);
 
+        //user is not blocked
         userToBeInserted.setCounter(0);
         userToBeInserted.setStatus(false);
 
         userToBeInserted.setEmail(userToBeInserted.getEmail().toLowerCase());
 
-
         User insertedUser = userDao.insertUser(userToBeInserted);
 
-        notificationUtils.sendNotification(insertedUser, NotificationType.WELCOME_NEW_USER, "Welcome: " + insertedUser.getUsername());
+        //send ntoification to the new user
+        notificationUtils.sendNotification("", insertedUser, NotificationType.WELCOME_NEW_USER, "Welcome: " + insertedUser.getUsername());
 
         Set<Role> roles = insertedUser.getRoles();
 
@@ -70,8 +71,8 @@ public class UserManager implements UserManagerRemote {
             Role role = roleDao.findRole(roleId);
             roles.add(role);
         }
-
         insertedUser.setRoles(roles);
+
         return UserDTOEntityMapper.getDtoFromUser(insertedUser);
     }
 
@@ -107,11 +108,13 @@ public class UserManager implements UserManagerRemote {
         user.setEmail(userDTO.getEmail());
         user.setStatus(userDTO.getStatus());
 
-        String hashedPassword = Hashing.sha256()
-                .hashString(userDTO.getPassword(), StandardCharsets.UTF_8)
-                .toString();
+        if (userDTO.getPassword() != null) {
+            String hashedPassword = Hashing.sha256()
+                    .hashString(userDTO.getPassword(), StandardCharsets.UTF_8)
+                    .toString();
 
-        user.setPassword(hashedPassword);
+            user.setPassword(hashedPassword);
+        }
 
         Set<Role> roles = new HashSet<>();
         for (Integer roleId : userDTO.getRoleIds()) {
@@ -152,24 +155,26 @@ public class UserManager implements UserManagerRemote {
                 .hashString(password, StandardCharsets.UTF_8)
                 .toString();
 
-        User user;
+        User user = userDao.findUserByUsername(username);
 
-        user = userDao.findUserByUsername(username);
         if (user == null) {
             throw new BusinessException("msg_005","User not found !");
         }
-        if (user.isStatus() == false) {
+
+        //checks if user is blocked
+        if (!user.isStatus()) {
             try {
                 user = userDao.findUserByUsernameAndPassword(username, hashedPassword);
                 user.setCounter(0);
             } catch (BusinessException e) {
                 user.setCounter(user.getCounter() + 1);
-                if (user.getCounter() > 4)
+                if (user.getCounter() > 4) {
+                    //block (deactivate) user
                     user.setStatus(true);
+                }
                 throw new BusinessException("msg_007", "Invalid credentials");
             }
         } else {
-            System.out.println("Account is blocked!");
             throw new BusinessException("msg_006", "Account is blocked !");
         }
 
