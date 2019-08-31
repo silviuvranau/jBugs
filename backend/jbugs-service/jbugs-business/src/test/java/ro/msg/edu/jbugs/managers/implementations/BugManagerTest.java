@@ -14,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.dto.UserDTO;
-import ro.msg.edu.jbugs.mappers.BugDTOEntityMapper;
 import ro.msg.edu.jbugs.mappers.UserDTOEntityMapper;
 
 import java.util.ArrayList;
@@ -62,7 +61,7 @@ public class BugManagerTest {
     }
 
     @Test
-    public void findABug() {
+    public void findABug() throws BusinessException {
         Bug bug = createBug();
         when(bugDao.findBug(bug.getId())).thenReturn(bug);
 
@@ -94,12 +93,12 @@ public class BugManagerTest {
 
     @Test
     public void updateBug() {
-//        Bug bug = createBug();
-//        Bug newBug = bug;
-//        newBug.setTitle("updatedTitle");
-//
-//        when(bugDao.findBug(bug.getId())).thenReturn(bug);
-//
+        Bug bug = createBug();
+        Bug newBug = bug;
+        newBug.setTitle("updatedTitle");
+
+        when(bugDao.findBug(bug.getId())).thenReturn(bug);
+
 //        try {
 //            BugDTO returnedBug = bugManager.updateBug(BugDTOEntityMapper.getDtoFromBug(newBug), "popm");
 //            Assert.assertEquals(newBug.getTitle(), returnedBug.getTitle());
@@ -116,7 +115,7 @@ public class BugManagerTest {
 
         when(bugDao.findBug(bug.getId())).thenReturn(null);
 
-//        bugManager.updateBug(BugDTOEntityMapper.getDtoFromBug(newBug), "popm");
+        //bugManager.updateBug(BugDTOEntityMapper.getDtoFromBug(newBug), "popm");
     }
 
     /**
@@ -124,7 +123,7 @@ public class BugManagerTest {
      * public void updateBugStatusUnreachableException () throws BusinessException{
      * Bug bug = createBug();
      * Bug newBug = bug;
-     * newBug.setStatus(Status.IN_PROGRESSS);
+     * newBug.setStatus(Status.IN_PROGRESS);
      * BugDTO bugDto = BugDTOEntityMapper.getDtoFromBug(newBug);
      * <p>
      * when(bugDao.findBug(bug.getId())).thenReturn(bug);
@@ -132,17 +131,17 @@ public class BugManagerTest {
      * <p>
      * bugManager.updateBug(newBug.getId(), BugDTOEntityMapper.getDtoFromBug(newBug));
      * }
-     **/
+
 
     @Test(expected = BusinessException.class)
     public void updateBugDifferentIdsException() throws BusinessException {
         Bug bug = createBug();
         Bug newBug = bug;
-        newBug.setStatus(Status.IN_PROGRESSS);
+        newBug.setStatus(Status.IN_PROGRESS);
         BugDTO bugDto = BugDTOEntityMapper.getDtoFromBug(newBug);
 
-//        bugManager.updateBug(bugDto, "popm");
-    }
+    bugManager.updateBug(bugDto, "popm");
+    } **/
 
     @Test(expected = BusinessException.class)
     public void canDeactivateUserException() throws BusinessException {
@@ -165,18 +164,6 @@ public class BugManagerTest {
         }
     }
 
-    @Test
-    public void findBugsByCreatedId() {
-    }
-
-    @Test
-    public void findBugsByAssignedId() {
-    }
-
-    @Test
-    public void deleteExceedingBugs() {
-    }
-
     private Bug createBug() {
         Bug bug = new Bug();
         User user = new User();
@@ -197,23 +184,23 @@ public class BugManagerTest {
 
     @Test
     public void statusIsReachable() {
-        Assert.assertFalse(bugManager.statusIsReachable(Status.CLOSED, Status.IN_PROGRESSS));
-        Assert.assertFalse(bugManager.statusIsReachable(Status.REJECTED, Status.IN_PROGRESSS));
+        Assert.assertFalse(bugManager.statusIsReachable(Status.CLOSED, Status.IN_PROGRESS));
+        Assert.assertFalse(bugManager.statusIsReachable(Status.REJECTED, Status.IN_PROGRESS));
         Assert.assertFalse(bugManager.statusIsReachable(Status.CLOSED, Status.NEW));
-        Assert.assertTrue(bugManager.statusIsReachable(Status.IN_PROGRESSS, Status.NEW));
-        Assert.assertTrue(bugManager.statusIsReachable(Status.IN_PROGRESSS, Status.CLOSED));
-        Assert.assertTrue(bugManager.statusIsReachable(Status.IN_PROGRESSS, Status.REJECTED));
-        Assert.assertTrue(bugManager.statusIsReachable(Status.IN_PROGRESSS, Status.INFO_NEEDED));
-        Assert.assertTrue(bugManager.statusIsReachable(Status.IN_PROGRESSS, Status.FIXED));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.IN_PROGRESS, Status.NEW));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.IN_PROGRESS, Status.CLOSED));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.IN_PROGRESS, Status.REJECTED));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.IN_PROGRESS, Status.INFO_NEEDED));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.IN_PROGRESS, Status.FIXED));
         Assert.assertTrue(bugManager.statusIsReachable(Status.NEW, Status.FIXED));
         Assert.assertTrue(bugManager.statusIsReachable(Status.NEW, Status.CLOSED));
         Assert.assertTrue(bugManager.statusIsReachable(Status.NEW, Status.INFO_NEEDED));
-        Assert.assertTrue(bugManager.statusIsReachable(Status.NEW, Status.IN_PROGRESSS));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.NEW, Status.IN_PROGRESS));
         Assert.assertTrue(bugManager.statusIsReachable(Status.NEW, Status.REJECTED));
         Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.FIXED));
         Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.CLOSED));
         Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.NEW));
-        Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.IN_PROGRESSS));
+        Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.IN_PROGRESS));
         Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.REJECTED));
         Assert.assertTrue(bugManager.statusIsReachable(Status.INFO_NEEDED, Status.INFO_NEEDED));
     }
