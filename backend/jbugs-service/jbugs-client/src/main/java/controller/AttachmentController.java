@@ -7,11 +7,9 @@ import ro.msg.edu.jbugs.managers.interfaces.AttachmentManagerRemote;
 import ro.msg.edu.jbugs.managers.interfaces.BugManagerRemote;
 import utils.RightsUtils;
 
+import javax.decorator.Delegate;
 import javax.ejb.EJB;
-import javax.ws.rs.CookieParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
@@ -44,5 +42,15 @@ public class AttachmentController {
                     .entity(e.getMessage())
                     .build();
         }
+    }
+
+    @DELETE
+    @Path("{attId}")
+    public Response deleteAttachment(@CookieParam("username") String username, @PathParam("attId") Integer attachmentID){
+        Response response = rightsUtils.checkUserRights(username, "BUG_MANAGEMENT");
+        if(response != null)
+            return response;
+        attachmentManagerRemote.deleteAttachment(attachmentID);
+        return Response.ok().build();
     }
 }

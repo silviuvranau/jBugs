@@ -47,6 +47,11 @@ public class AttachmentDao {
         Query query = entityManager.createNamedQuery(Attachment.FIND_ATT_OF_BUG, Attachment.class);
         query.setParameter("bug", bug);
         List<Attachment> attachments = query.getResultList();
-        return attachments.get(0);
+        if(attachments.size() != 0){
+            return attachments.get(0);
+        }
+        else{
+            return null;
+        }
     }
 }

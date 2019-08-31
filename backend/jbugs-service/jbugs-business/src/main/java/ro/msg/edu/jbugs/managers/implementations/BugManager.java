@@ -249,6 +249,9 @@ public class BugManager implements BugManagerRemote {
                     attachmentManager.deleteAttachment(attachmentInDatabase.getId());
                     AttachmentDTO persistedNewAttachment = insertAttachment(bugAttWrapper.getAttachmentDTO(), BugDTOEntityMapper.getBugFromDto(bugAttWrapper.getBugDTO()));
                 }
+                else{
+                    AttachmentDTO persistedNewAttachment = insertAttachment(bugAttWrapper.getAttachmentDTO(), BugDTOEntityMapper.getBugFromDto(bugAttWrapper.getBugDTO()));
+                }
             }
 
             sendNotification(bugAttWrapper.getBugDTO(), NotificationType.BUG_UPDATED, "Your bug was just updated.", "BUG_MANAGEMENT");
