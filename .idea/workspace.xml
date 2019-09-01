@@ -8,7 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ca89a1a1-3ee2-45f0-9768-40c2af9d9ac1" name="Default Changelist" comment="Rest get Notifications with given User">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/RoleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/BugAttachmentWrapperDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/BugAttachmentWrapperDTO.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/backend/jbugs-service/jbugs-ear/target/" />
     <ignored path="$PROJECT_DIR$/backend/jbugs-service/target/" />
@@ -49,70 +49,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/BugController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-925">
-              <caret line="33" column="105" selection-start-line="33" selection-start-column="72" selection-end-line="33" selection-end-column="105" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/LoginController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="40" selection-start-line="40" selection-end-line="40" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/NotificationController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="461">
-              <caret line="40" column="1" selection-start-line="40" selection-start-column="1" selection-end-line="40" selection-end-column="1" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#637#638#0" expanded="true" />
-                <element signature="e#702#703#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/PermissionController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/dao/AttachmentDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="421">
-              <caret line="49" selection-start-line="49" selection-end-line="49" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/AttachmentController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+            <state relative-caret-position="94">
+              <caret line="106" selection-start-line="106" selection-end-line="106" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -121,9 +59,44 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/mappers/UserDTOEntityMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="67">
+              <caret line="31" column="24" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/AttachmentDTO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="27" selection-start-line="27" selection-end-line="27" />
+              <folding>
+                <element signature="e#485#486#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/BugAttachmentWrapperDTO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="12" selection-start-line="12" selection-end-line="12" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#508#509#0" expanded="true" />
+                <element signature="e#544#545#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/RoleController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
+            <state relative-caret-position="570">
               <caret line="49" column="66" selection-start-line="49" selection-start-column="66" selection-end-line="49" selection-end-column="66" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -133,34 +106,23 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/UserPermissionCheckerController.java">
+        <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/BugDTO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+            <state relative-caret-position="153">
+              <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#1098#1099#0" expanded="true" />
+                <element signature="e#1126#1127#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/UserController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-123">
-              <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/interfaces/RoleManagerRemote.java">
+        <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/UserDTO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
-              <caret line="19" column="9" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+              <caret line="30" column="12" lean-forward="true" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -207,7 +169,6 @@
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/test/java/BugDaoTest.java" />
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/test/java/dao/BugDaoTest.java" />
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/entity/User.java" />
-        <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/mappers/UserDTOEntityMapper.java" />
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/dao/UserDao.java" />
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/dao/BugDao.java" />
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/BugDTO.java" />
@@ -227,12 +188,10 @@
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/UserDTO.java" />
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/mappers/AttachementDTOEntityMapper.java" />
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/entity/Bug.java" />
-        <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/BugAttachmentWrapperDTO.java" />
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/AttachmentDTO.java" />
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/mappers/BugDTOEntityMapper.java" />
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/interceptors/Interceptor.java" />
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/interfaces/BugManagerRemote.java" />
-        <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/BugController.java" />
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/src/main/java/entity/Attachment.java" />
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/interfaces/AttachmentManagerRemote.java" />
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/AttachmentManager.java" />
@@ -243,6 +202,9 @@
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/managers/implementations/BugManager.java" />
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/AttachmentController.java" />
         <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/RoleController.java" />
+        <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/BugController.java" />
+        <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/BugAttachmentWrapperDTO.java" />
+        <option value="$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/mappers/UserDTOEntityMapper.java" />
       </list>
     </option>
   </component>
@@ -278,10 +240,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="806" />
-    <option name="y" value="242" />
-    <option name="width" value="1450" />
-    <option name="height" value="1040" />
+    <option name="x" value="213" />
+    <option name="y" value="198" />
+    <option name="width" value="1934" />
+    <option name="height" value="1078" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -338,39 +300,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="jbugs" type="462c0819:PsiDirectoryNode" />
-              <item name="interceptors" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-business" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs" type="462c0819:PsiDirectoryNode" />
-              <item name="managers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-business" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs" type="462c0819:PsiDirectoryNode" />
-              <item name="managers" type="462c0819:PsiDirectoryNode" />
-              <item name="implementations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-business" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs" type="462c0819:PsiDirectoryNode" />
-              <item name="managers" type="462c0819:PsiDirectoryNode" />
-              <item name="interfaces" type="462c0819:PsiDirectoryNode" />
+              <item name="dto" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
@@ -410,15 +340,6 @@
             <path>
               <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
               <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
               <item name="jbugs-persistence" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -441,15 +362,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
-              <item name="jbugs-persistence" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
@@ -459,6 +371,16 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jBugs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jbugs-service" type="462c0819:PsiDirectoryNode" />
+              <item name="jbugs-persistence" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="entity" type="462c0819:PsiDirectoryNode" />
+              <item name="enums" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -715,7 +637,7 @@
       <workItem from="1567066361498" duration="21208000" />
       <workItem from="1567149689840" duration="12002000" />
       <workItem from="1567176551960" duration="3114000" />
-      <workItem from="1567257677715" duration="8961000" />
+      <workItem from="1567257677715" duration="14945000" />
     </task>
     <task id="LOCAL-00001" summary="in table Bugs, created_id, assgned_id =&gt; ...username">
       <created>1566211520223</created>
@@ -998,7 +920,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="169307000" />
+    <option name="totallyTimeSpent" value="175291000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1010,7 +932,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.93342775" visible="true" weight="0.19261745" />
@@ -1027,7 +949,7 @@
       <window_info anchor="bottom" id="Application Servers" order="0" sideWeight="0.49597314" weight="0.3286119" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" sideWeight="0.49731544" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.76778525" visible="true" weight="0.49858356" />
+      <window_info active="true" anchor="bottom" id="Run" order="3" sideWeight="0.76778525" visible="true" weight="0.53257793" />
       <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.7308725" weight="0.39235127" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
@@ -1254,13 +1176,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-persistence/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="42" lean-forward="true" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1351,13 +1266,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/UserDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="129" column="50" selection-start-line="129" selection-start-column="50" selection-end-line="129" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/servlet/BugTestServlet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2159">
@@ -1372,48 +1280,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/BugDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-116">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding>
-            <element signature="e#1098#1099#0" expanded="true" />
-            <element signature="e#1126#1127#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/mappers/BugDTOEntityMapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/mappers/UserDTOEntityMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/AttachmentDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-          <folding>
-            <element signature="e#485#486#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/BugAttachmentWrapperDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-          <folding>
-            <element signature="e#544#545#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1598,30 +1468,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/AttachmentController.java">
+    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/PermissionController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/BugController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-925">
-          <caret line="33" column="105" selection-start-line="33" selection-start-column="72" selection-end-line="33" selection-end-column="105" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/LoginController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
+        <state relative-caret-position="323">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1640,10 +1490,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/PermissionController.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/javax/javaee-api/7.0/javaee-api-7.0.jar!/javax/validation/Valid.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        <state relative-caret-position="68">
+          <caret line="7" column="7" lean-forward="true" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/UserDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="30" column="12" lean-forward="true" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/AttachmentController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="25" column="21" lean-forward="true" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="52" column="77" lean-forward="true" selection-start-line="52" selection-start-column="77" selection-end-line="52" selection-end-column="77" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1660,23 +1547,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/UserController.java">
+    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/BugDTO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-123">
-          <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+        <state relative-caret-position="153">
+          <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1098#1099#0" expanded="true" />
+            <element signature="e#1126#1127#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/RoleController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
+        <state relative-caret-position="570">
           <caret line="49" column="66" selection-start-line="49" selection-start-column="66" selection-end-line="49" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/AttachmentDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
+          <folding>
+            <element signature="e#485#486#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/dto/BugAttachmentWrapperDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#508#509#0" expanded="true" />
+            <element signature="e#544#545#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-client/src/main/java/controller/BugController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="106" selection-start-line="106" selection-end-line="106" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/jbugs-service/jbugs-business/src/main/java/ro/msg/edu/jbugs/mappers/UserDTOEntityMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="67">
+          <caret line="31" column="24" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="24" />
         </state>
       </provider>
     </entry>
