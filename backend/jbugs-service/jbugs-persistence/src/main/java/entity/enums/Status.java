@@ -2,7 +2,7 @@ package entity.enums;
 
 public enum Status {
     NEW,
-    IN_PROGRESSS,
+    IN_PROGRESS,
     FIXED,
     CLOSED,
     REJECTED,

@@ -43,13 +43,11 @@ public class RoleController {
             roleManagerRemote.modifyRolePermission(rolePermissionDTO.getRoleDTO(), rolePermissionDTO.getPermissionDTO());
             return Response
                     .status(Response.Status.OK)
-                    .entity("You request was carried out successfully.")
                     .build();
         } catch (BusinessException e) {
             e.printStackTrace();
             return Response
                     .status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity("You request couldn't be carried out successfully.")
                     .build();
         }
     }
