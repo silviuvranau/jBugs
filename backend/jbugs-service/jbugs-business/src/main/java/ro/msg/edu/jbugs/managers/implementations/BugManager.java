@@ -143,7 +143,7 @@ public class BugManager implements BugManagerRemote {
         }
 
         Bug persistedBug = bugDao.insertBug(bugToBePersisted);
-        if (persistedBug.getId() == null) {
+        if (persistedBug == null) {
             throw new BusinessException("msg-009", "Created bug could not be persisted");
         }
 
