@@ -5,6 +5,7 @@ import dao.UserDao;
 import entity.Attachment;
 import entity.Bug;
 import entity.User;
+import entity.enums.NotificationType;
 import entity.enums.Severity;
 import entity.enums.Status;
 import exceptions.BusinessException;
@@ -14,19 +15,25 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import ro.msg.edu.jbugs.dto.AttachmentDTO;
 import ro.msg.edu.jbugs.dto.BugAttachmentWrapperDTO;
 import ro.msg.edu.jbugs.dto.BugDTO;
 import ro.msg.edu.jbugs.dto.UserDTO;
 import ro.msg.edu.jbugs.mappers.AttachmentDTOEntityMapper;
 import ro.msg.edu.jbugs.mappers.BugDTOEntityMapper;
 import ro.msg.edu.jbugs.mappers.UserDTOEntityMapper;
+import ro.msg.edu.jbugs.util.NotificationUtils;
+import ro.msg.edu.jbugs.util.PermissionChecker;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.isA;
+import static org.mockito.Mockito.*;
 
 /**
  * Document me.
@@ -45,6 +52,9 @@ public class BugManagerTest {
 
     @Mock
     private UserDao userDao;
+
+    @Mock
+    private PermissionChecker permissionChecker;
 
     public BugManagerTest() {
         this.bugDao = new BugDao();
@@ -107,63 +117,59 @@ public class BugManagerTest {
         bugManager.insertBug(bugAttachmentWrapperDTO);
     }
 
+
     @Test(expected = BusinessException.class)
-    public void insertBugWithCreatedIdNull() throws BusinessException {
+    public void insertBugCouldNotInsert() throws BusinessException {
         Bug bug = createBug();
         Attachment attachment = createAttachment();
         attachment.setBug(bug);
 
         BugAttachmentWrapperDTO bugAttachmentWrapperDTO = new BugAttachmentWrapperDTO();
         bugAttachmentWrapperDTO.setBugDTO(BugDTOEntityMapper.getDtoFromBug(bug));
-        bugAttachmentWrapperDTO.getBugDTO().setCreatedId(null);
         bugAttachmentWrapperDTO.setAttachmentDTO(AttachmentDTOEntityMapper.getDtoFromAttachment(attachment));
 
         when(userDao.findUser(anyInt())).thenReturn(bug.getAssignedId());
+        when(bugDao.insertBug(any(Bug.class))).thenReturn(null);
 
         bugManager.insertBug(bugAttachmentWrapperDTO);
     }
 
-//    @Test
-//    public void insertBug(){
-//        Bug bug = createBug();
-//        Attachment attachment = createAttachment();
-//        attachment.setBug(bug);
-//
-//        BugAttachmentWrapperDTO bugAttachmentWrapperDTO = new BugAttachmentWrapperDTO();
-//        bugAttachmentWrapperDTO.setBugDTO(BugDTOEntityMapper.getDtoFromBug(bug));
-//        bugAttachmentWrapperDTO.setAttachmentDTO(AttachmentDTOEntityMapper.getDtoFromAttachment(attachment));
-//
-//        when(bugDao.findBug(any(Integer.class))).thenReturn(bug);
-//        when(bugDao.insertBug(any(Bug.class))).thenReturn(bug);
-//
-//        BugDTO bugToInsert = BugDTOEntityMapper.getDtoFromBug(bug);
-//        BugDTO bugReturned = bugToInsert;
-//        try {
-//            bugReturned = bugManager.insertBug(bugToInsert);
-//        } catch (BusinessException e) { }
-//
-//        Assert.assertEquals(bugToInsert.getId(), bugReturned.getId());
-//        Assert.assertEquals(bugToInsert.getDescription(), bugReturned.getDescription());
-//        Assert.assertEquals(bugToInsert.getSeverity(), bugReturned.getSeverity());
-//        Assert.assertEquals(bugToInsert.getFixedVersion(), bugReturned.getFixedVersion());
-//    }
+    @Test
+    public void insertBug() throws BusinessException {
+        Bug bug = createBug();
+        Attachment attachment = createAttachment();
+        attachment.setBug(bug);
+        attachment.setAttContent(null);
+
+        BugAttachmentWrapperDTO bugAttachmentWrapperDTO = new BugAttachmentWrapperDTO();
+        bugAttachmentWrapperDTO.setBugDTO(BugDTOEntityMapper.getDtoFromBug(bug));
+        bugAttachmentWrapperDTO.setAttachmentDTO(AttachmentDTOEntityMapper.getDtoFromAttachment(attachment));
+
+        when(userDao.findUser(anyInt())).thenReturn(bug.getAssignedId());
+        when(bugDao.insertBug(any(Bug.class))).thenReturn(bug);
+
+        BugAttachmentWrapperDTO returned = bugManager.insertBug(bugAttachmentWrapperDTO);
+
+        assertEquals(returned.getAttachmentDTO(), null);
+        assertEquals(returned.getBugDTO().getId(), bugAttachmentWrapperDTO.getBugDTO().getId());
+    }
 
     @Test
-    public void findABug() throws BusinessException {
+    public void findABug() {
         Bug bug = createBug();
         when(bugDao.findBug(bug.getId())).thenReturn(bug);
 
         BugDTO searchedBugDto = bugManager.findABug(bug.getId());
 
-        Assert.assertEquals(bug.getTitle(), searchedBugDto.getTitle());
-        Assert.assertEquals(bug.getSeverity(), searchedBugDto.getSeverity());
-        Assert.assertEquals(bug.getAssignedId().getId(), searchedBugDto.getAssignedId().getId());
-        Assert.assertEquals(bug.getCreatedId().getId(), searchedBugDto.getCreatedId().getId());
-        Assert.assertEquals(bug.getDescription(), bug.getDescription());
-        Assert.assertEquals(bug.getFixedVersion(), searchedBugDto.getFixedVersion());
-        Assert.assertEquals(bug.getVersion(), searchedBugDto.getVersion());
-        Assert.assertEquals(bug.getStatus(), searchedBugDto.getStatus());
-        Assert.assertEquals(bug.getTargetDate(), searchedBugDto.getTargetDate());
+        assertEquals(bug.getTitle(), searchedBugDto.getTitle());
+        assertEquals(bug.getSeverity(), searchedBugDto.getSeverity());
+        assertEquals(bug.getAssignedId().getId(), searchedBugDto.getAssignedId().getId());
+        assertEquals(bug.getCreatedId().getId(), searchedBugDto.getCreatedId().getId());
+        assertEquals(bug.getDescription(), bug.getDescription());
+        assertEquals(bug.getFixedVersion(), searchedBugDto.getFixedVersion());
+        assertEquals(bug.getVersion(), searchedBugDto.getVersion());
+        assertEquals(bug.getStatus(), searchedBugDto.getStatus());
+        assertEquals(bug.getTargetDate(), searchedBugDto.getTargetDate());
     }
 
     @Test
@@ -176,59 +182,67 @@ public class BugManagerTest {
 
         when(bugDao.findAllBugs()).thenReturn(bugsList);
         List<BugDTO> returnedBugs = bugManager.findAllBugs();
-        Assert.assertEquals(2, returnedBugs.size());
-    }
-
-    @Test
-    public void updateBug() {
-//        Bug bug = createBug();
-//        Bug newBug = bug;
-//        newBug.setTitle("updatedTitle");
-//
-//        when(bugDao.findBug(bug.getId())).thenReturn(bug);
-//
-//        try {
-//            BugDTO returnedBug = bugManager.updateBug(BugDTOEntityMapper.getDtoFromBug(newBug), "popm");
-//            Assert.assertEquals(newBug.getTitle(), returnedBug.getTitle());
-//        } catch (BusinessException e) {
-//        }
-
+        assertEquals(2, returnedBugs.size());
     }
 
     @Test(expected = BusinessException.class)
     public void updateBugNotInDbException() throws BusinessException {
         Bug bug = createBug();
         Bug newBug = bug;
-        newBug.setTitle("updatedTitle");
+        newBug.setTitle("Updated title.");
+        Attachment attachment = createAttachment();
+        attachment.setBug(bug);
+
+        BugAttachmentWrapperDTO bugAttachmentWrapperDTO = new BugAttachmentWrapperDTO();
+        bugAttachmentWrapperDTO.setBugDTO(BugDTOEntityMapper.getDtoFromBug(newBug));
+        bugAttachmentWrapperDTO.setAttachmentDTO(AttachmentDTOEntityMapper.getDtoFromAttachment(attachment));
 
         when(bugDao.findBug(bug.getId())).thenReturn(null);
 
-//        bugManager.updateBug(BugDTOEntityMapper.getDtoFromBug(newBug), "popm");
+        bugManager.updateBug(bugAttachmentWrapperDTO, "popm");
     }
 
-    /**
-     * @Test(expected = BusinessException.class)
-     * public void updateBugStatusUnreachableException () throws BusinessException{
-     * Bug bug = createBug();
-     * Bug newBug = bug;
-     * newBug.setStatus(Status.IN_PROGRESSS);
-     * BugDTO bugDto = BugDTOEntityMapper.getDtoFromBug(newBug);
-     * <p>
-     * when(bugDao.findBug(bug.getId())).thenReturn(bug);
-     * when(bugManager.statusIsReachable(any(Status.class), any(Status.class))).thenReturn(false);
-     * <p>
-     * bugManager.updateBug(newBug.getId(), BugDTOEntityMapper.getDtoFromBug(newBug));
-     * }
-     **/
-
     @Test(expected = BusinessException.class)
-    public void updateBugDifferentIdsException() throws BusinessException {
+    public void updateBugNoSuchTransition() throws BusinessException {
         Bug bug = createBug();
-        Bug newBug = bug;
-        newBug.setStatus(Status.IN_PROGRESS);
-        BugDTO bugDto = BugDTOEntityMapper.getDtoFromBug(newBug);
+        Bug newBug = createBug();
+        newBug.setStatus(Status.FIXED);
+        Attachment attachment = createAttachment();
+        attachment.setBug(bug);
 
-//        bugManager.updateBug(bugDto, "popm");
+        BugAttachmentWrapperDTO bugAttachmentWrapperDTO = new BugAttachmentWrapperDTO();
+        bugAttachmentWrapperDTO.setBugDTO(BugDTOEntityMapper.getDtoFromBug(newBug));
+        bugAttachmentWrapperDTO.setAttachmentDTO(AttachmentDTOEntityMapper.getDtoFromAttachment(attachment));
+
+        when(bugDao.findBug(bug.getId())).thenReturn(bug);
+
+        bugManager.updateBug(bugAttachmentWrapperDTO, "popm");
+    }
+
+    @Test
+    public void updateBug() throws BusinessException {
+        Bug bug = createBug();
+        Bug newBug = createBug();
+        bug.setStatus(Status.NEW);
+        newBug.setStatus(Status.IN_PROGRESS);
+        Attachment attachment = createAttachment();
+        attachment.setBug(bug);
+
+        BugAttachmentWrapperDTO bugAttachmentWrapperDTO = new BugAttachmentWrapperDTO();
+        bugAttachmentWrapperDTO.setBugDTO(BugDTOEntityMapper.getDtoFromBug(newBug));
+        bugAttachmentWrapperDTO.setAttachmentDTO(AttachmentDTOEntityMapper.getDtoFromAttachment(attachment));
+        bugAttachmentWrapperDTO.getAttachmentDTO().setAttContent(null);
+
+        when(bugDao.findBug(bug.getId())).thenReturn(bug);
+        when(permissionChecker.checkPermission(anyString(), anyString())).thenReturn(true);
+
+        BugManager bugManagerMock = mock(BugManager.class);
+        doNothing().when(bugManagerMock).sendNotification(isA(BugDTO.class), isA(NotificationType.class), isA(String.class), isA(String.class));
+
+        BugAttachmentWrapperDTO returned = bugManager.updateBug(bugAttachmentWrapperDTO, "popm");
+
+        assertEquals(returned.getBugDTO().getId(), bugAttachmentWrapperDTO.getBugDTO().getId());
+        assertEquals(returned.getBugDTO().getStatus(), bugAttachmentWrapperDTO.getBugDTO().getStatus());
     }
 
     @Test(expected = BusinessException.class)
@@ -250,18 +264,6 @@ public class BugManagerTest {
             Assert.assertTrue(bugManager.canDeactivateUser(UserDTOEntityMapper.getDtoFromUser(bug.getAssignedId())));
         } catch (BusinessException e) {
         }
-    }
-
-    @Test
-    public void findBugsByCreatedId() {
-    }
-
-    @Test
-    public void findBugsByAssignedId() {
-    }
-
-    @Test
-    public void deleteExceedingBugs() {
     }
 
     @Test

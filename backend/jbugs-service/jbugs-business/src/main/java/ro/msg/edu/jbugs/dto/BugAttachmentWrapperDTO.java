@@ -1,5 +1,6 @@
 package ro.msg.edu.jbugs.dto;
 
+import javax.validation.Valid;
 import java.io.Serializable;
 
 /**

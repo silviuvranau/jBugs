@@ -19,17 +19,22 @@ public class UserDTOEntityMapper {
 
     public static User getUserFromUserDto(UserDTO userDTO){
         User user = new User();
-        user.setId(userDTO.getId());
-        user.setCounter(userDTO.getCounter());
-        user.setFirstName(userDTO.getFirstName());
-        user.setLastName(userDTO.getLastName());
-        user.setEmail(userDTO.getEmail());
-        user.setMobileNumber(userDTO.getMobileNumber());
-        user.setUsername(userDTO.getUsername());
-        user.setPassword(userDTO.getPassword());
-        user.setStatus(userDTO.getStatus());
+        if (userDTO != null){
+            user.setId(userDTO.getId());
+            user.setCounter(userDTO.getCounter());
+            user.setFirstName(userDTO.getFirstName());
+            user.setLastName(userDTO.getLastName());
+            user.setEmail(userDTO.getEmail());
+            user.setMobileNumber(userDTO.getMobileNumber());
+            user.setUsername(userDTO.getUsername());
+            user.setPassword(userDTO.getPassword());
+            user.setStatus(userDTO.getStatus());
+            return user;
+        }
+        else{
+            return null;
+        }
 
-        return user;
     }
 
     public static UserDTO getDtoFromUser(User user){
