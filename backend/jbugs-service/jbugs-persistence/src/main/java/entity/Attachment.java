@@ -11,7 +11,15 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name="attachments")
+@NamedQueries({
+        @NamedQuery(name = Attachment.GET_ALL_ATTACHMENTS, query = "SELECT a FROM Attachment a"),
+        @NamedQuery(name = Attachment.DELETE_ATTACHMENT, query = "Delete from Attachment a where a.id = :attachment"),
+        @NamedQuery(name = Attachment.FIND_ATT_OF_BUG, query = "Select a from Attachment a where a.bug = :bug")
+})
 public class Attachment implements Serializable {
+    public static final String GET_ALL_ATTACHMENTS = "findAllAttachments";
+    public static final String DELETE_ATTACHMENT = "deleteAttachment";
+    public static final String FIND_ATT_OF_BUG = "findAttOfBug";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

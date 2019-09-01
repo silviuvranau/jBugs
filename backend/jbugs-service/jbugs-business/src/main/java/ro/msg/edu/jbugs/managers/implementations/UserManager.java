@@ -1,9 +1,9 @@
 package ro.msg.edu.jbugs.managers.implementations;
 
 import com.google.common.hash.Hashing;
+import dao.NotificationDao;
 import dao.RoleDao;
 import dao.UserDao;
-import dao.NotificationDao;
 import entity.Role;
 import entity.User;
 import entity.enums.NotificationType;
@@ -118,11 +118,13 @@ public class UserManager implements UserManagerRemote {
         user.setEmail(userDTO.getEmail());
         user.setStatus(userDTO.getStatus());
 
-        String hashedPassword = Hashing.sha256()
-                .hashString(userDTO.getPassword(), StandardCharsets.UTF_8)
-                .toString();
+        if (userDTO.getPassword() != null) {
+            String hashedPassword = Hashing.sha256()
+                    .hashString(userDTO.getPassword(), StandardCharsets.UTF_8)
+                    .toString();
 
-        user.setPassword(hashedPassword);
+            user.setPassword(hashedPassword);
+        }
 
         Set<Role> roles = new HashSet<>();
         for (Integer roleId : userDTO.getRoleIds()) {
@@ -189,13 +191,13 @@ public class UserManager implements UserManagerRemote {
         }
 
         //checks if user is blocked
-        if ( !user.isStatus() ) {
+        if (!user.isStatus()) {
             try {
                 user = userDao.findUserByUsernameAndPassword(username, hashedPassword);
                 user.setCounter(0);
             } catch (BusinessException e) {
                 user.setCounter(user.getCounter() + 1);
-                if (user.getCounter() > 4){
+                if (user.getCounter() > 4) {
                     //block (deactivate) user
                     user.setStatus(true);
                 }

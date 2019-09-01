@@ -8,7 +8,6 @@ import ro.msg.edu.jbugs.managers.interfaces.BugManagerRemote;
 import utils.RightsUtils;
 
 import javax.ejb.EJB;
-import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -31,20 +30,19 @@ public class BugController {
 
     @GET
     @Path("{bugId}")
-    public Response getBugById(@CookieParam("username") String username,
-                               @PathParam("bugId") Integer bugId) {
+    public Response getBugById(@CookieParam("username") String username,@PathParam("bugId") Integer bugId) throws BusinessException {
         Response response = rightsUtils.checkUserRights(username, "BUG_MANAGEMENT");
-        if (response != null)
+        if(response != null)
             return response;
-
-        BugDTO result;
         try {
-            result = bugManagerRemote.findABug(bugId);
-        } catch (BusinessException e) {
+            BugDTO result = bugManagerRemote.findABug(bugId);
+            return Response.ok(result).build();
+        }
+        catch(BusinessException e){
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
-        return Response.ok(result).build();
     }
+
 
     @GET
     public Response getAllBugs(@CookieParam("username") String username) {
@@ -80,14 +78,14 @@ public class BugController {
     }
 
     @PUT
-    public Response modifyBug(@CookieParam("username") String username, @Valid BugDTO bugDTO) {
+    public Response modifyBug(@CookieParam("username") String username, BugAttachmentWrapperDTO bugAttWrapperDTO) {
         Response response = rightsUtils.checkUserRights(username, "BUG_MANAGEMENT");
         if(response != null)
             return response;
 
-        BugDTO result;
+        BugAttachmentWrapperDTO result;
         try {
-            result = bugManagerRemote.updateBug(bugDTO, username);
+            result = bugManagerRemote.updateBug(bugAttWrapperDTO, username);
         }
         catch (BusinessException e){
             return Response.status(Response.Status.BAD_REQUEST)

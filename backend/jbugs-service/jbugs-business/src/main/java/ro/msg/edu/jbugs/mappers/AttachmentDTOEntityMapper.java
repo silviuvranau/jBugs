@@ -21,11 +21,14 @@ public class AttachmentDTOEntityMapper {
     }
 
     public static AttachmentDTO getDtoFromAttachment(Attachment attachment) {
-        AttachmentDTO attachmentDTO = new AttachmentDTO();
-        attachmentDTO.setId(attachment.getId());
-        attachmentDTO.setAttContent(attachment.getAttContent());
-        attachmentDTO.setBug(BugDTOEntityMapper.getDtoFromBug(attachment.getBug()));
+        if (attachment != null) {
+            AttachmentDTO attachmentDTO = new AttachmentDTO();
+            attachmentDTO.setId(attachment.getId());
+            attachmentDTO.setAttContent(attachment.getAttContent());
+            attachmentDTO.setBug(BugDTOEntityMapper.getDtoFromBug(attachment.getBug()));
+            return attachmentDTO;
+        }
+        return null;
 
-        return attachmentDTO;
     }
 }
